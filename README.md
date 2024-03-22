@@ -28,21 +28,21 @@ Qui, l'utente può visualizzare le piante attualmente coltivate, i loro progress
 
 3. Requisiti Non Funzionali
 
-Usabilità:
+-Usabilità:
 
 Interfaccia utente intuitiva e facile da navigare per un'esperienza senza intoppi.
 Chiare istruzioni e messaggi di aiuto per guidare l'utente attraverso le varie funzionalità dell'app.
 
-Velocità e Prestazioni:
+-Velocità e Prestazioni:
 
 Tempi di risposta rapidi durante la navigazione tra le schede delle piante, il calendario e il recettario.
 Ottimizzazione per garantire una fluida esperienza utente.
 
-Sicurezza e Privacy:
+-Sicurezza e Privacy:
 
 Nessuna condivisione di dati degli utenti con terze parti senza consenso esplicito.
 
-Compatibilità:
+-Compatibilità:
 
 "My Garden" sarà disponibile per dispositivi Android e iOS per una maggiore accessibilità.
 

@@ -54,7 +54,7 @@ Con funzionalità come informazioni dettagliate, calendario interattivo, recetta
 Questo documento dei requisiti delinea le funzionalità principali e le capacità dell'app "My Garden", fornendo agli utenti un quadro chiaro di cosa aspettarsi e di cosa possono fare con l'applicazione. 
 Possono essere apportate modifiche o aggiunte in base all'evoluzione del progetto. 
 
-WORK IN PROGRESS
+WORK IN PROGRESS ON NOTIFICATION, TRANSLATION AND IMAGE IDENTIFICATION.
 
 
 

@@ -26,11 +26,6 @@ Ogni ricetta può includere ingredienti, istruzioni e note personali per la prep
 L'app fornisce una sezione dedicata al "giardino virtuale" dell'utente.
 Qui, l'utente può visualizzare le piante attualmente coltivate, i loro progressi e le prossime attività di cura.
 
-2.5 Notifiche e Promemoria:
-
-"My Garden" invia notifiche personalizzate per ricordare all'utente le attività di cura pianificate per le piante.
-Gli utenti possono impostare promemoria personalizzati per eventi specifici, come semina, raccolta, ecc.
-
 3. Requisiti Non Funzionali
 
 Usabilità:

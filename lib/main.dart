@@ -1,9 +1,11 @@
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
-import 'package:address_24/screens/recipes_screen.dart';
-import 'package:address_24/screens/recipesadd_screen.dart';
+
 import 'package:flutter/services.dart';
+
+import 'models/plant.dart';
+import 'screens/recipesadd_screen.dart';
 
 void main() {
   runApp(MyApp());
@@ -30,6 +32,7 @@ class MyHomePage extends StatefulWidget {
 class _MyHomePageState extends State<MyHomePage> {
   int _selectedIndex = 1;
   List<String> plants = [];
+  List<Plant> userPlants = [];
 
   @override
   void initState() {
@@ -39,10 +42,11 @@ class _MyHomePageState extends State<MyHomePage> {
 
   Future<void> loadPlants() async {
     final String jsonString =
-        await rootBundle.loadString('../../data/userdata.json');
+        await rootBundle.loadString('../../data/userData.JSON');
     final List<dynamic> jsonList = json.decode(jsonString);
+    plants = jsonList.map((item) => item.toString()).toList();
     setState(() {
-      plants = jsonList.map((item) => item['common_name'].toString()).toList();
+      plants = jsonList.map((item) => item["selectedName"].toString()).toList();
     });
   }
 
@@ -59,17 +63,28 @@ class _MyHomePageState extends State<MyHomePage> {
     });
   }
 
+  void _onPlantTapped() {
+    setState(() {
+      Navigator.push(
+        context,
+        MaterialPageRoute(builder: (context) => RecipesMainScreen()),
+      );
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Esempio di Barra di Navigazione Inferiore'),
+        title:
+            Text('MyGarden - La migliore app per il management del tuo orto!'),
       ),
       body: ListView.builder(
         itemCount: plants.length,
         itemBuilder: (context, index) {
           return ListTile(
             title: Text(plants[index]),
+            onTap: _onPlantTapped,
           );
         },
       ),

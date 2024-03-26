@@ -19,7 +19,7 @@ class _MyPlantState extends State<MyPlant> {
     return SafeArea(
       child: Scaffold(
         appBar: AppBar(
-          title: Text(widget.plant.name!),
+          title: Text(widget.plant.selected_name!),
         ),
         body: MyPlantWidget(p: widget.plant),
       )

@@ -9,16 +9,49 @@ class MyPlantWidget extends StatelessWidget {
     });
 
   final Plant p;
-  final link = 'data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wCEAAkGBxMTEhUSERISFhUXFRsYGRgVFhUYGBUYFxgXFxoWFRcbHyggGhslGxcTITEhJSkrLi4uFx8zODMsNygtLisBCgoKDg0OGxAQGy8lICYvLS0tMS0tLTEtLS0tLS0tLS0vLS8tLy4tLS01LS0tLS0vLS01LS0tLS0tLS0tNS0tLf/AABEIARMAtwMBIgACEQEDEQH/xAAbAAEAAgMBAQAAAAAAAAAAAAAABAUCAwYHAf/EADsQAAIBAgMGBAUDAgUEAwAAAAABAgMRBCExBRJBUWFxBiKBkTKhsdHwE0LBUuFDYnKi8RUzgpIUFyP/xAAZAQEAAwEBAAAAAAAAAAAAAAAAAQIDBAX/xAAnEQEAAgIBBAEDBQEAAAAAAAAAAQIDETEEEiFBURMiYXGBocHwQv/aAAwDAQACEQMRAD8A9xAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAPjYH0GmeKgtZwXeSPqxMHmpxt/qRHdA2gxjNPRp9mZEgAAAAAAAAAAAAAAAAAYzlZNvRK/sBkYzqJK7aS5spYbfU/+2k87O996L5SjwNOPnKputySUXmra3/OBz26iuvt8q93wsa214L4U38l9yPW8QRiryi7p5pO7t/VHn2yK+UElo7W/v6lTtXEKLykrrNrik7rzLk02cuTqclY2rNph02D8TYao0ozs3l5lbPkcv4rlNya3m7Pm7c7W4ZZrmcvtZKM1Vpy3XxSV4t8va3uWeyttRrRVOb8+Sz4q9lfs2rPk7HNk6i+WmpZTk7vEomHx6cbPW1iXXrr9OMUsnNN2XBWsuvH2IG1dmypybSsrXtyfFEOliWo9mpL6P6p+hz6+FOHS4Wq01Zve3r5ZO7s/mzoNn+I5JuNTzWdm+K69UcXQxl3m7N5p8uK+xZUKnklJ65RyzSvm5LvbTuXxZbUn7ZXraYekYbExmrwaa+nc3HnmyNpyoyi4u6taS10dvQ77D11OKlF3T/LHr9P1EZY/LetttoAOlYAAAAAAAAAAA+M+lB4j8Qxw9oRtKo+H9K69ymTJXHXusiZiOXNeLNjyo1v1aUt2NRrK7WfJMi08fOEX+tNt8IW3pPl2XW5Nw+261WW7Npxbvmlk+DT1XoTMVByylF3tw48rNniW7bWm1OGGonzDVhcZN2i6du0tL58UVU4Q/VyqJZvejJWbjyz9SXLDeW281dZ5t3y0d9eRBVNQTioRa43in7md78RZE/lR7Tim2opuN9c7cbfIgbPW7Na2f0eV0egYbaacbWSWaaX7VZZ25alHjIJXp1PNTecXxjfSUXwZM2itdepUmvt0VOMa9GEpatWf+pXT+hyu19iypveirxXLPLqdJ4cajB05TUlfeT0eet13V/Vk/E0UzXti1YtDTW48vNYzayLHZuPzcZfui16rOL918yz2tsHe80FboszmcRhp03plzM9R75UmJheQrrLNrNt9Fkn9DoNhbZnC9NNXel803rb1OHoYh6llRrxajnaWa6qzvFrnysRWbUtuCLTDtaPjW03TrUXGS13ZXy5pPh6nTYHHQqx3qbuvmu6PM51adfdjVe7K3kqLKz4p81dPL6EnZG1quGnuu12uPwzXBr8yOqnW3raO7zX+Ya1yfL0wEPZmPjWgpx14q+cXyZMPVraLRuOGwACwAAAAAOY8b7TlThCnCTTm23Z2e6lpfhd/Q4fERkqnnTTfPky78apvFSvooRt26e7IuIkqiTeUtU/ql8zweqvN8tt+vDnv5lIwFBbqdnrbPqnn72LCpiN1Xvd29ivwM93W7Vmnd36e2hhXrXfcxnJFK+OSPEMq1W92+ObIFSur5uyMMdiLIppVb5p68uBlWs28qzZbNxbvGV+xqk2tW2it/Tv3tw4mVKo9N534X+hp9PxyqmUsVKDybte6LyltSM1rKL5xfzt/wAnM1JXuncUZ2tZvvoNTHBEzDr412leV5p8UlddXbU1YnD05rKUd58U7e6Oao4ucHeMn1V7p+jLWlj6dT43uT5v4X3/AD3LTadLxaJK2wFn8N+l4t/KxBqbHkr7r/8AZW/3K6+hc0K0l5cprhnde6zSJn6l35nu9Mmuzdsl6CurR4NQ5l4WSpWmnFqWTenmXPS2XzNmFq3p/p1lknk/3Qd893nld26HS0tn5O81K+dt3y9nnoQMTsmMr2e5K+ju4t9Hw7EzW0cnZL5gK9SjpJ5WtOOjy0lyfRnoeBxG/TjK6d0r252V0eX0aU6NRRmviTTTzjNa+q/sdL4fx0Y3lC6bWcHK97LJxdrvI6OjzfTt2zxK2O3p2YKrBbX35brjurnfjrZq2Ranr0vW8bq2idgALpAABwPimNsVK71S56OKRVRVks1fW2uTyz9j0HamxaVfOaala29F2duXJ+xTYjwfxhW4aSivqvsePn6LJN5tWNsbUne4UNVKPDl+fMg4qryu8iw2hhJUpfpztdJZrNWfIqsdVt35fwebes92pZ2VdXem7tMTUUbo1Ennm+P2NFWs11fHkuiNazPCr6pXXlsfZp5Wtbjz9DTCV/iSM1CL5rs/uXS2TV/Mnwt6kez69+puhRte09eDuvmZTozt8N+KaZG4Q1wd0nx/saVJ3s/xmSbV04tPr0MFf14E6Q+058+OXsdv4WxEa9F05pOUH7wfwv0d17HD4iKvvc1f7/yWnhnGfo1t96WzXGUXrbnz9C+OYrbcprbUuxxGFcF5Oel8uHz7mmdOqrZxV1mpJu3RWy5Fw5RqR3qclKL4r8yfQONrX00vy7nVOKN+G+lPUaS3Z2lHk4vJ81yNH/wXBqdB70U77rzlHtz+vcusZhFOOV720UrfMpt2pSeUXbo29MrnNlxzWePCJj5SsJjlUUfMlVTsk8lNf03Wn8NF3s3HvT4vNaSbzpsop4anX8ye5U5rRv8AzLn1XzJVKs4ye+rSTim9N6N0s3pLhb1NMOW1Z3M/v/vaY3DrgQNmYty3oTXmjnfg072t7W9CeexS0WjcNQAFgAAHH+LqNqqlwlH6Xy+aOR2jFLRO71f8HpPiLCQnSblLd3M0/lb1yPMdo33ny09P7ngdZi7c0z8+WGSNIijd2s0uvGxhNLT11zJEMP8Aubu3ohVjGPBX+hhtig3/ADmfGuP4iW6V1p+cyPODWvzNIslnTlY2QlfRtepGcjJSuNCXGvLg79zJzi/ih7ESE8/L/c2KpbqVmqW94GMl5ZejI9fAyS000fT8+pug+Ly+pIo4p88uo3McJ1Eq9yqL4ZSWVnZtfNZ2J+zdq16Mt6Erp57svhkuvXqsyWnCXxKz5oyns9NeVprk8iIyWrwjstHmHTbL2rDERU4WjUWUoNq7S/pfFfmRYVJxaSeXG2aduqscCsI4ZZpp3Xfozqdj7SjOEY1p2qK8U5Zbya1vpfhnyXM68XUxee2eWlbTxL5icFb/APSk8tcs00SsLXjUSU1mnk+Kf26EiOGlHR5OXG7sstOC48CLjsHuvfi++Qtjmv3Vj9YXhYYCTptKTvre3FNtt9ldP3L453Z2JUrJ+n2LzCzvHPVZP0PQ6W0dvheG4AHUkNWJrxhFyk7Jam0i7ToOdKcUrtrJXtdrNK/oVtvU6HK7Y2w6zUYpKMXez1b55Ze3M57E0m7+W71u+H82M62OhBuLvGSfmjKLUo975fXUr6m2HKV4pKKytfXvkeBlmbzu3LltO+WVJXeWbTaaXC2b7GirDsZYbE7nljfe3m0krt3VnfmacdPe1b3raRdrd2tWZdvlVjOuk+ppnUu8l9kaZUpPPfa9E/qjTPDT/rk/VmsVj5Qkuk3/AMo1pW1y4GiOFks1KV+5m51uafdLPuW1+Rui/T84sxjO2nufFiXpKm+u6YSxaX+HUtpe0fpcjUpS6cW9fVvl0N0JJK6d3z5IhUsZTn+53/zcOnQmxtbWPDkUtE+xnRqP7vgiZSxltL9yFKN765/I+byWS4LLp1K6WiZh0FDGp/Ek+5IWFpz0e79DnMPLO9/7smUcW1zIjXuGsWieVpV2dUgrZ7rzyeTfOxf7MqSlTvaLfFcVbL0y+pR4LaTXVcmXWHxVKTUo+SS+Z14KRFtxP7LdmvMNWJi4TutGXuza98+evfmVGKrKSV1Zpr8RI2TKzkr6HZhjtv44Wh0IAO9IAAKrbnh+hio2qx83CcbKa9eK6PI5n/65jwxMrdaav7pndgyvhpedzCs1ieXkfiTwpWwi34t1KT1klZx/1pcOunY5tVJcLnv7V9Skx/hTC1Hf9PcfOHl/26fI5cvR+6M7Yvh49BzfB+xIp0qj4M77F+AuNOt6Tj8t5P8Agr6nhjEq8XF/+Nmn+djiyYctf+f7Umlvhy6pNWvNdkfFUd7cOx0eG8I15yUXDdVs5T0Xtm2SMR4ArRzp1YTbeaacfZ5lK9PltEz2oikuZhbv6GShGWqv6ZHUYfwDVa89aEXyinL3eRHxHgzEwyioTX+WVvdSsRbpcsRvtlP05c7/ANMpPPcjfnk3pploaVsjPyyeV8pJN++R1mzPB9eUrVUqcUtcpN9Ek+3sba3gysqtoSi4N3327W6OPPsIwZ9b1J2S5ONCUYuOduDVn3stfQ0zw01wb55fY7LFeEcTGXlcKivk77rt1T+5zVXaM6M508RCUH/TJW3dbWavdfYTjy15qtFflppyz+fZ6GdKEr5Gj/rCf+LD2WXyubY7Su7KSk3wSzftqV+nb3C3bCZRhJZ7xL35L9r+S/kr4RrW3v0qtuHknn8syVHC4mplGhiHfjuSiveRvjrOtTDfHGoT47Sk92Dadne/bg2dLsGjKpL9R5RT1tbfl06IqtheDqialXajHXcWbfRvRfM7inBJJJWSySXA78OK0zuy0zEcMgAdjMAAAAAAAAAAAAAAAAAAArtr7EoYlJV6albR5pq/JrP0LEETETGpHMYXwRhYU509xNyeU2lvxX7Un0LbDbDw8JRnCjBSgrRaWaX8vrrmWIKxjpHpGoAAXSAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAP/9k= ';
+
+    // List<Widget> returnList() {
+    //   final List<Widget> list = [];
+    //   final namesList = ['Watering frequency', 'Estimated growing days', 'Propriety'];
+    //   final jsonNames = ['wateringFrequency', 'estimated_growing_days', 'propriety'];
+
+    //   for(int i = 0; i < namesList.length; i++) {
+    //     final fieldName = jsonNames[i];
+    //     final Widget obj = ListTile(
+    //            leading: const Icon(Icons.water_drop_outlined),
+    //            title: Text('${namesList[i]}: ${p[fieldName]}'),
+    //          );
+
+    //     list.add(obj); 
+    //   }
+    //   return list;
+    // }
 
   @override
   Widget build(BuildContext context) {
     return Container(
       child: Column(
         children: [
-          Image(image: AssetImage('data/assets/${p.name}.jpeg')),
+          Image(image: AssetImage('data/assets/${p.common_name}.jpeg')),
           Card(
-            child: Text('Ciao'),
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                ListTile(
+                  leading: const Icon(Icons.water_drop_outlined),
+                  title: Text('Watering frequency: ${p.watering_frequency}'),
+                ),
+                ListTile(
+                  leading: const Icon(Icons.calendar_month),
+                  title: Text('Estimated growing days: ${p.estimated_growing_days}'),
+                ),
+                ListTile(
+                  leading: const Icon(Icons.local_pizza),
+                  title: Text('Propriety: ${p.propriety}'),
+                ),
+              ]
+              //ToDo: da vedere cosa fare con questo metodo per non passarlo in maniera statica: returnList(),
+            ),
           )
         ],
       ),

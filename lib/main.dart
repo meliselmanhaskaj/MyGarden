@@ -34,10 +34,14 @@ class _MyHomePageState extends State<MyHomePage> {
   }
 
   final myPlant = Plant(
-    common_name: 'pomodoro',
-    watering_frequency: 'High',
-    estimated_growing_days: 20,
-    propriety: 'edible');
+    name: "Lattuga",
+    image: "assets/plant_lattuga.jpg",
+    description: "La lattuga è una pianta erbacea annuale...",
+    watering_frequency: "Ogni 2 giorni",
+    species: "Lactuca sativa",
+    propriety: "edible",
+    estimated_growing_days: 30
+    );
 
   @override
   Widget build(BuildContext context) {

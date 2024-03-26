@@ -1,4 +1,5 @@
 import 'package:address_24/models/plant.dart';
+import 'package:address_24/widgets/my_plant_widget.dart';
 import 'package:flutter/material.dart';
 
 class MyPlant extends StatefulWidget {
@@ -18,9 +19,9 @@ class _MyPlantState extends State<MyPlant> {
     return SafeArea(
       child: Scaffold(
         appBar: AppBar(
-          title: Text(widget.plant.common_name),
+          title: Text(widget.plant.name!),
         ),
-        body: ,
+        body: MyPlantWidget(p: widget.plant),
       )
     );
   }

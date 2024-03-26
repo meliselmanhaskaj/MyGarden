@@ -4,7 +4,9 @@
 
 class Plant {
   Plant(
-      {this.name,
+      {this.common_name,
+      this.id,
+      this.selected_name,
       this.image,
       this.description,
       this.watering_frequency,
@@ -12,7 +14,9 @@ class Plant {
       this.propriety,
       this.estimated_growing_days});
 
-  final String? name;
+  final String? common_name;
+  final String? selected_name;
+  final String? id;
   final String? image;
   final String? description;
   final String? watering_frequency;
@@ -21,15 +25,19 @@ class Plant {
   final String? estimated_growing_days;
 
   Plant copyWith(
-          {String? name,
+          {String? common_name,
           String? image,
+          String? id,
+          String? selected_name,
           String? description,
           String? watering_frequency,
           String? species,
           String? propriety,
           String? estimated_growing_days}) =>
       Plant(
-          name: name ?? this.name,
+          common_name: common_name ?? this.common_name,
+          id: id ?? this.id,
+          selected_name: selected_name ?? this.selected_name,
           image: image ?? this.image,
           description: description ?? this.description,
           watering_frequency: watering_frequency ?? this.watering_frequency,

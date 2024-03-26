@@ -7,8 +7,8 @@ class RecipesScreen extends StatelessWidget {
       appBar: AppBar(
         title: Text('Recipes'),
       ),
-      body: Padding(
-        padding: const EdgeInsets.all(16.0),
+      body: const Padding(
+        padding: EdgeInsets.all(16.0),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [

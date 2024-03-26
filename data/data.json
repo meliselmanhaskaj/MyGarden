@@ -1,454 +1,164 @@
 [
     {
-        "common_name": "Tomato",
-        "watering_frequency": "Medium",
-        "estimated_growing_days": 60,
-        "propriety": "edible"
-    },
-    {
-        "common_name": "Basil",
-        "watering_frequency": "High",
-        "estimated_growing_days": 30,
-        "propriety": "edible"
-    },
-    {
-        "common_name": "Zucchini",
-        "watering_frequency": "High",
-        "estimated_growing_days": 50,
-        "propriety": "edible"
-    },
-    {
-        "common_name": "Lettuce",
-        "watering_frequency": "High",
-        "estimated_growing_days": 40,
-        "propriety": "edible"
-    },
-    {
-        "common_name": "Bell Pepper",
-        "watering_frequency": "Medium",
-        "estimated_growing_days": 70,
-        "propriety": "edible"
-    },
-    {
-        "common_name": "Cucumber",
-        "watering_frequency": "High",
-        "estimated_growing_days": 60,
-        "propriety": "edible"
-    },
-    {
-        "common_name": "Bean",
-        "watering_frequency": "Medium",
-        "estimated_growing_days": 60,
-        "propriety": "edible"
-    },
-    {
-        "common_name": "Eggplant",
-        "watering_frequency": "Medium",
-        "estimated_growing_days": 70,
-        "propriety": "edible"
-    },
-    {
-        "common_name": "Cabbage",
-        "watering_frequency": "High",
-        "estimated_growing_days": 90,
-        "propriety": "edible"
-    },
-    {
-        "common_name": "Onion",
-        "watering_frequency": "Low",
-        "estimated_growing_days": 120,
-        "propriety": "edible"
-    },
-    {
-        "common_name": "Leek",
-        "watering_frequency": "Low",
-        "estimated_growing_days": 120,
-        "propriety": "edible"
-    },
-    {
-        "common_name": "Turnip",
-        "watering_frequency": "Low",
-        "estimated_growing_days": 50,
-        "propriety": "edible"
-    },
-    {
-        "common_name": "Radicchio",
-        "watering_frequency": "High",
-        "estimated_growing_days": 60,
-        "propriety": "edible"
-    },
-    {
-        "common_name": "Spinach",
-        "watering_frequency": "High",
-        "estimated_growing_days": 40,
-        "propriety": "edible"
-    },
-    {
-        "common_name": "Arugula",
-        "watering_frequency": "High",
-        "estimated_growing_days": 30,
-        "propriety": "edible"
-    },
-    {
-        "common_name": "Garlic",
-        "watering_frequency": "Low",
-        "estimated_growing_days": 180,
-        "propriety": "edible"
-    },
-    {
-        "common_name": "Carrot",
-        "watering_frequency": "Low",
-        "estimated_growing_days": 70,
-        "propriety": "edible"
-    },
-    {
-        "common_name": "Potato",
-        "watering_frequency": "Low",
-        "estimated_growing_days": 90,
-        "propriety": "edible"
-    },
-    {
-        "common_name": "Parsley",
-        "watering_frequency": "High",
-        "estimated_growing_days": 70,
-        "propriety": "edible"
-    },
-    {
-        "common_name": "Fennel",
-        "watering_frequency": "High",
-        "estimated_growing_days": 90,
-        "propriety": "edible"
-    },
-    {
-        "common_name": "Rose",
-        "watering_frequency": "Medium",
-        "estimated_growing_days": 60,
-        "propriety": "flower"
-    },
-    {
-        "common_name": "Lily",
-        "watering_frequency": "High",
-        "estimated_growing_days": 30,
-        "propriety": "flower"
-    },
-    {
-        "common_name": "Tulip",
-        "watering_frequency": "High",
-        "estimated_growing_days": 50,
-        "propriety": "flower"
-    },
-    {
-        "common_name": "Daisy",
-        "watering_frequency": "High",
-        "estimated_growing_days": 40,
-        "propriety": "flower"
-    },
-    {
-        "common_name": "Sunflower",
-        "watering_frequency": "Medium",
-        "estimated_growing_days": 70,
-        "propriety": "flower"
-    },
-    {
-        "common_name": "Lavender",
-        "watering_frequency": "High",
-        "estimated_growing_days": 60,
-        "propriety": "flower"
-    },
-    {
-        "common_name": "Daffodil",
-        "watering_frequency": "High",
-        "estimated_growing_days": 60,
-        "propriety": "flower"
-    },
-    {
-        "common_name": "Rosemary",
-        "watering_frequency": "Medium",
-        "estimated_growing_days": 60,
-        "propriety": "flower"
-    },
-    {
-        "common_name": "Marigold",
-        "watering_frequency": "Medium",
-        "estimated_growing_days": 70,
-        "propriety": "flower"
-    },
-    {
-        "common_name": "Carnation",
-        "watering_frequency": "High",
-        "estimated_growing_days": 90,
-        "propriety": "flower"
-    },
-    {
-        "common_name": "Geranium",
-        "watering_frequency": "Low",
-        "estimated_growing_days": 120,
-        "propriety": "flower"
-    },
-    {
-        "common_name": "Lily of the Valley",
-        "watering_frequency": "Low",
-        "estimated_growing_days": 120,
-        "propriety": "flower"
-    },
-    {
-        "common_name": "Hydrangea",
-        "watering_frequency": "Low",
-        "estimated_growing_days": 50,
-        "propriety": "flower"
-    },
-    {
-        "common_name": "Orchid",
-        "watering_frequency": "High",
-        "estimated_growing_days": 60,
-        "propriety": "flower"
-    },
-    {
-        "common_name": "Peony",
-        "watering_frequency": "High",
-        "estimated_growing_days": 40,
-        "propriety": "flower"
-    },
-    {
-        "common_name": "Echinacea",
-        "watering_frequency": "Medium",
-        "estimated_growing_days": 60,
-        "propriety": "medical"
-    },
-    {
-        "common_name": "Ginseng",
-        "watering_frequency": "High",
-        "estimated_growing_days": 30,
-        "propriety": "medical"
-    },
-    {
-        "common_name": "Aloe Vera",
-        "watering_frequency": "High",
-        "estimated_growing_days": 50,
-        "propriety": "medical"
-    },
-    {
-        "common_name": "Chamomile",
-        "watering_frequency": "High",
-        "estimated_growing_days": 40,
-        "propriety": "medical"
-    },
-    {
-        "common_name": "Ginkgo Biloba",
-        "watering_frequency": "Medium",
-        "estimated_growing_days": 70,
-        "propriety": "medical"
-    },
-    {
-        "common_name": "Lavender",
-        "watering_frequency": "High",
-        "estimated_growing_days": 60,
-        "propriety": "medical"
-    },
-    {
-        "common_name": "Peppermint",
-        "watering_frequency": "High",
-        "estimated_growing_days": 60,
-        "propriety": "medical"
-    },
-    {
-        "common_name": "St. John's Wort",
-        "watering_frequency": "Medium",
-        "estimated_growing_days": 60,
-        "propriety": "medical"
-    },
-    {
-        "common_name": "Valerian",
-        "watering_frequency": "Medium",
-        "estimated_growing_days": 70,
-        "propriety": "medical"
-    },
-    {
-        "common_name": "Lemon Balm",
-        "watering_frequency": "High",
-        "estimated_growing_days": 90,
-        "propriety": "medical"
-    },
-    {
-        "common_name": "Rosemary",
-        "watering_frequency": "Low",
-        "estimated_growing_days": 120,
-        "propriety": "medical"
-    },
-    {
-        "common_name": "Feverfew",
-        "watering_frequency": "Low",
-        "estimated_growing_days": 120,
-        "propriety": "medical"
-    },
-    {
-        "common_name": "Garlic",
-        "watering_frequency": "Low",
-        "estimated_growing_days": 50,
-        "propriety": "medical"
-    },
-    {
-        "common_name": "Ginger",
-        "watering_frequency": "High",
-        "estimated_growing_days": 60,
-        "propriety": "medical"
-    },
-    {
-        "common_name": "Sage",
-        "watering_frequency": "High",
-        "estimated_growing_days": 40,
-        "propriety": "medical"
-    },
-    {
-        "common_name": "Thyme",
-        "watering_frequency": "High",
-        "estimated_growing_days": 60,
-        "propriety": "medical"
-    },
-    {
-        "common_name": "Turmeric",
-        "watering_frequency": "High",
-        "estimated_growing_days": 30,
-        "propriety": "medical"
-    },
-    {
-        "common_name": "Arnica",
-        "watering_frequency": "Low",
-        "estimated_growing_days": 70,
-        "propriety": "medical"
-    },
-    {
-        "common_name": "Calendula",
-        "watering_frequency": "Low",
-        "estimated_growing_days": 90,
-        "propriety": "medical"
-    },
-    {
-        "common_name": "Milk Thistle",
-        "watering_frequency": "High",
-        "estimated_growing_days": 70,
-        "propriety": "medical"
-    },
-    {
-        "common_name": "Echinacea",
-        "watering_frequency": "Medium",
-        "estimated_growing_days": 60,
-        "propriety": "medical"
-    },
-    {
-        "common_name": "Ginseng",
-        "watering_frequency": "High",
-        "estimated_growing_days": 30,
-        "propriety": "medical"
-    },
-    {
-        "common_name": "Aloe Vera",
-        "watering_frequency": "High",
-        "estimated_growing_days": 50,
-        "propriety": "medical"
-    },
-    {
-        "common_name": "Chamomile",
-        "watering_frequency": "High",
-        "estimated_growing_days": 40,
-        "propriety": "medical"
-    },
-    {
-        "common_name": "Ginkgo Biloba",
-        "watering_frequency": "Medium",
-        "estimated_growing_days": 70,
-        "propriety": "medical"
-    },
-    {
-        "common_name": "Lavender",
-        "watering_frequency": "High",
-        "estimated_growing_days": 60,
-        "propriety": "medical"
-    },
-    {
-        "common_name": "Peppermint",
-        "watering_frequency": "High",
-        "estimated_growing_days": 60,
-        "propriety": "medical"
-    },
-    {
-        "common_name": "St. John's Wort",
-        "watering_frequency": "Medium",
-        "estimated_growing_days": 60,
-        "propriety": "medical"
-    },
-    {
-        "common_name": "Valerian",
-        "watering_frequency": "Medium",
-        "estimated_growing_days": 70,
-        "propriety": "medical"
-    },
-    {
-        "common_name": "Lemon Balm",
-        "watering_frequency": "High",
-        "estimated_growing_days": 90,
-        "propriety": "medical"
-    },
-    {
-        "common_name": "Rosemary",
-        "watering_frequency": "Low",
-        "estimated_growing_days": 120,
-        "propriety": "medical"
-    },
-    {
-        "common_name": "Feverfew",
-        "watering_frequency": "Low",
-        "estimated_growing_days": 120,
-        "propriety": "medical"
-    },
-    {
-        "common_name": "Garlic",
-        "watering_frequency": "Low",
-        "estimated_growing_days": 50,
-        "propriety": "medical"
-    },
-    {
-        "common_name": "Ginger",
-        "watering_frequency": "High",
-        "estimated_growing_days": 60,
-        "propriety": "medical"
-    },
-    {
-        "common_name": "Sage",
-        "watering_frequency": "High",
-        "estimated_growing_days": 40,
-        "propriety": "medical"
-    },
-    {
-        "common_name": "Thyme",
-        "watering_frequency": "High",
-        "estimated_growing_days": 60,
-        "propriety": "medical"
-    },
-    {
-        "common_name": "Turmeric",
-        "watering_frequency": "High",
-        "estimated_growing_days": 30,
-        "propriety": "medical"
-    },
-    {
-        "common_name": "Arnica",
-        "watering_frequency": "Low",
-        "estimated_growing_days": 70,
-        "propriety": "medical"
-    },
-    {
-        "common_name": "Calendula",
-        "watering_frequency": "Low",
-        "estimated_growing_days": 90,
-        "propriety": "medical"
-    },
-    {
-        "common_name": "Milk Thistle",
-        "watering_frequency": "High",
-        "estimated_growing_days": 70,
-        "propriety": "medical"
+      "name": "Lattuga",
+      "image": "assets/plant_lattuga.jpg",
+      "description": "La lattuga è una pianta erbacea annuale...",
+      "wateringFrequency": "Ogni 2 giorni",
+      "species": "Lactuca sativa",
+      "propriety": "edible",
+      "estimated_growing_days": 30
+    },
+    {
+      "name": "Pomodoro",
+      "image": "assets/plant_pomodoro.jpg",
+      "description": "Il pomodoro è una pianta ortiva annuale...",
+      "wateringFrequency": "Ogni giorno",
+      "species": "Solanum lycopersicum",
+      "propriety": "edible",
+      "estimated_growing_days": 60
+    },
+    {
+      "name": "Basilico",
+      "image": "assets/plant_basilico.jpg",
+      "description": "Il basilico è una pianta aromatica...",
+      "wateringFrequency": "Ogni 3 giorni",
+      "species": "Ocimum basilicum",
+      "propriety": "edible",
+      "estimated_growing_days": 20
+    },
+    {
+      "name": "Peperoncino",
+      "image": "assets/plant_peperoncino.jpg",
+      "description": "Il peperoncino è una pianta piccante...",
+      "wateringFrequency": "Ogni giorno",
+      "species": "Capsicum annuum",
+      "propriety": "edible",
+      "estimated_growing_days": 90
+    },
+    {
+      "name": "Zucchina",
+      "image": "assets/plant_zucchina.jpg",
+      "description": "La zucchina è una pianta ortiva...",
+      "wateringFrequency": "Ogni 2 giorni",
+      "species": "Cucurbita pepo",
+      "propriety": "edible",
+      "estimated_growing_days": 45
+    },
+    {
+      "name": "Fragola",
+      "image": "assets/plant_fragola.jpg",
+      "description": "La fragola è una pianta da frutto...",
+      "wateringFrequency": "Ogni giorno",
+      "species": "Fragaria × ananassa",
+      "propriety": "edible",
+      "estimated_growing_days": 30
+    },
+    {
+      "name": "Rosmarino",
+      "image": "assets/plant_rosmarino.jpg",
+      "description": "Il rosmarino è un arbusto aromatico...",
+      "wateringFrequency": "Ogni 4 giorni",
+      "species": "Rosmarinus officinalis",
+      "propriety": "edible",
+      "estimated_growing_days": 60
+    },
+    {
+      "name": "Menta",
+      "image": "assets/plant_menta.jpg",
+      "description": "La menta è una pianta aromatica...",
+      "wateringFrequency": "Ogni 2 giorni",
+      "species": "Mentha",
+      "propriety": "edible",
+      "estimated_growing_days": 30
+    },
+    {
+      "name": "Cetriolo",
+      "image": "assets/plant_cetriolo.jpg",
+      "description": "Il cetriolo è una pianta ortiva...",
+      "wateringFrequency": "Ogni giorno",
+      "species": "Cucumis sativus",
+      "propriety": "edible",
+      "estimated_growing_days": 50
+    },
+    {
+      "name": "Sedano",
+      "image": "assets/plant_sedano.jpg",
+      "description": "Il sedano è una pianta erbacea...",
+      "wateringFrequency": "Ogni 2 giorni",
+      "species": "Apium graveolens",
+      "propriety": "edible",
+      "estimated_growing_days": 90
+    },
+    {
+      "name": "Pisello",
+      "image": "assets/plant_pisello.jpg",
+      "description": "Il pisello è una pianta erbacea...",
+      "wateringFrequency": "Ogni giorno",
+      "species": "Pisum sativum",
+      "propriety": "edible",
+      "estimated_growing_days": 60
+    },
+    {
+      "name": "Carota",
+      "image": "assets/plant_carota.jpg",
+      "description": "La carota è una pianta erbacea...",
+      "wateringFrequency": "Ogni 3 giorni",
+      "species": "Daucus carota",
+      "propriety": "edible",
+      "estimated_growing_days": 70
+    },
+    {
+      "name": "Cipolla",
+      "image": "assets/plant_cipolla.jpg",
+      "description": "La cipolla è una pianta ortiva...",
+      "wateringFrequency": "Ogni 4 giorni",
+      "species": "Allium cepa",
+      "propriety": "edible",
+      "estimated_growing_days": 90
+    },
+    {
+      "name": "Melanzana",
+      "image": "assets/plant_melanzana.jpg",
+      "description": "La melanzana è una pianta ortiva...",
+      "wateringFrequency": "Ogni 2 giorni",
+      "species": "Solanum melongena",
+      "propriety": "edible",
+      "estimated_growing_days": 60
+    },
+    {
+      "name": "Fico",
+      "image": "assets/plant_fico.jpg",
+      "description": "Il fico è un albero da frutto...",
+      "wateringFrequency": "Ogni giorno",
+      "species": "Ficus carica",
+      "propriety": "edible",
+      "estimated_growing_days": 180
+    },
+    {
+      "name": "Ciliegio",
+      "image": "assets/plant_ciliegio.jpg",
+      "description": "Il ciliegio è un albero da frutto...",
+      "wateringFrequency": "Ogni 3 giorni",
+      "species": "Prunus avium",
+      "propriety": "edible",
+      "estimated_growing_days": 120
+    },
+    {
+      "name": "Limone",
+      "image": "assets/plant_limone.jpg",
+      "description": "Il limone è un albero da frutto...",
+      "wateringFrequency": "Ogni giorno",
+      "species": "Citrus limon",
+      "propriety": "edible",
+      "estimated_growing_days": 90
+    },
+    {
+      "name": "Arancia",
+      "image": "assets/plant_arancia.jpg",
+      "description": "L'arancia è un albero da frutto...",
+      "wateringFrequency": "Ogni 2 giorni",
+      "species": "Citrus sinensis",
+      "propriety": "edible",
+      "estimated_growing_days": 150
     }
 ]
-
-

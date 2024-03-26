@@ -1,3 +1,5 @@
+import 'package:address_24/models/plant.dart';
+import 'package:address_24/screens/my_plant.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -31,6 +33,12 @@ class _MyHomePageState extends State<MyHomePage> {
     });
   }
 
+  final myPlant = Plant(
+    common_name: 'pomodoro',
+    watering_frequency: 'High',
+    estimated_growing_days: 20,
+    propriety: 'edible');
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -38,11 +46,25 @@ class _MyHomePageState extends State<MyHomePage> {
         title: Text('Bottom Navigation Bar Example'),
       ),
       body: Center(
-        child: Text(
-          'This is screen ${_selectedIndex + 1}',
-          style: TextStyle(fontSize: 24.0),
+        child: TextButton(
+          style: TextButton.styleFrom(
+            foregroundColor: Colors.blue
+          ),
+          onPressed: () {
+            Navigator.of(context).push(MaterialPageRoute(
+               builder: (context) {
+                 return MyPlant(plant: myPlant);
+               } 
+             ));
+          },
+          child: Text('This is screen ${_selectedIndex + 1}'),
         ),
       ),
+      // Navigator.of(context).push(MaterialPageRoute(
+      //         builder: (context) {
+      //           return PersonScreen(p: p);
+      //         } 
+      //       ));
       bottomNavigationBar: BottomNavigationBar(
         items: const <BottomNavigationBarItem>[
           BottomNavigationBarItem(

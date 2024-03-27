@@ -40,6 +40,7 @@ class _RecipesMainScreenState extends State<RecipesMainScreen> {
     return Scaffold(
       appBar: AppBar(
         title: Text('Recipes'),
+        backgroundColor: Colors.green[500], // Colore personalizzato per la barra dell'app
       ),
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -52,6 +53,7 @@ class _RecipesMainScreenState extends State<RecipesMainScreen> {
                 style: TextStyle(
                   fontSize: 24,
                   fontWeight: FontWeight.bold,
+                  color: Colors.green[500], // Colore personalizzato per il titolo
                 ),
               ),
             ),
@@ -61,19 +63,28 @@ class _RecipesMainScreenState extends State<RecipesMainScreen> {
               itemCount: savedRecipes.length,
               itemBuilder: (context, index) {
                 final recipe = savedRecipes[index];
-                return ListTile(
-                  title: Text(recipe['title']!),
-                  onTap: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => RecipeDetailScreen(
-                          title: recipe['title']!,
-                          details: recipe['details']!,
-                        ),
+                return Card(
+                  elevation: 2, // Aggiunge una leggera ombra al card
+                  margin: EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
+                  child: ListTile(
+                    title: Text(
+                      recipe['title']!,
+                      style: TextStyle(
+                        fontSize: 18,
                       ),
-                    );
-                  },
+                    ),
+                    onTap: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => RecipeDetailScreen(
+                            title: recipe['title']!,
+                            details: recipe['details']!,
+                          ),
+                        ),
+                      );
+                    },
+                  ),
                 );
               },
             ),
@@ -104,6 +115,7 @@ class _RecipesMainScreenState extends State<RecipesMainScreen> {
                     });
                   },
                   child: Icon(Icons.add),
+                  backgroundColor: Colors.green[500], // Colore personalizzato per il pulsante "Add"
                 ),
               ],
             ),
@@ -128,6 +140,7 @@ class RecipeDetailScreen extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: Text(title),
+        backgroundColor: Colors.green[500], // Colore personalizzato per la barra dell'app
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
@@ -139,6 +152,7 @@ class RecipeDetailScreen extends StatelessWidget {
               style: TextStyle(
                 fontSize: 20,
                 fontWeight: FontWeight.bold,
+                color: Colors.green[500], // Colore personalizzato per il titolo
               ),
             ),
             SizedBox(height: 8),
@@ -154,6 +168,7 @@ class RecipeDetailScreen extends StatelessWidget {
               style: TextStyle(
                 fontSize: 20,
                 fontWeight: FontWeight.bold,
+                color: Colors.green[500], // Colore personalizzato per il titolo
               ),
             ),
             SizedBox(height: 8),

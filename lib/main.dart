@@ -1,9 +1,9 @@
 import 'dart:convert';
+import 'package:address_24/models/plant.dart';
 import 'package:address_24/screens/my_plant.dart';
 import 'package:address_24/screens/recipesadd_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'models/plant.dart';
 
 void main() {
   runApp(MyApp());
@@ -15,7 +15,27 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Esempio di Barra di Navigazione Inferiore',
       theme: ThemeData(
-        primarySwatch: Colors.blue,
+        primaryColor: Colors.green[500],
+        scaffoldBackgroundColor: Colors.green[50],
+        appBarTheme: AppBarTheme(
+          color: Colors.green[500],
+        ),
+        bottomNavigationBarTheme: BottomNavigationBarThemeData(
+          selectedItemColor: Colors.green[500],
+          unselectedItemColor: Colors.grey[600],
+          backgroundColor: Colors.green[50],
+        ),
+        textTheme: TextTheme(
+          headline6: TextStyle(
+            fontSize: 24.0,
+            fontWeight: FontWeight.bold,
+            color: Colors.white, // Colore del testo dell'AppBar
+          ),
+          bodyText1: TextStyle(
+            fontSize: 16.0,
+            color: Colors.black,
+          ),
+        ),
       ),
       home: MyHomePage(),
     );
@@ -52,7 +72,6 @@ class _MyHomePageState extends State<MyHomePage> {
       _selectedIndex = index;
       if (_selectedIndex == 2) {
         _selectedIndex = 1;
-        // Se l'utente preme sull'icona delle Ricette (indice 2), apri la schermata principale delle Ricette
         Navigator.push(
           context,
           MaterialPageRoute(builder: (context) => RecipesMainScreen()),
@@ -75,38 +94,64 @@ class _MyHomePageState extends State<MyHomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title:
-            Text('MyGarden - La migliore app per il management del tuo orto!'),
+        title: Text(
+          'MyGarden',
+          style: Theme.of(context).textTheme.headline6,
+        ),
       ),
       body: ListView.builder(
         itemCount: plants.length,
         itemBuilder: (context, index) {
           return ListTile(
-            title: Text(plants[index]),
+            title: Text(
+              plants[index],
+              style: Theme.of(context).textTheme.bodyText1,
+            ),
             onTap: () =>
                 {print(jsonList[index]), _onPlantTapped(jsonList[index])},
           );
         },
       ),
-      bottomNavigationBar: BottomNavigationBar(
-        items: const <BottomNavigationBarItem>[
-          BottomNavigationBarItem(
-            icon: Icon(Icons.calendar_today),
-            label: 'Calendar',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.nature),
-            label: 'My Garden',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.menu_book),
-            label: 'Recipes',
-          ),
-        ],
-        currentIndex: _selectedIndex,
-        selectedItemColor: Colors.blue,
-        onTap: _onItemTapped,
+    bottomNavigationBar: Container(
+  decoration: BoxDecoration(
+    border: Border(
+      top: BorderSide(
+        color: Colors.black,
+        width: 1.0,
       ),
+    ),
+  ),
+  child: BottomNavigationBar(
+    backgroundColor: Colors.white,
+    selectedItemColor: Colors.green[500],
+    unselectedItemColor: Colors.blue,
+    showSelectedLabels: true,
+    showUnselectedLabels: true,
+    selectedFontSize: 14.0,
+    unselectedFontSize: 14.0,
+    currentIndex: _selectedIndex,
+    onTap: _onItemTapped,
+    items: <BottomNavigationBarItem>[
+      BottomNavigationBarItem(
+        icon: Icon(Icons.calendar_today, size: 28),
+        label: 'Calendar',
+      ),
+      BottomNavigationBarItem(
+        icon: Icon(Icons.nature, size: 28),
+        label: 'My Garden',
+      ),
+      BottomNavigationBarItem(
+        icon: Icon(Icons.menu_book, size: 28),
+        label: 'Recipes',
+      ),
+    ],
+    selectedLabelStyle: TextStyle(fontWeight: FontWeight.bold),
+    unselectedLabelStyle: TextStyle(fontWeight: FontWeight.normal),
+    elevation: 8.0,
+    type: BottomNavigationBarType.fixed,
+  ),
+),
+
     );
   }
 }

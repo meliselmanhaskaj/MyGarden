@@ -1,9 +1,4 @@
-//ignore_for_file: non_constant_identifier_names
-
 import 'dart:convert';
-import 'dart:ffi';
-
-import 'package:address_24/models/models.dart';
 
 class Plant {
   Plant(

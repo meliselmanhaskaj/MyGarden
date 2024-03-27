@@ -84,7 +84,6 @@ class _MyHomePageState extends State<MyHomePage> {
           return ListTile(
             title: Text(plants[index]),
             onTap: () => {
-              print(jsonList[index]),
               _onPlantTapped(jsonList[index])
               },
           );

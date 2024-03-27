@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:address_24/screens/my_plant.dart';
 import 'package:flutter/material.dart';
 
 import 'package:flutter/services.dart';
@@ -42,7 +43,7 @@ class _MyHomePageState extends State<MyHomePage> {
 
   Future<void> loadPlants() async {
     final String jsonString =
-        await rootBundle.loadString('../../data/userData.JSON');
+        await rootBundle.loadString('data/userData.json');
     final List<dynamic> jsonList = json.decode(jsonString);
     plants = jsonList.map((item) => item.toString()).toList();
     setState(() {
@@ -63,12 +64,14 @@ class _MyHomePageState extends State<MyHomePage> {
     });
   }
 
-  void _onPlantTapped() {
+  void _onPlantTapped(List<String> ciao) {
     setState(() {
-      Navigator.push(
-        context,
-        MaterialPageRoute(builder: (context) => RecipesMainScreen()),
-      );
+      print(plants);
+      print(ciao);
+      // Navigator.push(
+      //   context,
+      //   MaterialPageRoute(builder: (context) => MyPlant(id)),
+      // );
     });
   }
 
@@ -84,7 +87,7 @@ class _MyHomePageState extends State<MyHomePage> {
         itemBuilder: (context, index) {
           return ListTile(
             title: Text(plants[index]),
-            onTap: _onPlantTapped,
+            onTap: () => _onPlantTapped(plants),
           );
         },
       ),

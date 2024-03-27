@@ -1,83 +1,39 @@
 import 'package:flutter/material.dart';
-import 'recipes_screen.dart'; // Importa la schermata per aggiungere le ricette
+import 'package:shared_preferences/shared_preferences.dart';
+import 'dart:convert'; // Per la conversione da/verso JSON
+import 'recipes_screen.dart';
 
-class MyApp extends StatelessWidget {
+class RecipesMainScreen extends StatefulWidget {
   @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Esempio di Barra di Navigazione Inferiore',
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
-      ),
-      home: MyHomePage(),
-    );
+  _RecipesMainScreenState createState() => _RecipesMainScreenState();
+}
+
+class _RecipesMainScreenState extends State<RecipesMainScreen> {
+  List<Map<String, String>> savedRecipes = [];
+
+  @override
+  void initState() {
+    super.initState();
+    _loadRecipes();
   }
-}
 
-class MyHomePage extends StatefulWidget {
-  @override
-  _MyHomePageState createState() => _MyHomePageState();
-}
+  Future<void> _loadRecipes() async {
+    final SharedPreferences prefs = await SharedPreferences.getInstance();
+    final String? recipesJson = prefs.getString('saved_recipes');
 
-class _MyHomePageState extends State<MyHomePage> {
-  int _selectedIndex = 1;
-
-  void _onItemTapped(int index) {
-    setState(() {
-      _selectedIndex = index;
-      if (_selectedIndex == 2) {
-        // Se l'utente preme sull'icona delle Ricette (indice 2), apri la schermata delle Ricette principale
-        Navigator.push(
-          context,
-          MaterialPageRoute(builder: (context) => RecipesMainScreen()),
+    if (recipesJson != null) {
+      setState(() {
+        savedRecipes = List<Map<String, String>>.from(
+          json.decode(recipesJson).map((item) => Map<String, String>.from(item)),
         );
-      }
-    });
+      });
+    }
   }
 
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text('Esempio di Barra di Navigazione Inferiore'),
-      ),
-      body: Center(
-        child: Text(
-          'Questa è la schermata ${_selectedIndex + 1}',
-          style: TextStyle(fontSize: 24.0),
-        ),
-      ),
-      bottomNavigationBar: BottomNavigationBar(
-        items: const <BottomNavigationBarItem>[
-          BottomNavigationBarItem(
-            icon: Icon(Icons.calendar_today),
-            label: 'Calendar',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.nature),
-            label: 'My Garden',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.menu_book),
-            label: 'Recipes',
-          ),
-        ],
-        currentIndex: _selectedIndex,
-        selectedItemColor: Colors.blue,
-        onTap: _onItemTapped,
-      ),
-    );
+  Future<void> _saveRecipes() async {
+    final SharedPreferences prefs = await SharedPreferences.getInstance();
+    await prefs.setString('saved_recipes', json.encode(savedRecipes));
   }
-}
-
-class RecipesMainScreen extends StatelessWidget {
-  final List<String> savedRecipes = [
-    'Pasta al Pomodoro',
-    'Insalata Caprese',
-    'Tiramisù',
-    'Pizza Margherita',
-    'Risotto ai Funghi'
-  ];
 
   @override
   Widget build(BuildContext context) {
@@ -88,8 +44,8 @@ class RecipesMainScreen extends StatelessWidget {
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
-          const Padding(
-            padding: EdgeInsets.all(16.0),
+          Padding(
+            padding: const EdgeInsets.all(16.0),
             child: Center(
               child: Text(
                 'MY RECIPES',
@@ -106,13 +62,15 @@ class RecipesMainScreen extends StatelessWidget {
               itemBuilder: (context, index) {
                 final recipe = savedRecipes[index];
                 return ListTile(
-                  title: Text(recipe),
+                  title: Text(recipe['title']!),
                   onTap: () {
-                    // Azione quando si preme una ricetta
                     Navigator.push(
                       context,
                       MaterialPageRoute(
-                        builder: (context) => RecipeDetailScreen(recipe),
+                        builder: (context) => RecipeDetailScreen(
+                          title: recipe['title']!,
+                          details: recipe['details']!,
+                        ),
                       ),
                     );
                   },
@@ -127,13 +85,23 @@ class RecipesMainScreen extends StatelessWidget {
               children: [
                 FloatingActionButton(
                   onPressed: () {
-                    // Azione quando si preme il pulsante "+"
                     Navigator.push(
                       context,
                       MaterialPageRoute(
                         builder: (context) => RecipesScreen(),
                       ),
-                    );
+                    ).then((value) {
+                      if (value != null && value is List<String>) {
+                        setState(() {
+                          final newRecipe = {
+                            'title': value[0],
+                            'details': value[1],
+                          };
+                          savedRecipes.add(newRecipe);
+                          _saveRecipes(); // Salva le ricette dopo l'aggiunta
+                        });
+                      }
+                    });
                   },
                   child: Icon(Icons.add),
                 ),
@@ -147,23 +115,55 @@ class RecipesMainScreen extends StatelessWidget {
 }
 
 class RecipeDetailScreen extends StatelessWidget {
-  final String recipe;
+  final String title;
+  final String details;
 
-  RecipeDetailScreen(this.recipe);
+  RecipeDetailScreen({
+    required this.title,
+    required this.details,
+  });
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(recipe),
+        title: Text(title),
       ),
-      body: Center(
-        child: Padding(
-          padding: const EdgeInsets.all(16.0),
-          child: Text(
-            'Dettagli della ricetta: $recipe',
-            style: TextStyle(fontSize: 20),
-          ),
+      body: Padding(
+        padding: const EdgeInsets.all(16.0),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text(
+              'Titolo:',
+              style: TextStyle(
+                fontSize: 20,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+            SizedBox(height: 8),
+            Text(
+              title,
+              style: TextStyle(
+                fontSize: 18,
+              ),
+            ),
+            SizedBox(height: 16),
+            Text(
+              'Descrizione:',
+              style: TextStyle(
+                fontSize: 20,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+            SizedBox(height: 8),
+            Text(
+              details,
+              style: TextStyle(
+                fontSize: 18,
+              ),
+            ),
+          ],
         ),
       ),
     );

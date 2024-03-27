@@ -1,6 +1,8 @@
+import 'package:address_24/services/event_service.dart';
 import 'package:flutter/material.dart';
 import 'package:address_24/screens/recipes_screen.dart';
 import 'package:address_24/screens/recipesadd_screen.dart';
+import 'package:address_24/screens/calendar_screen.dart';
 
 void main() {
   runApp(MyApp());
@@ -14,7 +16,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: MyHomePage(),
+      home: SafeArea(child: MyHomePage()),
     );
   }
 }
@@ -30,6 +32,18 @@ class _MyHomePageState extends State<MyHomePage> {
   void _onItemTapped(int index) {
     setState(() {
       _selectedIndex = index;
+      if (_selectedIndex == 0) {
+        // Se l'utente preme sull'icona del calendario (indice ), apri la schermata del calendario
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+              builder: (context) =>
+                  CalendarEvent()), //collegamento con calendar
+        );
+      }
+      if (_selectedIndex == 1) {
+        // // Se l'utente preme sull'icona del calendario (indice 1), apri la schermata principale
+      }
       if (_selectedIndex == 2) {
         // Se l'utente preme sull'icona delle Ricette (indice 2), apri la schermata principale delle Ricette
         Navigator.push(

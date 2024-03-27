@@ -1,10 +1,7 @@
 import 'dart:convert';
-
 import 'package:address_24/screens/my_plant.dart';
 import 'package:flutter/material.dart';
-
 import 'package:flutter/services.dart';
-
 import 'models/plant.dart';
 import 'screens/recipesadd_screen.dart';
 
@@ -33,7 +30,7 @@ class MyHomePage extends StatefulWidget {
 class _MyHomePageState extends State<MyHomePage> {
   int _selectedIndex = 1;
   List<String> plants = [];
-  List<Plant> userPlants = [];
+  List<dynamic> jsonList = [];
 
   @override
   void initState() {
@@ -44,7 +41,7 @@ class _MyHomePageState extends State<MyHomePage> {
   Future<void> loadPlants() async {
     final String jsonString =
         await rootBundle.loadString('data/userData.json');
-    final List<dynamic> jsonList = json.decode(jsonString);
+    jsonList = json.decode(jsonString);
     plants = jsonList.map((item) => item.toString()).toList();
     setState(() {
       plants = jsonList.map((item) => item["selectedName"].toString()).toList();
@@ -64,14 +61,13 @@ class _MyHomePageState extends State<MyHomePage> {
     });
   }
 
-  void _onPlantTapped(List<String> ciao) {
+  void _onPlantTapped(dynamic myPlant) {
+    final Plant miaPianta = Plant.fromJson(myPlant);
     setState(() {
-      print(plants);
-      print(ciao);
-      // Navigator.push(
-      //   context,
-      //   MaterialPageRoute(builder: (context) => MyPlant(id)),
-      // );
+      Navigator.push(
+        context,
+        MaterialPageRoute(builder: (context) => MyPlant(plant: miaPianta)),
+      );
     });
   }
 
@@ -87,7 +83,10 @@ class _MyHomePageState extends State<MyHomePage> {
         itemBuilder: (context, index) {
           return ListTile(
             title: Text(plants[index]),
-            onTap: () => _onPlantTapped(plants),
+            onTap: () => {
+              print(jsonList[index]),
+              _onPlantTapped(jsonList[index])
+              },
           );
         },
       ),

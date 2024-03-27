@@ -65,7 +65,7 @@ class _CalendarEventState extends State<CalendarEvent> {
                         children: [
                           Text("Nome: ${plants[index]["selectedName"]}"),
                           Text(
-                              "Giorno di raccolta: ${plants[index]["harvestDate"]}"),
+                              "Giorno di raccolta: ${plants[index]["harvestDate"]}")
                         ],
                       ),
                     );
@@ -89,4 +89,27 @@ class _CalendarEventState extends State<CalendarEvent> {
     DateTime harvestDate = plantedDay.add(Duration(days: estimatedGrowingDays));
     return harvestDate;
   }
+}
+
+//Funzione per calcolare i giorni di annaffiatura
+List<DateTime> calculateWateringDays(
+    DateTime plantedDay, String wateringFrequency, DateTime harvestDate) {
+  List<DateTime> wateringDays = [];
+  //utilizza RegExp per cercare un numero seguito dalla parola “giorni” all’interno della stringa wateringFrequency.
+  //Se viene trovata una corrispondenza, verrà assegnata alla variabile match.
+  //Ad esempio, se wateringFrequency fosse “Ogni 3 giorni”, match conterrà il valore “3”.
+  RegExp frequencyRegExp = RegExp(r'(\d+) giorni');
+  RegExpMatch? match = frequencyRegExp.firstMatch(wateringFrequency);
+  if (match != null) {
+    int daysInterval = int.parse(match.group(1)!);
+    // Calcolo dei giorni di annaffiatura fino alla data di raccolta
+    DateTime currentDate = plantedDay;
+    while (currentDate.isBefore(harvestDate)) {
+      //i giorni di annaffiatura vengono aggiunti alla lista wateringDays
+      wateringDays.add(currentDate);
+      currentDate = currentDate.add(Duration(days: daysInterval));
+    }
+  }
+  print(wateringDays);
+  return wateringDays;
 }

@@ -38,7 +38,7 @@ class _MyHomePageState extends State<MyHomePage> {
           context,
           MaterialPageRoute(
               builder: (context) =>
-                  CalendarEvent()), //collegamento con calendar
+                  const CalendarEvent()), //collegamento con calendar
         );
       }
       if (_selectedIndex == 1) {

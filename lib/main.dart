@@ -1,9 +1,9 @@
 import 'dart:convert';
 import 'package:address_24/screens/my_plant.dart';
+import 'package:address_24/screens/recipesadd_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'models/plant.dart';
-import 'screens/recipesadd_screen.dart';
 
 void main() {
   runApp(MyApp());
@@ -39,8 +39,7 @@ class _MyHomePageState extends State<MyHomePage> {
   }
 
   Future<void> loadPlants() async {
-    final String jsonString =
-        await rootBundle.loadString('data/userData.json');
+    final String jsonString = await rootBundle.loadString('data/userData.json');
     jsonList = json.decode(jsonString);
     plants = jsonList.map((item) => item.toString()).toList();
     setState(() {
@@ -52,6 +51,7 @@ class _MyHomePageState extends State<MyHomePage> {
     setState(() {
       _selectedIndex = index;
       if (_selectedIndex == 2) {
+        _selectedIndex = 1;
         // Se l'utente preme sull'icona delle Ricette (indice 2), apri la schermata principale delle Ricette
         Navigator.push(
           context,
@@ -83,10 +83,8 @@ class _MyHomePageState extends State<MyHomePage> {
         itemBuilder: (context, index) {
           return ListTile(
             title: Text(plants[index]),
-            onTap: () => {
-              print(jsonList[index]),
-              _onPlantTapped(jsonList[index])
-              },
+            onTap: () =>
+                {print(jsonList[index]), _onPlantTapped(jsonList[index])},
           );
         },
       ),

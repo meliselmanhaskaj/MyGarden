@@ -1,7 +1,6 @@
 import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter/widgets.dart';
 
 class CalendarEvent extends StatefulWidget {
   const CalendarEvent({Key? key});
@@ -11,7 +10,7 @@ class CalendarEvent extends StatefulWidget {
 }
 
 class _CalendarEventState extends State<CalendarEvent> {
-  List<String> plants = [];
+  List<Map<String, dynamic>> plants = []; // Cambia il tipo della lista
 
   @override
   void initState() {
@@ -26,13 +25,18 @@ class _CalendarEventState extends State<CalendarEvent> {
     print("json di partenza : $jsonList");
 
     setState(() {
-      plants = jsonList
-          .map((item) => "Selected Name: ${item["selectedName"]}, "
-              "Watering Frequency: ${item["watering_frequency"]}, "
-              "Estimated Growing Days: ${item["estimated_growing_days"]}, "
-              "Planted Day: ${item["planted_day"]}")
-          .toList();
+      plants = jsonList.map((item) {
+        DateTime harvestDate = calculateHarvestDate(item);
+        return {
+          "selectedName": item["selectedName"],
+          "watering_frequency": item["watering_frequency"],
+          "estimated_growing_days": item["estimated_growing_days"],
+          "planted_day": item["planted_day"],
+          "harvestDate": harvestDate,
+        };
+      }).toList();
     });
+
     print("json di arrivo : $plants");
   }
 
@@ -48,16 +52,22 @@ class _CalendarEventState extends State<CalendarEvent> {
           children: [
             Container(
               padding: const EdgeInsets.all(8.0),
-              child: Text("Json di arrivo: ${plants.toString()}"),
             ),
-            if (plants.isNotEmpty) // Aggiungere questa condizione
+            if (plants.isNotEmpty)
               Expanded(
                 child: ListView.builder(
                   shrinkWrap: true,
                   itemCount: plants.length,
                   itemBuilder: (context, index) {
                     return ListTile(
-                      title: Text(plants[index]),
+                      title: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text("Nome: ${plants[index]["selectedName"]}"),
+                          Text(
+                              "Giorno di raccolta: ${plants[index]["harvestDate"]}"),
+                        ],
+                      ),
                     );
                   },
                 ),
@@ -66,5 +76,17 @@ class _CalendarEventState extends State<CalendarEvent> {
         ),
       ),
     );
+  }
+
+  // Funzione per calcolare la data di raccolta
+  DateTime calculateHarvestDate(dynamic plantData) {
+    List<String> parts = plantData["planted_day"].split('-');
+    int day = int.parse(parts[0]);
+    int month = int.parse(parts[1]);
+    int year = int.parse(parts[2]);
+    DateTime plantedDay = DateTime(year, month, day);
+    int estimatedGrowingDays = plantData["estimated_growing_days"];
+    DateTime harvestDate = plantedDay.add(Duration(days: estimatedGrowingDays));
+    return harvestDate;
   }
 }

@@ -16,24 +16,24 @@ class Plant {
 
   final String? common_name;
   final String? selected_name;
-  final String? id;
+  final int? id;
   final String? image;
   final String? description;
   final String? watering_frequency;
   final String? species;
   final String? propriety;
-  final String? estimated_growing_days;
+  final int? estimated_growing_days;
 
   Plant copyWith(
           {String? common_name,
           String? image,
-          String? id,
+          int? id,
           String? selected_name,
           String? description,
           String? watering_frequency,
           String? species,
           String? propriety,
-          String? estimated_growing_days}) =>
+          int? estimated_growing_days}) =>
       Plant(
           common_name: common_name ?? this.common_name,
           id: id ?? this.id,

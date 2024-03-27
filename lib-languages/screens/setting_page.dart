@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'language_page.dart'; // Importa LanguagePage
+import 'language_page.dart';
+import '../services/localization.dart';
 
 class SettingsPage extends StatelessWidget {
   @override
@@ -19,7 +20,10 @@ class SettingsPage extends StatelessWidget {
                   MaterialPageRoute(builder: (context) => LanguagePage()),
                 );
               },
-              child: Text('Lingue'),
+              child: Text(
+                // Testo tradotto in base alla lingua corrente
+                AppLocalizations.of(context)!.translate('settings_page_button'),
+              ),
             ),
           ],
         ),

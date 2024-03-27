@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'file:C:/Users/marco/Downloads/MyGarden-marco/MyGarden-main/lib/main.dart'; // Importa MyApp
+import '../main.dart';
+import '../services/localization.dart';
 
 class LanguagePage extends StatelessWidget {
   @override

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'setting_page.dart'; // Importa SettingsPage
+import '../services/localization.dart';
+import 'setting_page.dart';
 
 class HomePage extends StatelessWidget {
   @override
@@ -20,7 +21,11 @@ class HomePage extends StatelessWidget {
         ],
       ),
       body: Center(
-        child: Text('Contenuto della homepage'),
+        child: Text(
+          // Testo tradotto in base alla lingua corrente
+          AppLocalizations.of(context)!.translate('home_page_content'),
+          textAlign: TextAlign.center,
+        ),
       ),
     );
   }

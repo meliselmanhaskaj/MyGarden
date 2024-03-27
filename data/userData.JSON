@@ -1,0 +1,30 @@
+[
+    {
+        "id" : 0,
+        "selectedName" : "Lattuga - terrazzo",
+        "common_name" : "Lattuga",
+        "watering_frequency" : "ogni 2 giorni",
+        "description" : "La lattuga è una pianta erbacea annuale...",
+        "estimated_growing_days" : 45,
+        "planted_day" : "26-03-2024",
+        "image": "immagine"
+    },
+    {
+        "id" : 2,
+        "selectedName" : "Lattuga - giardino",
+        "common_name" : "Lattuga",
+        "watering_frequency" : "ogni 2 giorni",
+        "description" : "La lattuga è una pianta erbacea annuale...",
+        "estimated_growing_days" : 45,
+        "planted_day" : "26-03-2024"
+    },
+    {
+        "id" : 2,
+        "selectedName" : "Basilico - giardino",
+        "common_name" : "Basilico",
+        "watering_frequency" : "ogni 3 giorni",
+        "description" : "Il basilico e una pianta erbacea annuale...",
+        "estimated_growing_days" : 10,
+        "planted_day" : "26-03-2024"
+    }
+]

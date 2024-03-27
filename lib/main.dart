@@ -1,6 +1,9 @@
-import 'package:address_24/models/plant.dart';
+import 'dart:convert';
 import 'package:address_24/screens/my_plant.dart';
+import 'package:address_24/screens/recipesadd_screen.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import 'models/plant.dart';
 
 void main() {
   runApp(MyApp());
@@ -10,7 +13,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Bottom Navigation Bar Example',
+      title: 'Esempio di Barra di Navigazione Inferiore',
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
@@ -25,65 +28,80 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  int _selectedIndex = 0;
+  int _selectedIndex = 1;
+  List<String> plants = [];
+  List<dynamic> jsonList = [];
+
+  @override
+  void initState() {
+    super.initState();
+    loadPlants();
+  }
+
+  Future<void> loadPlants() async {
+    final String jsonString = await rootBundle.loadString('data/userData.json');
+    jsonList = json.decode(jsonString);
+    plants = jsonList.map((item) => item.toString()).toList();
+    setState(() {
+      plants = jsonList.map((item) => item["selectedName"].toString()).toList();
+    });
+  }
 
   void _onItemTapped(int index) {
     setState(() {
       _selectedIndex = index;
+      if (_selectedIndex == 2) {
+        _selectedIndex = 1;
+        // Se l'utente preme sull'icona delle Ricette (indice 2), apri la schermata principale delle Ricette
+        Navigator.push(
+          context,
+          MaterialPageRoute(builder: (context) => RecipesMainScreen()),
+        );
+      }
     });
   }
 
-  final myPlant = Plant(
-    id: '1',
-    selected_name: 'Lattuga - in terrazzo',
-    common_name: "Lattuga",
-    image: "assets/plant_lattuga.jpg",
-    description: "La lattuga è una pianta erbacea annuale...",
-    watering_frequency: "Ogni 2 giorni",
-    species: "Lactuca sativa",
-    propriety: "edible",
-    estimated_growing_days: '30'
-    );
+  void _onPlantTapped(dynamic myPlant) {
+    final Plant miaPianta = Plant.fromJson(myPlant);
+    setState(() {
+      Navigator.push(
+        context,
+        MaterialPageRoute(builder: (context) => MyPlant(plant: miaPianta)),
+      );
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Bottom Navigation Bar Example'),
+        title:
+            Text('MyGarden - La migliore app per il management del tuo orto!'),
       ),
-      body: Center(
-        child: TextButton(
-          style: TextButton.styleFrom(
-            foregroundColor: Colors.blue
-          ),
-          onPressed: () {
-            Navigator.of(context).push(MaterialPageRoute(
-               builder: (context) {
-                 return MyPlant(plant: myPlant);
-               } 
-             ));
-          },
-          child: Text('This is screen ${_selectedIndex + 1}'),
-        ),
+      body: ListView.builder(
+        itemCount: plants.length,
+        itemBuilder: (context, index) {
+          return ListTile(
+            title: Text(plants[index]),
+            onTap: () => {
+              _onPlantTapped(jsonList[index])
+              },
+          );
+        },
       ),
-      // Navigator.of(context).push(MaterialPageRoute(
-      //         builder: (context) {
-      //           return PersonScreen(p: p);
-      //         } 
-      //       ));
       bottomNavigationBar: BottomNavigationBar(
         items: const <BottomNavigationBarItem>[
           BottomNavigationBarItem(
-            icon: Icon(Icons.home),
-            label: 'Home',
+            icon: Icon(Icons.calendar_today),
+            label: 'Calendar',
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.search),
-            label: 'Search',
+            icon: Icon(Icons.nature),
+            label: 'My Garden',
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.person),
-            label: 'Profile',
+            icon: Icon(Icons.menu_book),
+            label: 'Recipes',
           ),
         ],
         currentIndex: _selectedIndex,

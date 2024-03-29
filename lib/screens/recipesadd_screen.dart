@@ -1,6 +1,6 @@
+import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'dart:convert'; // Per la conversione da/verso JSON
 import 'recipes_screen.dart';
 
 class RecipesMainScreen extends StatefulWidget {
@@ -35,12 +35,48 @@ class _RecipesMainScreenState extends State<RecipesMainScreen> {
     await prefs.setString('saved_recipes', json.encode(savedRecipes));
   }
 
+  Future<void> _confirmDeleteRecipe(int index) async {
+    final bool confirmDelete = await showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: Text('Delete Recipe'),
+          content: Text('Are you sure you want to delete this recipe?'),
+          actions: [
+            TextButton(
+              onPressed: () => Navigator.of(context).pop(false),
+              child: Text('Cancel'),
+            ),
+            TextButton(
+              onPressed: () => Navigator.of(context).pop(true),
+              child: Text('Delete'),
+            ),
+          ],
+        );
+      },
+    );
+
+    if (confirmDelete != null && confirmDelete) {
+      setState(() {
+        savedRecipes.removeAt(index);
+        _saveRecipes();
+      });
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Recipes'),
-        backgroundColor: Colors.green[500], // Colore personalizzato per la barra dell'app
+        title: Text(
+          'RECIPES',
+          style: TextStyle(
+            color: Colors.white,
+            fontSize: 24,
+            fontWeight: FontWeight.bold,
+          ),
+        ),
+        centerTitle: true, // Centra il titolo nella AppBar
       ),
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -49,11 +85,11 @@ class _RecipesMainScreenState extends State<RecipesMainScreen> {
             padding: const EdgeInsets.all(16.0),
             child: Center(
               child: Text(
-                'MY RECIPES',
+                'My recipes',
                 style: TextStyle(
-                  fontSize: 24,
+                  fontSize: 20,
                   fontWeight: FontWeight.bold,
-                  color: Colors.green[500], // Colore personalizzato per il titolo
+                  color: Colors.blue,
                 ),
               ),
             ),
@@ -64,7 +100,7 @@ class _RecipesMainScreenState extends State<RecipesMainScreen> {
               itemBuilder: (context, index) {
                 final recipe = savedRecipes[index];
                 return Card(
-                  elevation: 2, // Aggiunge una leggera ombra al card
+                  elevation: 2,
                   margin: EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
                   child: ListTile(
                     title: Text(
@@ -84,6 +120,10 @@ class _RecipesMainScreenState extends State<RecipesMainScreen> {
                         ),
                       );
                     },
+                    trailing: IconButton(
+                      icon: Icon(Icons.delete),
+                      onPressed: () => _confirmDeleteRecipe(index),
+                    ),
                   ),
                 );
               },
@@ -109,13 +149,12 @@ class _RecipesMainScreenState extends State<RecipesMainScreen> {
                             'details': value[1],
                           };
                           savedRecipes.add(newRecipe);
-                          _saveRecipes(); // Salva le ricette dopo l'aggiunta
+                          _saveRecipes();
                         });
                       }
                     });
                   },
                   child: Icon(Icons.add),
-                  backgroundColor: Colors.green[500], // Colore personalizzato per il pulsante "Add"
                 ),
               ],
             ),
@@ -140,7 +179,6 @@ class RecipeDetailScreen extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: Text(title),
-        backgroundColor: Colors.green[500], // Colore personalizzato per la barra dell'app
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
@@ -152,7 +190,7 @@ class RecipeDetailScreen extends StatelessWidget {
               style: TextStyle(
                 fontSize: 20,
                 fontWeight: FontWeight.bold,
-                color: Colors.green[500], // Colore personalizzato per il titolo
+                color: Theme.of(context).primaryColor,
               ),
             ),
             SizedBox(height: 8),
@@ -168,7 +206,7 @@ class RecipeDetailScreen extends StatelessWidget {
               style: TextStyle(
                 fontSize: 20,
                 fontWeight: FontWeight.bold,
-                color: Colors.green[500], // Colore personalizzato per il titolo
+                color: Theme.of(context).primaryColor,
               ),
             ),
             SizedBox(height: 8),

@@ -22,14 +22,14 @@ class MyApp extends StatelessWidget {
         ),
         bottomNavigationBarTheme: BottomNavigationBarThemeData(
           selectedItemColor: Colors.green[500],
-          unselectedItemColor: Colors.grey[600],
-          backgroundColor: Colors.green[50],
+          unselectedItemColor: Colors.blue,
+          backgroundColor: Colors.white,
         ),
         textTheme: TextTheme(
           headline6: TextStyle(
             fontSize: 24.0,
             fontWeight: FontWeight.bold,
-            color: Colors.white, // Colore del testo dell'AppBar
+            color: Colors.white,
           ),
           bodyText1: TextStyle(
             fontSize: 16.0,
@@ -37,7 +37,90 @@ class MyApp extends StatelessWidget {
           ),
         ),
       ),
-      home: MyHomePage(),
+      home: SplashScreen(), // Utilizzo dello SplashScreen come home iniziale
+    );
+  }
+}
+
+class SplashScreen extends StatefulWidget {
+  @override
+  _SplashScreenState createState() => _SplashScreenState();
+}
+
+class _SplashScreenState extends State<SplashScreen> with SingleTickerProviderStateMixin {
+  late AnimationController _controller;
+  late Animation<double> _animation;
+
+  @override
+  void initState() {
+    super.initState();
+    _controller = AnimationController(
+      vsync: this,
+      duration: Duration(milliseconds: 1000),
+    );
+    _animation = Tween<double>(begin: 0.0, end: 1.0).animate(_controller);
+    _controller.forward();
+    // Attendiamo 2 secondi e poi naviga alla HomePage
+    Future.delayed(Duration(seconds: 2), () {
+      Navigator.pushReplacement(
+        context,
+        MaterialPageRoute(builder: (context) => MyHomePage()),
+      );
+    });
+  }
+
+  @override
+  void dispose() {
+    _controller.dispose();
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      backgroundColor: Colors.green[100],
+      body: Center(
+        child: ScaleTransition(
+          scale: _animation,
+          child: Container(
+            decoration: BoxDecoration(
+              color: Colors.white,
+              borderRadius: BorderRadius.circular(16.0),
+              boxShadow: [
+                BoxShadow(
+                  color: Colors.grey.withOpacity(0.5),
+                  spreadRadius: 2,
+                  blurRadius: 5,
+                  offset: Offset(0, 3),
+                ),
+              ],
+            ),
+            padding: EdgeInsets.all(32.0),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                // Icona o Logo dell'app
+                Icon(
+                  Icons.nature,
+                  size: 100,
+                  color: Colors.green[500],
+                ),
+                SizedBox(height: 20),
+                // Nome dell'app nello SplashScreen
+                Text(
+                  'MY GARDEN',
+                  style: TextStyle(
+                    fontSize: 24,
+                    fontWeight: FontWeight.bold,
+                    color: Colors.green[500],
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ),
+      ),
     );
   }
 }
@@ -61,7 +144,6 @@ class _MyHomePageState extends State<MyHomePage> {
   Future<void> loadPlants() async {
     final String jsonString = await rootBundle.loadString('data/userData.json');
     jsonList = json.decode(jsonString);
-    plants = jsonList.map((item) => item.toString()).toList();
     setState(() {
       plants = jsonList.map((item) => item["selectedName"].toString()).toList();
     });
@@ -90,68 +172,132 @@ class _MyHomePageState extends State<MyHomePage> {
     });
   }
 
+  void _onAddPlant() {
+    // Implementazione del pulsante "+" per aggiungere una pianta
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: Text('Aggiungi Pianta'),
+          content: Text('Qui ci sarà il form per aggiungere una nuova pianta.'),
+          actions: <Widget>[
+            TextButton(
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+              child: Text('Annulla'),
+            ),
+            TextButton(
+              onPressed: () {
+                // Qui aggiungeremo il codice per salvare la nuova pianta
+                Navigator.of(context).pop();
+              },
+              child: Text('Aggiungi'),
+            ),
+          ],
+        );
+      },
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(
-          'MyGarden',
-          style: Theme.of(context).textTheme.headline6,
+        title: Center(
+          child: Text(
+            'MY GARDEN', // Titolo personalizzato per la pagina Home
+            style: TextStyle(
+              fontSize: 24.0,
+              fontWeight: FontWeight.bold,
+              color: Colors.white,
+            ),
+          ),
         ),
       ),
-      body: ListView.builder(
-        itemCount: plants.length,
-        itemBuilder: (context, index) {
-          return ListTile(
-            title: Text(
-              plants[index],
-              style: Theme.of(context).textTheme.bodyText1,
+      body: Column(
+        children: [
+          SizedBox(height: 10),
+          Text(
+            'My Plants',
+            style: TextStyle(
+              fontSize: 20.0,
+              fontWeight: FontWeight.bold,
+              color: Colors.blue[500],
             ),
-            onTap: () =>
-                {print(jsonList[index]), _onPlantTapped(jsonList[index])},
-          );
-        },
+          ),
+          Expanded(
+            child: ListView.builder(
+              itemCount: plants.length,
+              itemBuilder: (context, index) {
+                final plantName = plants[index];
+                return Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
+                  child: Card(
+                    elevation: 2,
+                    child: ListTile(
+                      title: Text(
+                        plantName,
+                        style: TextStyle(
+                          fontSize: 18,
+                        ),
+                      ),
+                      onTap: () => _onPlantTapped(jsonList[index]),
+                    ),
+                  ),
+                );
+              },
+            ),
+          ),
+        ],
       ),
-    bottomNavigationBar: Container(
-  decoration: BoxDecoration(
-    border: Border(
-      top: BorderSide(
-        color: Colors.black,
-        width: 1.0,
+      floatingActionButton: FloatingActionButton(
+        onPressed: _onAddPlant,
+        child: Icon(Icons.add),
       ),
-    ),
-  ),
-  child: BottomNavigationBar(
-    backgroundColor: Colors.white,
-    selectedItemColor: Colors.green[500],
-    unselectedItemColor: Colors.blue,
-    showSelectedLabels: true,
-    showUnselectedLabels: true,
-    selectedFontSize: 14.0,
-    unselectedFontSize: 14.0,
-    currentIndex: _selectedIndex,
-    onTap: _onItemTapped,
-    items: <BottomNavigationBarItem>[
-      BottomNavigationBarItem(
-        icon: Icon(Icons.calendar_today, size: 28),
-        label: 'Calendar',
+      bottomNavigationBar: Container(
+        decoration: BoxDecoration(
+          border: Border(
+            top: BorderSide(
+              color: Colors.black,
+              width: 1.0,
+            ),
+          ),
+        ),
+        child: BottomNavigationBar(
+          backgroundColor: Colors.white,
+          selectedItemColor: Colors.green[500],
+          unselectedItemColor: Colors.blue,
+          showSelectedLabels: true,
+          showUnselectedLabels: true,
+          selectedFontSize: 14.0,
+          unselectedFontSize: 14.0,
+          currentIndex: _selectedIndex,
+          onTap: _onItemTapped,
+          items: <BottomNavigationBarItem>[
+            BottomNavigationBarItem(
+              icon: Icon(Icons.calendar_today, size: 28),
+              label: 'Calendar',
+            ),
+            BottomNavigationBarItem(
+              icon: Icon(Icons.nature, size: 28),
+              label: 'My Garden',
+            ),
+            BottomNavigationBarItem(
+              icon: Icon(Icons.menu_book, size: 28),
+              label: 'Recipes',
+            ),
+            BottomNavigationBarItem(
+              icon: Icon(Icons.camera_alt, size: 28),
+              label: 'Camera',
+            ),
+          ],
+          selectedLabelStyle: TextStyle(fontWeight: FontWeight.bold),
+          unselectedLabelStyle: TextStyle(fontWeight: FontWeight.normal),
+          elevation: 8.0,
+          type: BottomNavigationBarType.fixed,
+        ),
       ),
-      BottomNavigationBarItem(
-        icon: Icon(Icons.nature, size: 28),
-        label: 'My Garden',
-      ),
-      BottomNavigationBarItem(
-        icon: Icon(Icons.menu_book, size: 28),
-        label: 'Recipes',
-      ),
-    ],
-    selectedLabelStyle: TextStyle(fontWeight: FontWeight.bold),
-    unselectedLabelStyle: TextStyle(fontWeight: FontWeight.normal),
-    elevation: 8.0,
-    type: BottomNavigationBarType.fixed,
-  ),
-),
-
     );
   }
 }

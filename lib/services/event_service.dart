@@ -3,8 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
 class CalendarEvent extends StatefulWidget {
-  const CalendarEvent({Key? key});
-
+  const CalendarEvent({super.key});
   @override
   State<CalendarEvent> createState() => _CalendarEventState();
 }
@@ -19,32 +18,61 @@ class _CalendarEventState extends State<CalendarEvent> {
   }
 
   Future<void> loadPlants() async {
+    DateTime currentDate = DateTime.now();
     final String jsonString =
         await rootBundle.loadString('../../data/userData.json');
     final List<dynamic> jsonList = jsonDecode(jsonString);
-    print("json di partenza : $jsonList");
-
     setState(() {
       plants = jsonList.map((item) {
         DateTime harvestDate = calculateHarvestDate(item);
+        int extractNumberFromString(String wateringFrequency) {
+          RegExp regExp = RegExp(r'\b(\d+)\b');
+          Match? match = regExp.firstMatch(wateringFrequency);
+          int numero;
+          if (match != null) {
+            String numberAsString = match.group(0)!;
+            numero = int.parse(numberAsString);
+          } else {
+            numero = 0;
+            // In caso di mancata corrispondenza, restituisci un valore predefinito o gestisci l'eccezione di conseguenza
+          }
+          return numero;
+        }
+
+        int giorni = extractNumberFromString(item["watering_frequency"]);
+
         return {
           "selectedName": item["selectedName"],
           "watering_frequency": item["watering_frequency"],
           "estimated_growing_days": item["estimated_growing_days"],
           "planted_day": item["planted_day"],
           "harvestDate": harvestDate,
+          "currentDate": currentDate,
+          "giorni": giorni,
+          // "wateringDays": calculateWateringDays(
+          //     DateTime.parse(item["planted_day"]), giorni, harvestDate),
         };
       }).toList();
+      // List<DateTime> calculateWateringDays(
+      //     DateTime plantedDay, int giorni, DateTime harvestDate) {
+      //   List<DateTime> wateringDays = [];
+      //   DateTime currentDate = plantedDay;
+      //   // Aggiungi i giorni di annaffiatura fino alla data di raccolta
+      //   while (currentDate.isBefore(harvestDate)) {
+      //     wateringDays.add(currentDate);
+      //     currentDate = currentDate.add(Duration(days: giorni));
+      //   }
+      //   return wateringDays;
+      // }
     });
-
-    print("json di arrivo : $plants");
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Calendar'),
+        title: Text(
+            'Oggi: ${DateTime.now().year}-${DateTime.now().month}-${DateTime.now().day}'),
       ),
       body: Directionality(
         textDirection: TextDirection.ltr,
@@ -59,13 +87,21 @@ class _CalendarEventState extends State<CalendarEvent> {
                   shrinkWrap: true,
                   itemCount: plants.length,
                   itemBuilder: (context, index) {
+                    // List<DateTime> wateringDays = calculateWateringDays(
+                    //     DateTime.parse(plants[index]["planted_day"]),
+                    //     plants[index]["giorni"],
+                    //     plants[index]["harvestDate"]);
                     return ListTile(
                       title: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Text("Nome: ${plants[index]["selectedName"]}"),
                           Text(
-                              "Giorno di raccolta: ${plants[index]["harvestDate"]}")
+                              "Giorno di raccolta: ${plants[index]["harvestDate"].toString().substring(0, 10)}"),
+                          Text(
+                              "Da annaffiare ogni: ${plants[index]["giorni"]} giorni"),
+                          // Text(
+                          //     "Giorni di annaffiatura: ${wateringDays.map((date) => date.toString().substring(0, 10)).toList()}"),
                         ],
                       ),
                     );
@@ -78,7 +114,7 @@ class _CalendarEventState extends State<CalendarEvent> {
     );
   }
 
-  // Funzione per calcolare la data di raccolta
+  //metodo per il giorno di raccolta
   DateTime calculateHarvestDate(dynamic plantData) {
     List<String> parts = plantData["planted_day"].split('-');
     int day = int.parse(parts[0]);
@@ -89,27 +125,4 @@ class _CalendarEventState extends State<CalendarEvent> {
     DateTime harvestDate = plantedDay.add(Duration(days: estimatedGrowingDays));
     return harvestDate;
   }
-}
-
-//Funzione per calcolare i giorni di annaffiatura
-List<DateTime> calculateWateringDays(
-    DateTime plantedDay, String wateringFrequency, DateTime harvestDate) {
-  List<DateTime> wateringDays = [];
-  //utilizza RegExp per cercare un numero seguito dalla parola “giorni” all’interno della stringa wateringFrequency.
-  //Se viene trovata una corrispondenza, verrà assegnata alla variabile match.
-  //Ad esempio, se wateringFrequency fosse “Ogni 3 giorni”, match conterrà il valore “3”.
-  RegExp frequencyRegExp = RegExp(r'(\d+) giorni');
-  RegExpMatch? match = frequencyRegExp.firstMatch(wateringFrequency);
-  if (match != null) {
-    int daysInterval = int.parse(match.group(1)!);
-    // Calcolo dei giorni di annaffiatura fino alla data di raccolta
-    DateTime currentDate = plantedDay;
-    while (currentDate.isBefore(harvestDate)) {
-      //i giorni di annaffiatura vengono aggiunti alla lista wateringDays
-      wateringDays.add(currentDate);
-      currentDate = currentDate.add(Duration(days: daysInterval));
-    }
-  }
-  print(wateringDays);
-  return wateringDays;
 }

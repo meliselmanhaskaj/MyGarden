@@ -1,5 +1,7 @@
 import 'package:address_24/models/plant.dart';
 import 'package:flutter/material.dart';
+import 'package:intl/date_symbol_data_local.dart';
+import 'package:intl/intl.dart';
 
 //  ToDo:
 //    -Caricamento dell'immagine
@@ -17,7 +19,7 @@ class MyPlantWidget extends StatelessWidget {
     List<Widget> returnList() {
       final List<Widget> list = [];
       final namesList = ['Watering frequency', 'Estimated growing days', 'Propriety', 'Planted day', 'Missing days'];
-      final jsonNames = ['wateringFrequency', 'estimated_growing_days', 'propriety', 'planted_day', 'estimated_growing_days'];
+      //final jsonNames = ['wateringFrequency', 'estimated_growing_days', 'propriety', 'planted_day', 'estimated_growing_days'];
       final List<IconData> iconsList = [Icons.water_drop_outlined, Icons.calendar_month, Icons.info, Icons.calendar_today_sharp, Icons.calendar_view_day];
 
       for(int i = 0; i < namesList.length; i++) {
@@ -31,12 +33,15 @@ class MyPlantWidget extends StatelessWidget {
                 : fieldName == 'Planted day'
                   ? p.planted_day
                   : fieldName == 'Missing days'
-                    ? p.estimated_growing_days
+                    ? (DateFormat('dd-MM-yyyy').parse(p.planted_day!).add(Duration(days: p.estimated_growing_days!))).difference(DateTime.now()).inDays
                     : '';
 
         final Widget obj = ListTile(
-               leading: Icon(iconsList[i]),
-               title: Text('${namesList[i]}: $value'),
+              leading: Icon(
+                iconsList[i],
+                color: const Color.fromRGBO(103, 148, 54, 1),
+                ),
+              title: Text('${namesList[i]}: $value'),
              );
 
         list.add(obj); 

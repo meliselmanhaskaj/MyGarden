@@ -16,21 +16,26 @@ class MyPlantWidget extends StatelessWidget {
 
     List<Widget> returnList() {
       final List<Widget> list = [];
-      final namesList = ['Watering frequency', 'Estimated growing days', 'Propriety'];
-      final jsonNames = ['wateringFrequency', 'estimated_growing_days', 'propriety'];
+      final namesList = ['Watering frequency', 'Estimated growing days', 'Propriety', 'Planted day', 'Missing days'];
+      final jsonNames = ['wateringFrequency', 'estimated_growing_days', 'propriety', 'planted_day', 'estimated_growing_days'];
+      final List<IconData> iconsList = [Icons.water_drop_outlined, Icons.calendar_month, Icons.info, Icons.calendar_today_sharp, Icons.calendar_view_day];
 
       for(int i = 0; i < namesList.length; i++) {
-        final fieldName = jsonNames[i];
-        final value = fieldName == 'estimated_growing_days'
+        final fieldName = namesList[i];
+        final value = fieldName == 'Estimated growing days'
         ? p.estimated_growing_days
-        : fieldName == 'wateringFrequency'
+        : fieldName == 'Watering frequency'
             ? p.watering_frequency
-            : fieldName == 'propriety'
+            : fieldName == 'Propriety'
                 ? p.propriety
-                : '';
+                : fieldName == 'Planted day'
+                  ? p.planted_day
+                  : fieldName == 'Missing days'
+                    ? p.estimated_growing_days
+                    : '';
 
         final Widget obj = ListTile(
-               leading: const Icon(Icons.water_drop_outlined),
+               leading: Icon(iconsList[i]),
                title: Text('${namesList[i]}: $value'),
              );
 

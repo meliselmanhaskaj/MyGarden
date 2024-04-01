@@ -133,7 +133,7 @@ class MyHomePage extends StatefulWidget {
 class _MyHomePageState extends State<MyHomePage> {
   int _selectedIndex = 1;
   List<String> plants = [];
-  List<dynamic> jsonList = [];
+  List<dynamic> userPlantList = [];
 
   @override
   void initState() {
@@ -143,9 +143,9 @@ class _MyHomePageState extends State<MyHomePage> {
 
   Future<void> loadPlants() async {
     final String jsonString = await rootBundle.loadString('data/userData.json');
-    jsonList = json.decode(jsonString);
+    userPlantList = json.decode(jsonString);
     setState(() {
-      plants = jsonList.map((item) => item["selectedName"].toString()).toList();
+      plants = userPlantList.map((item) => item["selected_name"].toString()).toList();
     });
   }
 
@@ -231,18 +231,27 @@ class _MyHomePageState extends State<MyHomePage> {
               itemCount: plants.length,
               itemBuilder: (context, index) {
                 final plantName = plants[index];
+                final plant = userPlantList[index];
+                print(plants);
                 return Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
                   child: Card(
                     elevation: 2,
                     child: ListTile(
+                      leading: CircleAvatar(
+                        backgroundImage: AssetImage('data/assets/${plant['common_name']}.jpeg'),
+                      ),
                       title: Text(
                         plantName,
                         style: TextStyle(
                           fontSize: 18,
                         ),
                       ),
-                      onTap: () => _onPlantTapped(jsonList[index]),
+                      trailing: CircleAvatar(
+                        backgroundImage: AssetImage('data/assets/Icons/${plant['propriety']}.png'),
+                        backgroundColor: Colors.white,
+                      ),
+                      onTap: () => _onPlantTapped(userPlantList[index]),
                     ),
                   ),
                 );

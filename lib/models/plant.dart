@@ -12,7 +12,8 @@ class Plant {
       this.species,
       this.propriety,
       this.planted_day,
-      this.estimated_growing_days});
+      this.estimated_growing_days
+      });
 
   final String? common_name;
   final String? selected_name;
@@ -54,7 +55,7 @@ class Plant {
   factory Plant.fromJson(Map<String, dynamic> json) => Plant(
         id: json["id"],
         common_name: json["common_name"],
-        selected_name: json["selectedName"],
+        selected_name: json["selected_name"],
         image: json["image"],
         description: json["description"],
         watering_frequency: json["watering_frequency"],

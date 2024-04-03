@@ -131,7 +131,14 @@ class _CameraScreenState extends State<CameraScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Camera'),
+        title: Text(
+          'CAMERA', // Testo centrato e bianco
+          textAlign: TextAlign.center,
+          style: TextStyle(
+            color: Colors.white, // Colore testo bianco
+          ),
+        ),
+        centerTitle: true, // Centrare il testo
       ),
       body: Center(
         child: _isLoading

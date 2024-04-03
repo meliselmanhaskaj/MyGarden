@@ -67,6 +67,7 @@ class _CalendarEventState extends State<CalendarEvent> {
     });
   }
 
+//visualizzazzione sull'app
   @override
   Widget build(BuildContext context) {
     return Scaffold(

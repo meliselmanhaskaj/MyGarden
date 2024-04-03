@@ -4,6 +4,7 @@ import 'package:address_24/screens/my_plant.dart';
 import 'package:address_24/screens/recipesadd_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:address_24/screens/camera.dart'; // Importiamo il file camera.dart
 
 void main() {
   runApp(MyApp());
@@ -157,6 +158,13 @@ class _MyHomePageState extends State<MyHomePage> {
         Navigator.push(
           context,
           MaterialPageRoute(builder: (context) => RecipesMainScreen()),
+        );
+      }
+      // Aggiungiamo l'opzione per navigare alla schermata Camera
+      else if (_selectedIndex == 3) {
+        Navigator.push(
+          context,
+          MaterialPageRoute(builder: (context) => CameraScreen()),
         );
       }
     });

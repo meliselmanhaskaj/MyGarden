@@ -1,13 +1,6 @@
 import 'package:address_24/models/plant.dart';
 import 'package:flutter/material.dart';
-import 'package:intl/date_symbol_data_local.dart';
 import 'package:intl/intl.dart';
-
-//  ToDo:
-//    -Caricamento dell'immagine
-//    -Aggiungere i campi json (data di quando e stata piantata, quanto manca)
-//    -Aggiungere un link al calendario
-//    -Non fare i Tile statici pero mapparli con il metodo returnList() --> Parzialmente Fatto!
 
 class MyPlantWidget extends StatelessWidget {
   const MyPlantWidget({
@@ -19,7 +12,6 @@ class MyPlantWidget extends StatelessWidget {
     List<Widget> returnList() {
       final List<Widget> list = [];
       final namesList = ['Watering frequency', 'Estimated growing days', 'Propriety', 'Planted day', 'Missing days'];
-      //final jsonNames = ['wateringFrequency', 'estimated_growing_days', 'propriety', 'planted_day', 'estimated_growing_days'];
       final List<IconData> iconsList = [Icons.water_drop_outlined, Icons.calendar_month, Icons.info, Icons.calendar_today_sharp, Icons.calendar_view_day];
 
       for(int i = 0; i < namesList.length; i++) {
@@ -53,7 +45,7 @@ class MyPlantWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        Image(image: AssetImage('data/assets/${p.common_name}.jpeg')),
+        Image(image: AssetImage('data/${p.image}')),
         Card(
           child: Column(
             mainAxisSize: MainAxisSize.min,

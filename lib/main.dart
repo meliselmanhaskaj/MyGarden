@@ -1,9 +1,9 @@
 import 'dart:convert';
+import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:address_24/models/plant.dart';
 import 'package:address_24/screens/my_plant.dart';
 import 'package:address_24/screens/recipesadd_screen.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:address_24/screens/camera.dart'; // Importiamo il file camera.dart
 
 void main() {
@@ -22,9 +22,12 @@ class MyApp extends StatelessWidget {
           color: Colors.green[500],
         ),
         bottomNavigationBarTheme: BottomNavigationBarThemeData(
-          selectedItemColor: Colors.green[500],
+          selectedItemColor: Colors.green[500], // Colore dell'icona selezionata
           unselectedItemColor: Colors.blue,
           backgroundColor: Colors.white,
+          selectedIconTheme: IconThemeData(
+            color: Colors.green[500], // Colore dell'icona selezionata
+          ),
         ),
         textTheme: TextTheme(
           headline6: TextStyle(
@@ -48,7 +51,8 @@ class SplashScreen extends StatefulWidget {
   _SplashScreenState createState() => _SplashScreenState();
 }
 
-class _SplashScreenState extends State<SplashScreen> with SingleTickerProviderStateMixin {
+class _SplashScreenState extends State<SplashScreen>
+    with SingleTickerProviderStateMixin {
   late AnimationController _controller;
   late Animation<double> _animation;
 
@@ -146,7 +150,9 @@ class _MyHomePageState extends State<MyHomePage> {
     final String jsonString = await rootBundle.loadString('data/userData.json');
     userPlantList = json.decode(jsonString);
     setState(() {
-      plants = userPlantList.map((item) => item["selected_name"].toString()).toList();
+      plants = userPlantList
+          .map((item) => item["selected_name"].toString())
+          .toList();
     });
   }
 
@@ -242,12 +248,14 @@ class _MyHomePageState extends State<MyHomePage> {
                 final plant = userPlantList[index];
                 print(plants);
                 return Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
+                  padding: const EdgeInsets.symmetric(
+                      horizontal: 16.0, vertical: 8.0),
                   child: Card(
                     elevation: 2,
                     child: ListTile(
                       leading: CircleAvatar(
-                        backgroundImage: AssetImage('data/assets/${plant['common_name']}.jpeg'),
+                        backgroundImage: AssetImage(
+                            'data/assets/${plant['common_name']}.jpeg'),
                       ),
                       title: Text(
                         plantName,
@@ -256,7 +264,8 @@ class _MyHomePageState extends State<MyHomePage> {
                         ),
                       ),
                       trailing: CircleAvatar(
-                        backgroundImage: AssetImage('data/assets/Icons/${plant['propriety']}.png'),
+                        backgroundImage: AssetImage(
+                            'data/assets/Icons/${plant['propriety']}.png'),
                         backgroundColor: Colors.white,
                       ),
                       onTap: () => _onPlantTapped(userPlantList[index]),

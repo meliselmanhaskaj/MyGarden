@@ -64,6 +64,27 @@ class _RecipesMainScreenState extends State<RecipesMainScreen> {
     }
   }
 
+  void _editRecipe(int index) {
+    final recipeToEdit = savedRecipes[index];
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (context) => RecipesScreen(
+          initialRecipeTitle: recipeToEdit['title'],
+          initialRecipeDetails: recipeToEdit['details'],
+        ),
+      ),
+    ).then((updatedRecipe) {
+      if (updatedRecipe != null && updatedRecipe is List<String>) {
+        setState(() {
+          savedRecipes[index]['title'] = updatedRecipe[0];
+          savedRecipes[index]['details'] = updatedRecipe[1];
+          _saveRecipes();
+        });
+      }
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -76,7 +97,7 @@ class _RecipesMainScreenState extends State<RecipesMainScreen> {
             fontWeight: FontWeight.bold,
           ),
         ),
-        centerTitle: true, // Centra il titolo nella AppBar
+        centerTitle: true,
       ),
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -107,6 +128,7 @@ class _RecipesMainScreenState extends State<RecipesMainScreen> {
                       recipe['title']!,
                       style: TextStyle(
                         fontSize: 18,
+                        color: Colors.black, // Cambia il colore del testo del titolo
                       ),
                     ),
                     onTap: () {
@@ -120,9 +142,22 @@ class _RecipesMainScreenState extends State<RecipesMainScreen> {
                         ),
                       );
                     },
-                    trailing: IconButton(
-                      icon: Icon(Icons.delete),
-                      onPressed: () => _confirmDeleteRecipe(index),
+                    trailing: Row(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        IconButton(
+                          icon: Icon(Icons.edit),
+                          onPressed: () => _editRecipe(index),
+                          iconSize: 20, // Imposta la dimensione dell'icona
+                          color: Colors.blue, // Cambia il colore dell'icona
+                        ),
+                        IconButton(
+                          icon: Icon(Icons.delete),
+                          onPressed: () => _confirmDeleteRecipe(index),
+                          iconSize: 20, // Imposta la dimensione dell'icona
+                          color: Colors.blue, // Cambia il colore dell'icona
+                        ),
+                      ],
                     ),
                   ),
                 );
@@ -178,7 +213,12 @@ class RecipeDetailScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(title),
+        title: Text(
+          title,
+          style: TextStyle(
+            color: Colors.white,
+          ),
+        ),
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
@@ -190,7 +230,7 @@ class RecipeDetailScreen extends StatelessWidget {
               style: TextStyle(
                 fontSize: 20,
                 fontWeight: FontWeight.bold,
-                color: Theme.of(context).primaryColor,
+                color: Colors.blue,
               ),
             ),
             SizedBox(height: 8),
@@ -206,7 +246,7 @@ class RecipeDetailScreen extends StatelessWidget {
               style: TextStyle(
                 fontSize: 20,
                 fontWeight: FontWeight.bold,
-                color: Theme.of(context).primaryColor,
+                color: Colors.blue,
               ),
             ),
             SizedBox(height: 8),

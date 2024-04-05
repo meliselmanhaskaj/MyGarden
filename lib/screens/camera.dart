@@ -1,11 +1,9 @@
 import 'dart:convert';
 import 'dart:io';
-import 'dart:typed_data';
+
 import 'package:flutter/material.dart';
-import 'package:image_picker/image_picker.dart';
 import 'package:http/http.dart' as http;
-import 'package:path_provider/path_provider.dart';
-import 'package:http_parser/http_parser.dart';
+import 'package:image_picker/image_picker.dart';
 
 class CameraScreen extends StatefulWidget {
   @override
@@ -13,117 +11,99 @@ class CameraScreen extends StatefulWidget {
 }
 
 class _CameraScreenState extends State<CameraScreen> {
-  final ImagePicker _imagePicker = ImagePicker();
-  File? _imageFile;
+  final List<String> organs = ["flower", "leaf"]; // Organs corresponding to the images
+  final String apiKey = "2b102XrV1zcHuwVI8yxpuH8";
   bool _isLoading = false;
-  String _plantName = '';
+  List<Map<String, dynamic>> _plantData = [];
+  List<Map<String, dynamic>> _history = [];
 
-  Future<void> _getImage(ImageSource source) async {
-    final pickedFile = await _imagePicker.pickImage(source: source);
+  int _currentImageIndex = 0;
+  bool _showImageDivider = false;
 
-    if (pickedFile != null) {
-      setState(() {
-        _imageFile = File(pickedFile.path);
-      });
-
-      _identifyPlant();
-    }
-  }
-
-  Future<void> _identifyPlant() async {
+  Future<void> _identifyPlants(List<XFile> images) async {
     setState(() {
       _isLoading = true;
-      _plantName = '';
+      _plantData.clear();
     });
 
     try {
-      final apiUrl = Uri.parse(
-          'https://my-api.plantnet.org/v2/identify/all?api-key=2b102XrV1zcHuwVI8yxpuH8');
+      final apiUrl = Uri.parse('https://my-api.plantnet.org/v2/identify/all?api-key=$apiKey');
+      var formData = http.MultipartRequest('POST', apiUrl);
 
-      // Converte l'immagine in base64
-      List<int> imageBytes = await _imageFile!.readAsBytes();
-      String base64Image = base64Encode(imageBytes);
+      for (int i = 0; i < images.length; i++) {
+        formData.fields['organs'] = organs[i];
+        formData.files.add(await http.MultipartFile.fromPath('images', images[i].path));
+      }
 
-      // Crea il corpo della richiesta JSON
-      Map<String, String> requestBody = {
-        'images': base64Image,
-      };
-
-      final response = await http.post(
-        apiUrl,
-        headers: {
-          HttpHeaders.contentTypeHeader: 'application/json',
-        },
-        body: jsonEncode(requestBody),
-      );
+      http.Response response =
+          await http.Response.fromStream(await formData.send());
 
       if (response.statusCode == 200) {
         final jsonResponse = jsonDecode(response.body);
-        final assetSelfLink = jsonResponse['results'][0]['links']['_self']['href'];
-        await _activateAsset(assetSelfLink);
+        print(jsonResponse); // Print the API response
+
+        final results = jsonResponse['results'];
+        for (int i = 0; i < results.length; i++) {
+          final plantName = results[i]['species']['scientificNameWithoutAuthor'];
+          final score = results[i]['score'];
+
+          _plantData.add({
+            'plantName': plantName,
+            'score': score,
+          });
+        }
+
+        _showImageDivider = _currentImageIndex > 0;
+
+        if (_plantData.isNotEmpty) {
+          final plantName = _plantData[0]['plantName'];
+          final score = _plantData[0]['score'];
+
+          _history.add({
+            'plantName': plantName,
+            'score': score,
+            'imageIndex': _currentImageIndex,
+          });
+
+          _showImageDivider = _currentImageIndex > 0;
+        }
+
+        _currentImageIndex++;
+
+        setState(() {
+          _isLoading = false;
+        });
       } else {
         throw Exception('Failed to identify plant. Response: ${response.body}');
       }
     } catch (e) {
-      print('Error identifying plant: $e');
+      print('Error identifying plants: $e');
       setState(() {
         _isLoading = false;
       });
     }
   }
 
-  Future<void> _activateAsset(String assetSelfLink) async {
-    final response = await http.put(
-      Uri.parse(assetSelfLink + '/activate'),
-    );
-    if (response.statusCode == 204) {
-      await _pollAssetStatus(assetSelfLink);
-    } else {
-      throw Exception('Failed to activate asset. Response: ${response.body}');
+  Future<List<XFile>?> _pickImages() async {
+    List<XFile>? images;
+    final picker = ImagePicker();
+    try {
+      images = await picker.pickMultiImage();
+    } catch (e) {
+      print('Error picking images: $e');
     }
+    return images;
   }
 
-  Future<void> _pollAssetStatus(String assetSelfLink) async {
-    setState(() {
-      _plantName = 'Attivazione in corso...';
-    });
-
-    while (true) {
-      await Future.delayed(Duration(seconds: 5));
-      final response = await http.get(
-        Uri.parse(assetSelfLink),
-      );
-      if (response.statusCode == 200) {
-        final jsonResponse = jsonDecode(response.body);
-        final status = jsonResponse['status'];
-        if (status == 'active') {
-          final location = jsonResponse['location'];
-          await _downloadImage(location);
-          break;
-        }
-      } else {
-        throw Exception('Failed to poll asset status. Response: ${response.body}');
+  Future<void> _captureImage() async {
+    final picker = ImagePicker();
+    try {
+      final XFile? image = await picker.pickImage(source: ImageSource.camera);
+      if (image != null) {
+        _identifyPlants([image]);
       }
-    }
-  }
-
-  Future<void> _downloadImage(String imageUrl) async {
-    final response = await http.get(
-      Uri.parse(imageUrl),
-    );
-    if (response.statusCode == 200) {
-      final bytes = response.bodyBytes;
-      final appDir = await getApplicationDocumentsDirectory();
-      final localFilePath = '${appDir.path}/plant_image.jpg';
-      final imageFile = File(localFilePath);
-      await imageFile.writeAsBytes(bytes);
-
-      setState(() {
-        _plantName = 'Immagine scaricata con successo: $localFilePath';
-        _isLoading = false;
-      });
-    } else {
-      throw Exception('Failed to download image. Response: ${response.body}');
+    } catch (e) {
+      print('Error capturing image: $e');
     }
   }
 
@@ -132,53 +112,158 @@ class _CameraScreenState extends State<CameraScreen> {
     return Scaffold(
       appBar: AppBar(
         title: Text(
-          'CAMERA', // Testo centrato e bianco
+          'Plant Identifier',
           textAlign: TextAlign.center,
           style: TextStyle(
-            color: Colors.white, // Colore testo bianco
+            color: Colors.white,
           ),
         ),
-        centerTitle: true, // Centrare il testo
+        centerTitle: true,
+        actions: [
+          IconButton(
+            icon: Icon(Icons.history),
+            onPressed: () {
+              showDialog(
+                context: context,
+                builder: (context) => AlertDialog(
+                  title: Center(
+                    child: Text(
+                      'Identified Plants History',
+                      style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
+                    ),
+                  ),
+                  content: Container(
+                    width: double.maxFinite,
+                    child: ListView.builder(
+                      itemCount: _history.length,
+                      itemBuilder: (context, index) {
+                        final plantName = _history[index]['plantName'];
+                        final score = (_history[index]['score'] * 100).toStringAsFixed(2);
+                        final imageIndex = _history[index]['imageIndex'];
+
+                        final bool newImage = index == 0 || _history[index - 1]['imageIndex'] != imageIndex;
+
+                        return Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            if (_showImageDivider && newImage)
+                              Padding(
+                                padding: const EdgeInsets.symmetric(vertical: 8.0),
+                                child: Center(
+                                  child: Text(
+                                    'Image ${imageIndex + 1}',
+                                    style: TextStyle(fontWeight: FontWeight.bold, color: Colors.blue, fontSize: 18),
+                                  ),
+                                ),
+                              ),
+                            ListTile(
+                              title: Text(
+                                'Plant: $plantName',
+                                style: TextStyle(fontWeight: FontWeight.bold),
+                              ),
+                              subtitle: Text('Score: $score%'),
+                            ),
+                            if (newImage) Divider(),
+                          ],
+                        );
+                      },
+                    ),
+                  ),
+                  actions: [
+                    TextButton(
+                      onPressed: () {
+                        Navigator.pop(context);
+                      },
+                      child: Text('Close'),
+                    ),
+                  ],
+                ),
+              );
+            },
+          ),
+        ],
       ),
       body: Center(
         child: _isLoading
             ? CircularProgressIndicator()
-            : _imageFile == null
-                ? Text('Nessuna immagine selezionata')
-                : Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Image.file(_imageFile!),
-                      SizedBox(height: 20),
-                      _plantName.isNotEmpty
-                          ? Text(
-                              'Nome della pianta: $_plantName',
-                              style: TextStyle(fontSize: 18),
-                              textAlign: TextAlign.center,
-                            )
-                          : Text(
-                              'Pianta non identificata',
-                              style: TextStyle(fontSize: 18),
-                              textAlign: TextAlign.center,
-                            ),
-                    ],
+            : _plantData.isEmpty
+                ? Text(
+                    'Identify Your Plant!',
+                    style: TextStyle(fontSize: 18),
+                  )
+                : ListView.builder(
+                    itemCount: _plantData.length,
+                    itemBuilder: (context, index) {
+                      final plantName = _plantData[index]['plantName'];
+                      final score = (_plantData[index]['score'] * 100).toStringAsFixed(2);
+
+                      return Card(
+                        margin: EdgeInsets.symmetric(vertical: 8, horizontal: 16),
+                        child: Padding(
+                          padding: EdgeInsets.all(16),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text(
+                                'Plant ${index + 1}:',
+                                style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                              ),
+                              SizedBox(height: 8),
+                              Text(
+                                'Name:',
+                                style: TextStyle(fontSize: 16),
+                              ),
+                              SizedBox(height: 4),
+                              Text(
+                                plantName,
+                                style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold, color: Colors.blue),
+                              ),
+                              SizedBox(height: 8),
+                              Text(
+                                'Score: $score%',
+                                style: TextStyle(fontSize: 16),
+                              ),
+                            ],
+                          ),
+                        ),
+                      );
+                    },
                   ),
       ),
-      floatingActionButton: Column(
-        mainAxisAlignment: MainAxisAlignment.end,
-        children: [
-          FloatingActionButton(
-            onPressed: () => _getImage(ImageSource.camera),
-            tooltip: 'Scatta foto',
-            child: Icon(Icons.camera),
-          ),
-          SizedBox(height: 16),
-          FloatingActionButton(
-            onPressed: () => _getImage(ImageSource.gallery),
-            tooltip: 'Scegli dalla galleria',
-            child: Icon(Icons.image),
-          ),
-        ],
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          showDialog(
+            context: context,
+            builder: (context) => AlertDialog(
+              title: Text('Select Image Source'),
+              content: Column(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  ElevatedButton(
+                    onPressed: () async {
+                      List<XFile>? images = await _pickImages();
+                      if (images != null && images.isNotEmpty) {
+                        _identifyPlants(images);
+                        Navigator.pop(context);
+                      }
+                    },
+                    child: Text('Pick from Gallery'),
+                  ),
+                  SizedBox(height: 16),
+                  ElevatedButton(
+                    onPressed: () async {
+                      _captureImage();
+                      Navigator.pop(context);
+                    },
+                    child: Text('Capture Image'),
+                  ),
+                ],
+              ),
+            ),
+          );
+        },
+        tooltip: 'Add Image',
+        child: Icon(Icons.add_a_photo),
       ),
     );
   }

@@ -1,4 +1,3 @@
-import 'package:address_24/services/event_service.dart';
 import 'package:flutter/material.dart';
 import 'package:address_24/screens/recipes_screen.dart';
 import 'package:address_24/screens/recipesadd_screen.dart';
@@ -37,8 +36,7 @@ class _MyHomePageState extends State<MyHomePage> {
         Navigator.push(
           context,
           MaterialPageRoute(
-              builder: (context) =>
-                  const CalendarEvent()), //collegamento con calendar
+              builder: (context) => MyHomePage1()), //collegamento con calendar
         );
       }
       if (_selectedIndex == 1) {

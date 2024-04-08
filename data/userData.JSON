@@ -1,13 +1,57 @@
 [
     {
-      "id": 0,
-      "selectedName": "lattuga - terrazzo",
-      "common_name": "Lattuga",
-      "watering_frequency": "ogni 2 giorni",
-      "description": "La lattuga è una pianta erbacea annuale...",
-      "estimated_growing_days": 45,
-      "planted_day": "2024-03-25"
+        "id" : 0,
+        "selected_name" : "Lattuga - terrazzo",
+        "common_name" : "Lattuga",
+        "watering_frequency" : "ogni 2 giorni",
+        "description" : "La lattuga è una pianta erbacea annuale...",
+        "estimated_growing_days" : 45,
+        "planted_day" : "26-03-2024",
+        "image": "assets/Lattuga.jpeg",
+        "propriety": "edible"
+    },
+    {
+        "id" : 2,
+        "selected_name" : "Lattuga - giardino",
+        "common_name" : "Lattuga",
+        "watering_frequency" : "ogni 2 giorni",
+        "description" : "La lattuga è una pianta erbacea annuale...",
+        "estimated_growing_days" : 45,
+        "planted_day" : "26-03-2024",
+        "propriety": "edible",
+        "image": "assets/Lattuga.jpeg"
+    },
+    {
+        "id" : 3,
+        "selected_name" : "Basilico - giardino",
+        "common_name" : "Basilico",
+        "watering_frequency" : "ogni 3 giorni",
+        "description" : "Il basilico e una pianta erbacea annuale...",
+        "estimated_growing_days" : 10,
+        "planted_day" : "26-03-2024",
+        "propriety": "edible",
+        "image": "assets/Basilico.jpeg"
+    },
+    {
+        "id" : 4,
+        "selected_name" : "Calendula - in terrazzo",
+        "common_name" : "Calendula",
+        "watering_frequency" : "ogni 5 giorni",
+        "description" : "La calendula e una pianta medicinale...",
+        "estimated_growing_days" : 60,
+        "planted_day" : "26-12-2023",
+        "propriety": "medicine",
+        "image": "assets/Calendula.jpeg"
+    },
+    {
+        "id" : 5,
+        "selected_name" : "Orchidea - in terrazzo",
+        "common_name" : "Orchidea",
+        "watering_frequency" : "ogni 1 giorni",
+        "description" : "L'orchidea e una pianta da fiore...",
+        "estimated_growing_days" : 2,
+        "planted_day" : "01-04-2024",
+        "propriety": "flower",
+        "image": "assets/Orchidea.jpeg"
     }
-    
-  ]
-  
+]

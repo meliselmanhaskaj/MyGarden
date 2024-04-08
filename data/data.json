@@ -1,7 +1,7 @@
 [
     {
       "name": "Lattuga",
-      "image": "assets/plant_lattuga.jpg",
+      "image": "assets/Lattuga.jpeg",
       "description": "La lattuga è una pianta erbacea annuale...",
       "wateringFrequency": "Ogni 2 giorni",
       "species": "Lactuca sativa",
@@ -10,7 +10,7 @@
     },
     {
       "name": "Pomodoro",
-      "image": "assets/plant_pomodoro.jpg",
+      "image": "assets/Pomodoro.jpeg",
       "description": "Il pomodoro è una pianta ortiva annuale...",
       "wateringFrequency": "Ogni giorno",
       "species": "Solanum lycopersicum",
@@ -19,7 +19,7 @@
     },
     {
       "name": "Basilico",
-      "image": "assets/plant_basilico.jpg",
+      "image": "assets/Basilico.jpeg",
       "description": "Il basilico è una pianta aromatica...",
       "wateringFrequency": "Ogni 3 giorni",
       "species": "Ocimum basilicum",
@@ -27,138 +27,57 @@
       "estimated_growing_days": 20
     },
     {
-      "name": "Peperoncino",
-      "image": "assets/plant_peperoncino.jpg",
-      "description": "Il peperoncino è una pianta piccante...",
+      "name": "Biancospino",
+      "image": "assets/Biancospino.jpeg",
+      "description": "Il biancospino e una pianta medicinale...",
       "wateringFrequency": "Ogni giorno",
-      "species": "Capsicum annuum",
-      "propriety": "edible",
+      "species": "",
+      "propriety": "medicine",
       "estimated_growing_days": 90
     },
     {
-      "name": "Zucchina",
-      "image": "assets/plant_zucchina.jpg",
-      "description": "La zucchina è una pianta ortiva...",
+      "name": "Calendula",
+      "image": "assets/Calendula.jpeg",
+      "description": "La Calendula è una pianta medicinale...",
       "wateringFrequency": "Ogni 2 giorni",
-      "species": "Cucurbita pepo",
-      "propriety": "edible",
+      "species": "",
+      "propriety": "medicine",
       "estimated_growing_days": 45
     },
     {
-      "name": "Fragola",
-      "image": "assets/plant_fragola.jpg",
-      "description": "La fragola è una pianta da frutto...",
+      "name": "Camomilla",
+      "image": "assets/Camomilla.jpeg",
+      "description": "La Camomilla è una pianta medicinale...",
       "wateringFrequency": "Ogni giorno",
-      "species": "Fragaria × ananassa",
-      "propriety": "edible",
+      "species": "",
+      "propriety": "medicine",
       "estimated_growing_days": 30
     },
     {
-      "name": "Rosmarino",
-      "image": "assets/plant_rosmarino.jpg",
-      "description": "Il rosmarino è un arbusto aromatico...",
+      "name": "Giacinto",
+      "image": "assets/Giacinto.jpeg",
+      "description": "Il Giacinto è uno dei primi fiori che esce all'inizio della primavera...",
       "wateringFrequency": "Ogni 4 giorni",
-      "species": "Rosmarinus officinalis",
-      "propriety": "edible",
+      "species": "",
+      "propriety": "flower",
       "estimated_growing_days": 60
     },
     {
-      "name": "Menta",
-      "image": "assets/plant_menta.jpg",
-      "description": "La menta è una pianta aromatica...",
+      "name": "Orchidea",
+      "image": "assets/Orchidea.jpeg",
+      "description": "L'orchidea e un fiore...",
       "wateringFrequency": "Ogni 2 giorni",
-      "species": "Mentha",
-      "propriety": "edible",
+      "species": "",
+      "propriety": "flower",
       "estimated_growing_days": 30
     },
     {
-      "name": "Cetriolo",
-      "image": "assets/plant_cetriolo.jpg",
-      "description": "Il cetriolo è una pianta ortiva...",
+      "name": "Rosa",
+      "image": "assets/Rosa.jpeg",
+      "description": "La rosa e un fiore che esce a maggio...",
       "wateringFrequency": "Ogni giorno",
-      "species": "Cucumis sativus",
-      "propriety": "edible",
+      "species": "",
+      "propriety": "flower",
       "estimated_growing_days": 50
-    },
-    {
-      "name": "Sedano",
-      "image": "assets/plant_sedano.jpg",
-      "description": "Il sedano è una pianta erbacea...",
-      "wateringFrequency": "Ogni 2 giorni",
-      "species": "Apium graveolens",
-      "propriety": "edible",
-      "estimated_growing_days": 90
-    },
-    {
-      "name": "Pisello",
-      "image": "assets/plant_pisello.jpg",
-      "description": "Il pisello è una pianta erbacea...",
-      "wateringFrequency": "Ogni giorno",
-      "species": "Pisum sativum",
-      "propriety": "edible",
-      "estimated_growing_days": 60
-    },
-    {
-      "name": "Carota",
-      "image": "assets/plant_carota.jpg",
-      "description": "La carota è una pianta erbacea...",
-      "wateringFrequency": "Ogni 3 giorni",
-      "species": "Daucus carota",
-      "propriety": "edible",
-      "estimated_growing_days": 70
-    },
-    {
-      "name": "Cipolla",
-      "image": "assets/plant_cipolla.jpg",
-      "description": "La cipolla è una pianta ortiva...",
-      "wateringFrequency": "Ogni 4 giorni",
-      "species": "Allium cepa",
-      "propriety": "edible",
-      "estimated_growing_days": 90
-    },
-    {
-      "name": "Melanzana",
-      "image": "assets/plant_melanzana.jpg",
-      "description": "La melanzana è una pianta ortiva...",
-      "wateringFrequency": "Ogni 2 giorni",
-      "species": "Solanum melongena",
-      "propriety": "edible",
-      "estimated_growing_days": 60
-    },
-    {
-      "name": "Fico",
-      "image": "assets/plant_fico.jpg",
-      "description": "Il fico è un albero da frutto...",
-      "wateringFrequency": "Ogni giorno",
-      "species": "Ficus carica",
-      "propriety": "edible",
-      "estimated_growing_days": 180
-    },
-    {
-      "name": "Ciliegio",
-      "image": "assets/plant_ciliegio.jpg",
-      "description": "Il ciliegio è un albero da frutto...",
-      "wateringFrequency": "Ogni 3 giorni",
-      "species": "Prunus avium",
-      "propriety": "edible",
-      "estimated_growing_days": 120
-    },
-    {
-      "name": "Limone",
-      "image": "assets/plant_limone.jpg",
-      "description": "Il limone è un albero da frutto...",
-      "wateringFrequency": "Ogni giorno",
-      "species": "Citrus limon",
-      "propriety": "edible",
-      "estimated_growing_days": 90
-    },
-    {
-      "name": "Arancia",
-      "image": "assets/plant_arancia.jpg",
-      "description": "L'arancia è un albero da frutto...",
-      "wateringFrequency": "Ogni 2 giorni",
-      "species": "Citrus sinensis",
-      "propriety": "edible",
-      "estimated_growing_days": 150
     }
 ]

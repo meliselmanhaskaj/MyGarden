@@ -15,6 +15,7 @@ class CalendarEvent {
     required this.from,
     required this.to,
     required this.background,
+    required TextStyle textStyle,
   });
 }
 
@@ -43,30 +44,45 @@ class MyHomePage1State extends State<MyHomePage1> {
       DateTime harvestDate = calculateHarvestDate(item);
       int giorni = extractNumberFromString(item["watering_frequency"]);
       List<DateTime> wateringDays = await loadWatering(
-          DateFormat('dd-MM-yyyy').parse(item["planted_day"]), giorni, harvestDate);
+          DateFormat('dd-MM-yyyy').parse(item["planted_day"]),
+          giorni,
+          harvestDate);
 
       List<CalendarEvent> getDataSource() {
         final List<CalendarEvent> meetings = <CalendarEvent>[];
 
         meetings.add(CalendarEvent(
-          eventName: "Planting: ${item["selected_name"]}",
-          from: DateFormat('dd-MM-yyyy').parse(item["planted_day"]),
-          to: DateFormat('dd-MM-yyyy').parse(item["planted_day"]),
-          background: Colors.green,
-        ));
+            eventName: "Planting: ${item["selected_name"]}",
+            from: DateFormat('dd-MM-yyyy').parse(item["planted_day"]),
+            to: DateFormat('dd-MM-yyyy').parse(item["planted_day"]),
+            background: Colors.green,
+            textStyle: const TextStyle(
+              color: Colors.green,
+              fontWeight: FontWeight.bold,
+            )));
         meetings.add(CalendarEvent(
           eventName: "Harvest: ${item["selected_name"]}",
           from: harvestDate,
           to: harvestDate,
           background: Colors.green,
+          textStyle: const TextStyle(
+            color: Colors.green,
+            fontWeight: FontWeight.bold,
+          ),
         ));
         for (var wateringDay in wateringDays) {
-          meetings.add(CalendarEvent(
-            eventName: "Watering: ${item["selected_name"]}",
-            from: wateringDay,
-            to: wateringDay,
-            background: Colors.blue,
-          ));
+          meetings.add(
+            CalendarEvent(
+              eventName: "Watering: ${item["selected_name"]}",
+              from: wateringDay,
+              to: wateringDay,
+              background: Colors.blue,
+              textStyle: const TextStyle(
+                color: Colors.blue,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+          );
         }
         return meetings;
       }
@@ -82,7 +98,16 @@ class MyHomePage1State extends State<MyHomePage1> {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          title: const Text('Calendar Event'),
+          title: const Text(
+            'Calendar Event',
+            style: TextStyle(
+              color: Colors.white, // Imposta il colore del testo in bianco
+              fontWeight:
+                  FontWeight.bold, // Opzionale: aggiunge il grassetto al testo
+              fontSize: 20, // Opzionale: imposta la dimensione del testo
+            ),
+          ),
+          centerTitle: true, // Centra il titolo dell'app Bar
         ),
         body: FutureBuilder<MeetingDataSource>(
             future: loadPlants(),
@@ -175,6 +200,6 @@ class MeetingDataSource extends CalendarDataSource {
   //metodo che divide gli eventi giornalieri o di un determinato orario
   @override
   bool isAllDay(int index) {
-    return false;
+    return true;
   }
 }

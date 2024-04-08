@@ -12,9 +12,12 @@ void main() {
 }
 
 class MyApp extends StatelessWidget {
+  MyApp({super.key});
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
       title: 'Esempio di Barra di Navigazione Inferiore',
       theme: ThemeData(
         primaryColor: Colors.green[500],

@@ -18,25 +18,24 @@ class CalendarEvent {
 }
 
 class MyHomePage1 extends StatefulWidget {
-  const MyHomePage1({Key? key}) : super(key: key);
+  const MyHomePage1({super.key, required this.events});
+  final List<CalendarEvent> events;
 
   @override
-  _MyHomePage1State createState() => _MyHomePage1State();
+  MyHomePage1State createState() => MyHomePage1State();
 }
 
-class _MyHomePage1State extends State<MyHomePage1> {
-  late MeetingDataSource dataSource;
+class MyHomePage1State extends State<MyHomePage1> {
+  late MeetingDataSource dataSource = MeetingDataSource([]);
   List<CalendarEvent> events = [];
 
   @override
   void initState() {
     super.initState();
-    dataSource = MeetingDataSource([]);
-    loadPlants();
   }
 
-  Future<void> loadPlants() async {
-    final jsonString = await rootBundle.loadString("/data/userData.json");
+  Future<MeetingDataSource> loadPlants() async {
+    final jsonString = await rootBundle.loadString("data/userData.json");
     final List<dynamic> jsonList = jsonDecode(jsonString);
 
     for (var item in jsonList) {
@@ -45,7 +44,7 @@ class _MyHomePage1State extends State<MyHomePage1> {
       List<DateTime> wateringDays = await loadWatering(
           DateTime.parse(item["planted_day"]), giorni, harvestDate);
 
-      List<CalendarEvent> _getDataSource() {
+      List<CalendarEvent> getDataSource() {
         final List<CalendarEvent> meetings = <CalendarEvent>[];
 
         meetings.add(CalendarEvent(
@@ -54,7 +53,12 @@ class _MyHomePage1State extends State<MyHomePage1> {
           to: DateTime.parse(item["planted_day"]),
           background: Colors.green,
         ));
-
+        meetings.add(CalendarEvent(
+          eventName: "Harvest: ${item["selectedName"]}",
+          from: harvestDate,
+          to: harvestDate,
+          background: Colors.green,
+        ));
         for (var wateringDay in wateringDays) {
           meetings.add(CalendarEvent(
             eventName: "Watering: ${item["selectedName"]}",
@@ -66,31 +70,41 @@ class _MyHomePage1State extends State<MyHomePage1> {
         return meetings;
       }
 
-      events.addAll(_getDataSource());
+      events.addAll(getDataSource());
     }
-    setState(() {
-      dataSource = MeetingDataSource(events);
-    });
+
+    return MeetingDataSource(events);
   }
 
+//widget visuale
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('Calendar Event'),
-      ),
-      body: SfCalendar(
-        view: CalendarView.month,
-        dataSource: dataSource,
-        monthViewSettings: const MonthViewSettings(
-          appointmentDisplayMode: MonthAppointmentDisplayMode.appointment,
+        appBar: AppBar(
+          title: const Text('Calendar Event'),
         ),
-      ),
-    );
+        body: FutureBuilder<MeetingDataSource>(
+            future: loadPlants(),
+            builder: (context, snapshot) {
+              if (snapshot.connectionState == ConnectionState.waiting) {
+                return const CircularProgressIndicator();
+              } else if (snapshot.hasError) {
+                return Text('Error: ${snapshot.error}');
+              } else {
+                return SfCalendar(
+                  view: CalendarView.schedule,
+                  dataSource: snapshot.data,
+                  monthViewSettings: const MonthViewSettings(
+                    appointmentDisplayMode:
+                        MonthAppointmentDisplayMode.appointment,
+                  ),
+                );
+              }
+            }));
   }
 }
 
-//metodo per convertire numero da string ad int
+//metodo per convertire numero da string ad int V
 int extractNumberFromString(String wateringFrequency) {
   RegExp regExp = RegExp(r'\b(\d+)\b');
   Match? match = regExp.firstMatch(wateringFrequency);
@@ -104,7 +118,7 @@ int extractNumberFromString(String wateringFrequency) {
   return numero;
 }
 
-//metodo per calcolare data raccolta
+//metodo per calcolare data raccolta V
 DateTime calculateHarvestDate(dynamic plantData) {
   List<String> parts = plantData["planted_day"].split('-');
   int day = int.parse(parts[2]);
@@ -116,7 +130,7 @@ DateTime calculateHarvestDate(dynamic plantData) {
   return harvestDate;
 }
 
-//lista che visualizzi giorni di annaffiamento
+//lista che visualizzi giorni di annaffiamento V
 Future<List<DateTime>> loadWatering(
     DateTime plantedDay, int giorni, DateTime harvestDate) async {
   List<DateTime> wateringDays = [];
@@ -129,33 +143,35 @@ Future<List<DateTime>> loadWatering(
 }
 
 class MeetingDataSource extends CalendarDataSource {
-  final List<CalendarEvent> events;
-  MeetingDataSource(this.events);
+  MeetingDataSource(List<CalendarEvent> events) {
+    appointments = events;
+  }
+
   //metodo con data inizio
   @override
   DateTime getStartTime(int index) {
-    return events[index].from;
+    return appointments![index].from;
   }
 
   //metodo con data fine
   @override
   DateTime getEndTime(int index) {
-    return events[index].to;
+    return appointments![index].to;
   }
 
-  //metodo che restituisce il titolo dell'evento all'indice specificato
+  //metodo con titolo evento
   @override
   String getSubject(int index) {
-    return events[index].eventName;
+    return appointments![index].eventName;
   }
 
-  //metodo che restituisce colore di sfondo dell'evento specificato
+  //metodo con colore di sfondo dell'evento
   @override
   Color getColor(int index) {
-    return events[index].background;
+    return appointments![index].background;
   }
 
-  //metodo che divide eventi tra tutto il giorno  o in un determinato orario
+  //metodo che divide gli eventi giornalieri o di un determinato orario
   @override
   bool isAllDay(int index) {
     return false;

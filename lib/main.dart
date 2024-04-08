@@ -1,3 +1,5 @@
+import 'dart:convert';
+import 'dart:html';
 import 'package:flutter/material.dart';
 import 'package:address_24/screens/recipes_screen.dart';
 import 'package:address_24/screens/recipesadd_screen.dart';
@@ -36,7 +38,8 @@ class _MyHomePageState extends State<MyHomePage> {
         Navigator.push(
           context,
           MaterialPageRoute(
-              builder: (context) => MyHomePage1()), //collegamento con calendar
+              builder: (context) =>
+                  MyHomePage1(events: [])), //collegamento con calendar
         );
       }
       if (_selectedIndex == 1) {
@@ -56,12 +59,12 @@ class _MyHomePageState extends State<MyHomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Esempio di Barra di Navigazione Inferiore'),
+        title: const Text('Esempio di Barra di Navigazione Inferiore'),
       ),
       body: Center(
         child: Text(
           'Questa è la schermata ${_selectedIndex + 1}',
-          style: TextStyle(fontSize: 24.0),
+          style: const TextStyle(fontSize: 24.0),
         ),
       ),
       bottomNavigationBar: BottomNavigationBar(

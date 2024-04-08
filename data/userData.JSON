@@ -1,29 +1,13 @@
 [
     {
-        "id" : 0,
-        "selectedName" : "lattuga - terrazzo",
-        "common_name" : "Lattuga",
-        "watering_frequency" : "ogni 2 giorni",
-        "description" : "La lattuga è una pianta erbacea annuale...",
-        "estimated_growing_days" : 45,
-        "planted_day" : "2024-03-25"
-    },
-    {
-        "id" : 1,
-        "selectedName" : "lattuga - terrazzo",
-        "common_name" : "Lattuga",
-        "watering_frequency" : "ogni 2 giorni",
-        "description" : "La lattuga è una pianta erbacea annuale...",
-        "estimated_growing_days" : 45,
-        "planted_day" : "2024-03-25"
-    },
-    {
-        "id" : 2,
-        "selectedName" : "lattuga - terrazzo",
-        "common_name" : "Lattuga",
-        "watering_frequency" : "ogni 2 giorni",
-        "description" : "La lattuga è una pianta erbacea annuale...",
-        "estimated_growing_days" : 45,
-        "planted_day" : "2024-03-25"
+      "id": 0,
+      "selectedName": "lattuga - terrazzo",
+      "common_name": "Lattuga",
+      "watering_frequency": "ogni 2 giorni",
+      "description": "La lattuga è una pianta erbacea annuale...",
+      "estimated_growing_days": 45,
+      "planted_day": "2024-03-25"
     }
-]
+    
+  ]
+  

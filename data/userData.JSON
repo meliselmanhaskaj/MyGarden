@@ -1,57 +1,57 @@
 [
     {
         "id" : 0,
-        "selected_name" : "Lattuga - terrazzo",
-        "common_name" : "Lattuga",
-        "watering_frequency" : "ogni 2 giorni",
-        "description" : "La lattuga è una pianta erbacea annuale...",
+        "selected_name" : "Lettuce - terrace",
+        "common_name" : "Lettuce",
+        "watering_frequency" : "Every 2 days",
+        "description" : "The lettuce is an annual plant...",
         "estimated_growing_days" : 45,
         "planted_day" : "26-03-2024",
-        "image": "assets/Lattuga.jpeg",
+        "image": "assets/Lettuce.jpeg",
         "propriety": "edible"
     },
     {
         "id" : 2,
-        "selected_name" : "Lattuga - giardino",
-        "common_name" : "Lattuga",
-        "watering_frequency" : "ogni 2 giorni",
-        "description" : "La lattuga è una pianta erbacea annuale...",
+        "selected_name" : "Lettuce - garden",
+        "common_name" : "Lettuce",
+        "watering_frequency" : "Every 2 days",
+        "description" : "The lettuce is an annual plant...",
         "estimated_growing_days" : 45,
         "planted_day" : "26-03-2024",
         "propriety": "edible",
-        "image": "assets/Lattuga.jpeg"
+        "image": "assets/Lettuce.jpeg"
     },
     {
         "id" : 3,
-        "selected_name" : "Basilico - giardino",
-        "common_name" : "Basilico",
-        "watering_frequency" : "ogni 3 giorni",
-        "description" : "Il basilico e una pianta erbacea annuale...",
+        "selected_name" : "Basil - garden",
+        "common_name" : "Basil",
+        "watering_frequency" : "Every 3 days",
+        "description" : "The basil is an annual plant...",
         "estimated_growing_days" : 10,
         "planted_day" : "6-04-2024",
         "propriety": "edible",
-        "image": "assets/Basilico.jpeg"
+        "image": "assets/Basil.jpeg"
     },
     {
         "id" : 4,
-        "selected_name" : "Calendula - in terrazzo",
-        "common_name" : "Calendula",
-        "watering_frequency" : "ogni 5 giorni",
-        "description" : "La calendula e una pianta medicinale...",
+        "selected_name" : "Marigold - in terrace",
+        "common_name" : "Marigold",
+        "watering_frequency" : "Every 5 days",
+        "description" : "The marigold is a medical plant...",
         "estimated_growing_days" : 60,
         "planted_day" : "26-12-2023",
         "propriety": "medicine",
-        "image": "assets/Calendula.jpeg"
+        "image": "assets/Marigold.jpeg"
     },
     {
         "id" : 5,
-        "selected_name" : "Orchidea - in terrazzo",
-        "common_name" : "Orchidea",
-        "watering_frequency" : "ogni 1 giorni",
-        "description" : "L'orchidea e una pianta da fiore...",
+        "selected_name" : "orchid - in terrace",
+        "common_name" : "orchid",
+        "watering_frequency" : "Every 1 days",
+        "description" : "The orchid is a flower...",
         "estimated_growing_days" : 2,
         "planted_day" : "01-04-2024",
         "propriety": "flower",
-        "image": "assets/Orchidea.jpeg"
+        "image": "assets/orchid.jpeg"
     }
 ]

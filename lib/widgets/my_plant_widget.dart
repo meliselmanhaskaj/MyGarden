@@ -15,7 +15,8 @@ class MyPlantWidget extends StatelessWidget {
       final List<IconData> iconsList = [Icons.water_drop_outlined, Icons.calendar_month, Icons.info, Icons.calendar_today_sharp, Icons.calendar_view_day];
 
       for(int i = 0; i < namesList.length; i++) {
-        final fieldName = namesList[i];
+        final String fieldName = namesList[i];
+        final int daysLeft = (DateFormat('dd-MM-yyyy').parse(p.planted_day!).add(Duration(days: p.estimated_growing_days!))).difference(DateTime.now()).inDays;
         final value = fieldName == 'Estimated growing days'
         ? p.estimated_growing_days
         : fieldName == 'Watering frequency'
@@ -25,7 +26,9 @@ class MyPlantWidget extends StatelessWidget {
                 : fieldName == 'Planted day'
                   ? p.planted_day
                   : fieldName == 'Missing days'
-                    ? (DateFormat('dd-MM-yyyy').parse(p.planted_day!).add(Duration(days: p.estimated_growing_days!))).difference(DateTime.now()).inDays
+                    ?  daysLeft >= 0
+                      ? daysLeft
+                      : 'Farming complete'
                     : '';
 
         final Widget obj = ListTile(

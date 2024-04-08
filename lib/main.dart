@@ -9,7 +9,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Bottom nav bar',
+      title: 'Bottom navigation bar',
       theme: ThemeData(
         primaryColor: Colors.green[500],
         scaffoldBackgroundColor: Colors.green[50],

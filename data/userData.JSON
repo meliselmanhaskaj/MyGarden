@@ -45,13 +45,13 @@
     },
     {
         "id" : 5,
-        "selected_name" : "orchid - in terrace",
-        "common_name" : "orchid",
+        "selected_name" : "Orchid - in terrace",
+        "common_name" : "Orchid",
         "watering_frequency" : "Every 1 days",
-        "description" : "The orchid is a flower...",
+        "description" : "The Orchid is a flower...",
         "estimated_growing_days" : 2,
         "planted_day" : "01-04-2024",
         "propriety": "flower",
-        "image": "assets/orchid.jpeg"
+        "image": "assets/Orchid.jpeg"
     }
 ]

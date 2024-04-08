@@ -4,9 +4,9 @@ import 'package:address_24/widgets/my_plant_widget.dart';
 
 class MyPlant extends StatefulWidget {
   const MyPlant({
-    Key? key,
+    super.key,
     required this.plant,
-  }) : super(key: key);
+  });
 
   final Plant plant;
 

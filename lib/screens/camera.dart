@@ -1,5 +1,4 @@
 import 'dart:convert';
-import 'package:address_24/main.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:image_picker/image_picker.dart';
@@ -8,6 +7,8 @@ import 'package:address_24/screens/recipesadd_screen.dart';
 import 'my_home_page.dart';
 
 class CameraScreen extends StatefulWidget {
+  const CameraScreen({super.key});
+
   @override
   _CameraScreenState createState() => _CameraScreenState();
 }
@@ -16,8 +17,8 @@ class _CameraScreenState extends State<CameraScreen> {
   final List<String> organs = ["flower", "leaf"];
   final String apiKey = "2b102XrV1zcHuwVI8yxpuH8";
   bool _isLoading = false;
-  List<Map<String, dynamic>> _plantData = [];
-  List<Map<String, dynamic>> _history = [];
+  final List<Map<String, dynamic>> _plantData = [];
+  final List<Map<String, dynamic>> _history = [];
 
   int _currentImageIndex = 0;
   bool _showImageDivider = false;
@@ -112,7 +113,7 @@ class _CameraScreenState extends State<CameraScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(
+        title: const Text(
           'Plant Identifier',
           textAlign: TextAlign.center,
           style: TextStyle(
@@ -123,12 +124,12 @@ class _CameraScreenState extends State<CameraScreen> {
         automaticallyImplyLeading: false, // Rimuove l'icona di default (freccia indietro)
         actions: [
           IconButton(
-            icon: Icon(Icons.history),
+            icon: const Icon(Icons.history),
             onPressed: () {
               showDialog(
                 context: context,
                 builder: (context) => AlertDialog(
-                  title: Center(
+                  title: const Center(
                     child: Text(
                       'Identified Plants History',
                       style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
@@ -154,18 +155,18 @@ class _CameraScreenState extends State<CameraScreen> {
                                 child: Center(
                                   child: Text(
                                     'Image ${imageIndex + 1}',
-                                    style: TextStyle(fontWeight: FontWeight.bold, color: Colors.blue, fontSize: 18),
+                                    style: const TextStyle(fontWeight: FontWeight.bold, color: Colors.blue, fontSize: 18),
                                   ),
                                 ),
                               ),
                             ListTile(
                               title: Text(
                                 'Plant: $plantName',
-                                style: TextStyle(fontWeight: FontWeight.bold),
+                                style: const TextStyle(fontWeight: FontWeight.bold),
                               ),
                               subtitle: Text('Score: $score%'),
                             ),
-                            if (newImage) Divider(),
+                            if (newImage) const Divider(),
                           ],
                         );
                       },
@@ -176,7 +177,7 @@ class _CameraScreenState extends State<CameraScreen> {
                       onPressed: () {
                         Navigator.pop(context);
                       },
-                      child: Text('Close'),
+                      child: const Text('Close'),
                     ),
                   ],
                 ),
@@ -187,9 +188,9 @@ class _CameraScreenState extends State<CameraScreen> {
       ),
       body: Center(
         child: _isLoading
-            ? CircularProgressIndicator()
+            ? const CircularProgressIndicator()
             : _plantData.isEmpty
-                ? Text(
+                ? const Text(
                     'Identify Your Plant!',
                     style: TextStyle(fontSize: 18),
                   )
@@ -200,30 +201,30 @@ class _CameraScreenState extends State<CameraScreen> {
                       final score = (_plantData[index]['score'] * 100).toStringAsFixed(2);
 
                       return Card(
-                        margin: EdgeInsets.symmetric(vertical: 8, horizontal: 16),
+                        margin: const EdgeInsets.symmetric(vertical: 8, horizontal: 16),
                         child: Padding(
-                          padding: EdgeInsets.all(16),
+                          padding: const EdgeInsets.all(16),
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               Text(
                                 'Plant ${index + 1}:',
-                                style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                                style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
                               ),
-                              SizedBox(height: 8),
-                              Text(
+                              const SizedBox(height: 8),
+                              const Text(
                                 'Name:',
                                 style: TextStyle(fontSize: 16),
                               ),
-                              SizedBox(height: 4),
+                              const SizedBox(height: 4),
                               Text(
                                 plantName,
-                                style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold, color: Colors.blue),
+                                style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold, color: Colors.blue),
                               ),
-                              SizedBox(height: 8),
+                              const SizedBox(height: 8),
                               Text(
                                 'Score: $score%',
-                                style: TextStyle(fontSize: 16),
+                                style: const TextStyle(fontSize: 16),
                               ),
                             ],
                           ),
@@ -237,7 +238,7 @@ class _CameraScreenState extends State<CameraScreen> {
           showDialog(
             context: context,
             builder: (context) => AlertDialog(
-              title: Text('Select Image Source'),
+              title: const Text('Select Image Source'),
               content: Column(
                 mainAxisSize: MainAxisSize.min,
                 children: [
@@ -249,15 +250,15 @@ class _CameraScreenState extends State<CameraScreen> {
                         Navigator.pop(context);
                       }
                     },
-                    child: Text('Pick from Gallery'),
+                    child: const Text('Pick from Gallery'),
                   ),
-                  SizedBox(height: 16),
+                  const SizedBox(height: 16),
                   ElevatedButton(
                     onPressed: () async {
                       _captureImage();
                       Navigator.pop(context);
                     },
-                    child: Text('Capture Image'),
+                    child: const Text('Capture Image'),
                   ),
                 ],
               ),
@@ -265,7 +266,7 @@ class _CameraScreenState extends State<CameraScreen> {
           );
         },
         tooltip: 'Add Image',
-        child: Icon(Icons.add_a_photo),
+        child: const Icon(Icons.add_a_photo),
       ),
       bottomNavigationBar: _buildBottomNavigationBar(),
     );
@@ -282,7 +283,7 @@ class _CameraScreenState extends State<CameraScreen> {
       unselectedFontSize: 14.0,
       currentIndex: 3, // Index 3 for Camera in this screen
       onTap: _onItemTapped,
-      items: <BottomNavigationBarItem>[
+      items: const <BottomNavigationBarItem>[
         BottomNavigationBarItem(
           icon: Icon(Icons.calendar_today, size: 28),
           label: 'Calendar',
@@ -300,8 +301,8 @@ class _CameraScreenState extends State<CameraScreen> {
           label: 'Camera',
         ),
       ],
-      selectedLabelStyle: TextStyle(fontWeight: FontWeight.bold),
-      unselectedLabelStyle: TextStyle(fontWeight: FontWeight.normal),
+      selectedLabelStyle: const TextStyle(fontWeight: FontWeight.bold),
+      unselectedLabelStyle: const TextStyle(fontWeight: FontWeight.normal),
       elevation: 8.0,
       type: BottomNavigationBarType.fixed,
     );

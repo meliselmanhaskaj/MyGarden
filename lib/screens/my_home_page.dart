@@ -1,6 +1,4 @@
 import 'dart:convert';
-
-import 'package:address_24/main.dart';
 import 'package:address_24/models/plant.dart';
 import 'package:address_24/screens/calendar_screen.dart';
 import 'package:address_24/screens/camera.dart';
@@ -10,6 +8,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
 class MyHomePage extends StatefulWidget {
+  const MyHomePage({super.key});
+
   @override
   _MyHomePageState createState() => _MyHomePageState();
 }
@@ -59,7 +59,7 @@ class _MyHomePageState extends State<MyHomePage> {
       } else if (_selectedIndex == 3) {
         Navigator.push(
           context,
-          MaterialPageRoute(builder: (context) => CameraScreen()),
+          MaterialPageRoute(builder: (context) => const CameraScreen()),
         );
       }
     });

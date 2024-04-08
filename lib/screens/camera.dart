@@ -1,10 +1,8 @@
 import 'dart:convert';
-import 'dart:io';
 import 'package:address_24/main.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:image_picker/image_picker.dart';
-import 'package:address_24/screens/my_plant.dart';
 import 'package:address_24/screens/recipesadd_screen.dart';
 
 class CameraScreen extends StatefulWidget {

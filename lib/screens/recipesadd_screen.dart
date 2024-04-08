@@ -57,7 +57,7 @@ class _RecipesMainScreenState extends State<RecipesMainScreen> {
       },
     );
 
-    if (confirmDelete != null && confirmDelete) {
+    if (confirmDelete) {
       setState(() {
         savedRecipes.removeAt(index);
         _saveRecipes();

@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:intl/intl.dart';
 import 'package:syncfusion_flutter_calendar/calendar.dart';
 
 class CalendarEvent {
@@ -42,26 +43,26 @@ class MyHomePage1State extends State<MyHomePage1> {
       DateTime harvestDate = calculateHarvestDate(item);
       int giorni = extractNumberFromString(item["watering_frequency"]);
       List<DateTime> wateringDays = await loadWatering(
-          DateTime.parse(item["planted_day"]), giorni, harvestDate);
+          DateFormat('dd-MM-yyyy').parse(item["planted_day"]), giorni, harvestDate);
 
       List<CalendarEvent> getDataSource() {
         final List<CalendarEvent> meetings = <CalendarEvent>[];
 
         meetings.add(CalendarEvent(
-          eventName: "Planting: ${item["selectedName"]}",
-          from: DateTime.parse(item["planted_day"]),
-          to: DateTime.parse(item["planted_day"]),
+          eventName: "Planting: ${item["selected_name"]}",
+          from: DateFormat('dd-MM-yyyy').parse(item["planted_day"]),
+          to: DateFormat('dd-MM-yyyy').parse(item["planted_day"]),
           background: Colors.green,
         ));
         meetings.add(CalendarEvent(
-          eventName: "Harvest: ${item["selectedName"]}",
+          eventName: "Harvest: ${item["selected_name"]}",
           from: harvestDate,
           to: harvestDate,
           background: Colors.green,
         ));
         for (var wateringDay in wateringDays) {
           meetings.add(CalendarEvent(
-            eventName: "Watering: ${item["selectedName"]}",
+            eventName: "Watering: ${item["selected_name"]}",
             from: wateringDay,
             to: wateringDay,
             background: Colors.blue,
@@ -121,9 +122,9 @@ int extractNumberFromString(String wateringFrequency) {
 //metodo per calcolare data raccolta V
 DateTime calculateHarvestDate(dynamic plantData) {
   List<String> parts = plantData["planted_day"].split('-');
-  int day = int.parse(parts[2]);
+  int day = int.parse(parts[0]);
   int month = int.parse(parts[1]);
-  int year = int.parse(parts[0]);
+  int year = int.parse(parts[2]);
   DateTime plantedDay = DateTime(year, month, day);
   int estimatedGrowingDays = plantData["estimated_growing_days"];
   DateTime harvestDate = plantedDay.add(Duration(days: estimatedGrowingDays));

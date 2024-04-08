@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'recipes_screen.dart';
+import 'camera.dart';
 
 class RecipesMainScreen extends StatefulWidget {
   @override
@@ -98,6 +99,7 @@ class _RecipesMainScreenState extends State<RecipesMainScreen> {
           ),
         ),
         centerTitle: true,
+        automaticallyImplyLeading: false, // Rimuove l'icona di default (freccia indietro)
       ),
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -128,7 +130,7 @@ class _RecipesMainScreenState extends State<RecipesMainScreen> {
                       recipe['title']!,
                       style: TextStyle(
                         fontSize: 18,
-                        color: Colors.black, // Cambia il colore del testo del titolo
+                        color: Colors.black,
                       ),
                     ),
                     onTap: () {
@@ -148,14 +150,14 @@ class _RecipesMainScreenState extends State<RecipesMainScreen> {
                         IconButton(
                           icon: Icon(Icons.edit),
                           onPressed: () => _editRecipe(index),
-                          iconSize: 20, // Imposta la dimensione dell'icona
-                          color: Colors.blue, // Cambia il colore dell'icona
+                          iconSize: 20,
+                          color: Colors.blue,
                         ),
                         IconButton(
                           icon: Icon(Icons.delete),
                           onPressed: () => _confirmDeleteRecipe(index),
-                          iconSize: 20, // Imposta la dimensione dell'icona
-                          color: Colors.blue, // Cambia il colore dell'icona
+                          iconSize: 20,
+                          color: Colors.blue,
                         ),
                       ],
                     ),
@@ -196,7 +198,61 @@ class _RecipesMainScreenState extends State<RecipesMainScreen> {
           ),
         ],
       ),
+      bottomNavigationBar: _buildBottomNavigationBar(),
     );
+  }
+
+  BottomNavigationBar _buildBottomNavigationBar() {
+    return BottomNavigationBar(
+      backgroundColor: Colors.white,
+      selectedItemColor: Colors.green[500],
+      unselectedItemColor: Colors.blue,
+      showSelectedLabels: true,
+      showUnselectedLabels: true,
+      selectedFontSize: 14.0,
+      unselectedFontSize: 14.0,
+      currentIndex: 2, // Index 2 for Recipes in this screen
+      onTap: _onItemTapped,
+      items: <BottomNavigationBarItem>[
+        BottomNavigationBarItem(
+          icon: Icon(Icons.calendar_today, size: 28),
+          label: 'Calendar',
+        ),
+        BottomNavigationBarItem(
+          icon: Icon(Icons.nature, size: 28),
+          label: 'My Garden',
+        ),
+        BottomNavigationBarItem(
+          icon: Icon(Icons.menu_book, size: 28),
+          label: 'Recipes',
+        ),
+        BottomNavigationBarItem(
+          icon: Icon(Icons.camera_alt, size: 28),
+          label: 'Camera',
+        ),
+      ],
+      selectedLabelStyle: TextStyle(fontWeight: FontWeight.bold),
+      unselectedLabelStyle: TextStyle(fontWeight: FontWeight.normal),
+      elevation: 8.0,
+      type: BottomNavigationBarType.fixed,
+    );
+  }
+
+  void _onItemTapped(int index) {
+    setState(() {
+      if (index == 0) {
+        Navigator.pop(context);
+      } else if (index == 1) {
+        Navigator.pop(context);
+      } else if (index == 2) {
+        // Do nothing as we are already on this screen
+      } else if (index == 3) {
+        Navigator.push(
+          context,
+          MaterialPageRoute(builder: (context) => CameraScreen()),
+        );
+      }
+    });
   }
 }
 
@@ -226,7 +282,7 @@ class RecipeDetailScreen extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
-              'Titolo:',
+              'Title:',
               style: TextStyle(
                 fontSize: 20,
                 fontWeight: FontWeight.bold,
@@ -242,7 +298,7 @@ class RecipeDetailScreen extends StatelessWidget {
             ),
             SizedBox(height: 16),
             Text(
-              'Descrizione:',
+              'Description:',
               style: TextStyle(
                 fontSize: 20,
                 fontWeight: FontWeight.bold,

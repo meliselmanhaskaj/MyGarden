@@ -1,9 +1,11 @@
 import 'dart:convert';
 import 'dart:io';
-
+import 'package:address_24/main.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:image_picker/image_picker.dart';
+import 'package:address_24/screens/my_plant.dart';
+import 'package:address_24/screens/recipesadd_screen.dart';
 
 class CameraScreen extends StatefulWidget {
   @override
@@ -11,7 +13,7 @@ class CameraScreen extends StatefulWidget {
 }
 
 class _CameraScreenState extends State<CameraScreen> {
-  final List<String> organs = ["flower", "leaf"]; // Organs corresponding to the images
+  final List<String> organs = ["flower", "leaf"];
   final String apiKey = "2b102XrV1zcHuwVI8yxpuH8";
   bool _isLoading = false;
   List<Map<String, dynamic>> _plantData = [];
@@ -40,7 +42,6 @@ class _CameraScreenState extends State<CameraScreen> {
 
       if (response.statusCode == 200) {
         final jsonResponse = jsonDecode(response.body);
-        print(jsonResponse); // Print the API response
 
         final results = jsonResponse['results'];
         for (int i = 0; i < results.length; i++) {
@@ -119,6 +120,7 @@ class _CameraScreenState extends State<CameraScreen> {
           ),
         ),
         centerTitle: true,
+        automaticallyImplyLeading: false, // Rimuove l'icona di default (freccia indietro)
         actions: [
           IconButton(
             icon: Icon(Icons.history),
@@ -265,13 +267,63 @@ class _CameraScreenState extends State<CameraScreen> {
         tooltip: 'Add Image',
         child: Icon(Icons.add_a_photo),
       ),
+      bottomNavigationBar: _buildBottomNavigationBar(),
     );
   }
-}
 
-void main() {
-  runApp(MaterialApp(
-    title: 'Plant Identifier',
-    home: CameraScreen(),
-  ));
+  BottomNavigationBar _buildBottomNavigationBar() {
+    return BottomNavigationBar(
+      backgroundColor: Colors.white,
+      selectedItemColor: Colors.green[500],
+      unselectedItemColor: Colors.blue,
+      showSelectedLabels: true,
+      showUnselectedLabels: true,
+      selectedFontSize: 14.0,
+      unselectedFontSize: 14.0,
+      currentIndex: 3, // Index 3 for Camera in this screen
+      onTap: _onItemTapped,
+      items: <BottomNavigationBarItem>[
+        BottomNavigationBarItem(
+          icon: Icon(Icons.calendar_today, size: 28),
+          label: 'Calendar',
+        ),
+        BottomNavigationBarItem(
+          icon: Icon(Icons.nature, size: 28),
+          label: 'My Garden',
+        ),
+        BottomNavigationBarItem(
+          icon: Icon(Icons.menu_book, size: 28),
+          label: 'Recipes',
+        ),
+        BottomNavigationBarItem(
+          icon: Icon(Icons.camera_alt, size: 28),
+          label: 'Camera',
+        ),
+      ],
+      selectedLabelStyle: TextStyle(fontWeight: FontWeight.bold),
+      unselectedLabelStyle: TextStyle(fontWeight: FontWeight.normal),
+      elevation: 8.0,
+      type: BottomNavigationBarType.fixed,
+    );
+  }
+
+  void _onItemTapped(int index) {
+    setState(() {
+      if (index == 0) {
+        Navigator.pop(context);
+      } else if (index == 1) {
+        Navigator.push(
+          context,
+          MaterialPageRoute(builder: (context) => MyHomePage()),
+        );
+      } else if (index == 2) {
+        Navigator.push(
+          context,
+          MaterialPageRoute(builder: (context) => RecipesMainScreen()),
+        );
+      } else if (index == 3) {
+        // Do nothing as we are already on this screen
+      }
+    });
+  }
 }

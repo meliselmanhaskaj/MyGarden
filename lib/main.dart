@@ -4,7 +4,7 @@ import 'package:flutter/services.dart';
 import 'package:address_24/models/plant.dart';
 import 'package:address_24/screens/my_plant.dart';
 import 'package:address_24/screens/recipesadd_screen.dart';
-import 'package:address_24/screens/camera.dart'; // Importiamo il file camera.dart
+import 'package:address_24/screens/camera.dart';
 
 void main() {
   runApp(MyApp());
@@ -22,11 +22,11 @@ class MyApp extends StatelessWidget {
           color: Colors.green[500],
         ),
         bottomNavigationBarTheme: BottomNavigationBarThemeData(
-          selectedItemColor: Colors.green[500], // Colore dell'icona selezionata
+          selectedItemColor: Colors.green[500],
           unselectedItemColor: Colors.blue,
           backgroundColor: Colors.white,
           selectedIconTheme: IconThemeData(
-            color: Colors.green[500], // Colore dell'icona selezionata
+            color: Colors.green[500],
           ),
         ),
         textTheme: TextTheme(
@@ -41,7 +41,7 @@ class MyApp extends StatelessWidget {
           ),
         ),
       ),
-      home: SplashScreen(), // Utilizzo dello SplashScreen come home iniziale
+      home: SplashScreen(),
     );
   }
 }
@@ -65,7 +65,6 @@ class _SplashScreenState extends State<SplashScreen>
     );
     _animation = Tween<double>(begin: 0.0, end: 1.0).animate(_controller);
     _controller.forward();
-    // Attendiamo 2 secondi e poi naviga alla HomePage
     Future.delayed(Duration(seconds: 2), () {
       Navigator.pushReplacement(
         context,
@@ -105,14 +104,12 @@ class _SplashScreenState extends State<SplashScreen>
               mainAxisAlignment: MainAxisAlignment.center,
               mainAxisSize: MainAxisSize.min,
               children: [
-                // Icona o Logo dell'app
                 Icon(
                   Icons.nature,
                   size: 100,
                   color: Colors.green[500],
                 ),
                 SizedBox(height: 20),
-                // Nome dell'app nello SplashScreen
                 Text(
                   'MY GARDEN',
                   style: TextStyle(
@@ -165,9 +162,7 @@ class _MyHomePageState extends State<MyHomePage> {
           context,
           MaterialPageRoute(builder: (context) => RecipesMainScreen()),
         );
-      }
-      // Aggiungiamo l'opzione per navigare alla schermata Camera
-      else if (_selectedIndex == 3) {
+      } else if (_selectedIndex == 3) {
         Navigator.push(
           context,
           MaterialPageRoute(builder: (context) => CameraScreen()),
@@ -187,7 +182,6 @@ class _MyHomePageState extends State<MyHomePage> {
   }
 
   void _onAddPlant() {
-    // Implementazione del pulsante "+" per aggiungere una pianta
     showDialog(
       context: context,
       builder: (BuildContext context) {
@@ -203,7 +197,6 @@ class _MyHomePageState extends State<MyHomePage> {
             ),
             TextButton(
               onPressed: () {
-                // Qui aggiungeremo il codice per salvare la nuova pianta
                 Navigator.of(context).pop();
               },
               child: Text('Aggiungi'),
@@ -220,7 +213,7 @@ class _MyHomePageState extends State<MyHomePage> {
       appBar: AppBar(
         title: Center(
           child: Text(
-            'MY GARDEN', // Titolo personalizzato per la pagina Home
+            'MY GARDEN',
             style: TextStyle(
               fontSize: 24.0,
               fontWeight: FontWeight.bold,
@@ -228,6 +221,7 @@ class _MyHomePageState extends State<MyHomePage> {
             ),
           ),
         ),
+        automaticallyImplyLeading: false, // Rimuove l'icona di default (freccia indietro)
       ),
       body: Column(
         children: [
@@ -281,49 +275,43 @@ class _MyHomePageState extends State<MyHomePage> {
         onPressed: _onAddPlant,
         child: Icon(Icons.add),
       ),
-      bottomNavigationBar: Container(
-        decoration: BoxDecoration(
-          border: Border(
-            top: BorderSide(
-              color: Colors.black,
-              width: 1.0,
-            ),
-          ),
+      bottomNavigationBar: _buildBottomNavigationBar(),
+    );
+  }
+
+  BottomNavigationBar _buildBottomNavigationBar() {
+    return BottomNavigationBar(
+      backgroundColor: Colors.white,
+      selectedItemColor: Colors.green[500],
+      unselectedItemColor: Colors.blue,
+      showSelectedLabels: true,
+      showUnselectedLabels: true,
+      selectedFontSize: 14.0,
+      unselectedFontSize: 14.0,
+      currentIndex: _selectedIndex,
+      onTap: _onItemTapped,
+      items: <BottomNavigationBarItem>[
+        BottomNavigationBarItem(
+          icon: Icon(Icons.calendar_today, size: 28),
+          label: 'Calendar',
         ),
-        child: BottomNavigationBar(
-          backgroundColor: Colors.white,
-          selectedItemColor: Colors.green[500],
-          unselectedItemColor: Colors.blue,
-          showSelectedLabels: true,
-          showUnselectedLabels: true,
-          selectedFontSize: 14.0,
-          unselectedFontSize: 14.0,
-          currentIndex: _selectedIndex,
-          onTap: _onItemTapped,
-          items: <BottomNavigationBarItem>[
-            BottomNavigationBarItem(
-              icon: Icon(Icons.calendar_today, size: 28),
-              label: 'Calendar',
-            ),
-            BottomNavigationBarItem(
-              icon: Icon(Icons.nature, size: 28),
-              label: 'My Garden',
-            ),
-            BottomNavigationBarItem(
-              icon: Icon(Icons.menu_book, size: 28),
-              label: 'Recipes',
-            ),
-            BottomNavigationBarItem(
-              icon: Icon(Icons.camera_alt, size: 28),
-              label: 'Camera',
-            ),
-          ],
-          selectedLabelStyle: TextStyle(fontWeight: FontWeight.bold),
-          unselectedLabelStyle: TextStyle(fontWeight: FontWeight.normal),
-          elevation: 8.0,
-          type: BottomNavigationBarType.fixed,
+        BottomNavigationBarItem(
+          icon: Icon(Icons.nature, size: 28),
+          label: 'My Garden',
         ),
-      ),
+        BottomNavigationBarItem(
+          icon: Icon(Icons.menu_book, size: 28),
+          label: 'Recipes',
+        ),
+        BottomNavigationBarItem(
+          icon: Icon(Icons.camera_alt, size: 28),
+          label: 'Camera',
+        ),
+      ],
+      selectedLabelStyle: TextStyle(fontWeight: FontWeight.bold),
+      unselectedLabelStyle: TextStyle(fontWeight: FontWeight.normal),
+      elevation: 8.0,
+      type: BottomNavigationBarType.fixed,
     );
   }
 }

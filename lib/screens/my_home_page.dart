@@ -81,7 +81,8 @@ class _MyHomePageState extends State<MyHomePage> {
       builder: (BuildContext context) {
         return AlertDialog(
           title: const Text('Aggiungi Pianta'),
-          content: const Text('Qui ci sarà il form per aggiungere una nuova pianta.'),
+          content: const Text(
+              'Qui ci sarà il form per aggiungere una nuova pianta.'),
           actions: <Widget>[
             TextButton(
               onPressed: () {

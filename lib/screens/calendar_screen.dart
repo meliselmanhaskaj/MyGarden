@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'package:address_24/widgets/scheduleViewHeaderBuilder.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:intl/intl.dart';
@@ -117,6 +118,17 @@ class MyHomePage1State extends State<MyHomePage1> {
               } else {
                 return SfCalendar(
                   view: CalendarView.schedule,
+                  scheduleViewMonthHeaderBuilder: scheduleViewHeaderBuilder,
+                  scheduleViewSettings: const ScheduleViewSettings(
+                      monthHeaderSettings: MonthHeaderSettings(
+                          monthFormat: 'MMMM, yyyy',
+                          height: 100,
+                          textAlign: TextAlign.left,
+                          backgroundColor: Colors.green,
+                          monthTextStyle: TextStyle(
+                              color: Color.fromARGB(255, 229, 229, 229),
+                              fontSize: 25,
+                              fontWeight: FontWeight.w400))),
                   dataSource: snapshot.data,
                   monthViewSettings: const MonthViewSettings(
                     appointmentDisplayMode:

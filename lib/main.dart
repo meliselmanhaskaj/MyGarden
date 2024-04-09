@@ -6,12 +6,12 @@ void main() {
 }
 
 class MyApp extends StatelessWidget {
-  MyApp({super.key});
-
+  const MyApp({super.key});
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Bottom navigation bar',
+      debugShowCheckedModeBanner: false,
+      title: 'My App',
       theme: ThemeData(
         primaryColor: Colors.green[500],
         scaffoldBackgroundColor: Colors.green[50],

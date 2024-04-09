@@ -48,10 +48,13 @@ class _MyHomePageState extends State<MyHomePage> {
         );
       }
       if (_selectedIndex == 1) {
+        Navigator.push(
+          context,
+          MaterialPageRoute(builder: (context) => MyHomePage()),
+        );
         // // Se l'utente preme sull'icona del calendario (indice 1), apri la schermata principale
       }
       if (_selectedIndex == 2) {
-        _selectedIndex = 1;
         Navigator.push(
           context,
           MaterialPageRoute(builder: (context) => RecipesMainScreen()),

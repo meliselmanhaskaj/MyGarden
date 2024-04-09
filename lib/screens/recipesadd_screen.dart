@@ -1,4 +1,6 @@
 import 'dart:convert';
+import 'package:address_24/screens/calendar_screen.dart';
+import 'package:address_24/screens/my_home_page.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'recipes_screen.dart';
@@ -27,7 +29,9 @@ class _RecipesMainScreenState extends State<RecipesMainScreen> {
     if (recipesJson != null) {
       setState(() {
         savedRecipes = List<Map<String, String>>.from(
-          json.decode(recipesJson).map((item) => Map<String, String>.from(item)),
+          json
+              .decode(recipesJson)
+              .map((item) => Map<String, String>.from(item)),
         );
       });
     }
@@ -101,7 +105,8 @@ class _RecipesMainScreenState extends State<RecipesMainScreen> {
           ),
         ),
         centerTitle: true,
-        automaticallyImplyLeading: false, // Rimuove l'icona di default (freccia indietro)
+        automaticallyImplyLeading:
+            false, // Rimuove l'icona di default (freccia indietro)
       ),
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -126,7 +131,8 @@ class _RecipesMainScreenState extends State<RecipesMainScreen> {
                 final recipe = savedRecipes[index];
                 return Card(
                   elevation: 2,
-                  margin: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
+                  margin: const EdgeInsets.symmetric(
+                      horizontal: 16.0, vertical: 8.0),
                   child: ListTile(
                     title: Text(
                       recipe['title']!,
@@ -242,17 +248,26 @@ class _RecipesMainScreenState extends State<RecipesMainScreen> {
 
   void _onItemTapped(int index) {
     setState(() {
-      if (index == 0) {
-        Navigator.pop(context);
+      if (index == 0) { Navigator.push(
+          context,
+          MaterialPageRoute(builder: (context) => MyHomePage1(events: [])),
+        );
       } else if (index == 1) {
-        Navigator.pop(context);
+        Navigator.push(
+          context,
+          MaterialPageRoute(builder: (context) => MyHomePage()),
+        );
       } else if (index == 2) {
-        // Do nothing as we are already on this screen
+        Navigator.push(
+          context,
+          MaterialPageRoute(builder: (context) => RecipesMainScreen()),
+        );
       } else if (index == 3) {
         Navigator.push(
           context,
-          MaterialPageRoute(builder: (context) => const CameraScreen()),
+          MaterialPageRoute(builder: (context) => CameraScreen()),
         );
+        // Do nothing as we are already on this screen
       }
     });
   }

@@ -1,13 +1,16 @@
 import 'dart:convert';
+import 'package:address_24/screens/calendar_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:image_picker/image_picker.dart';
-import 'package:address_24/screens/recipesadd_screen.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 import 'my_home_page.dart';
+import 'recipesadd_screen.dart';
+import 'history_screen.dart'; // Nuova schermata per lo storico
 
 class CameraScreen extends StatefulWidget {
-  const CameraScreen({super.key});
+  const CameraScreen({Key? key}) : super(key: key);
 
   @override
   _CameraScreenState createState() => _CameraScreenState();
@@ -121,66 +124,14 @@ class _CameraScreenState extends State<CameraScreen> {
           ),
         ),
         centerTitle: true,
-        automaticallyImplyLeading: false, // Rimuove l'icona di default (freccia indietro)
+        automaticallyImplyLeading: false,
         actions: [
           IconButton(
             icon: const Icon(Icons.history),
             onPressed: () {
-              showDialog(
-                context: context,
-                builder: (context) => AlertDialog(
-                  title: const Center(
-                    child: Text(
-                      'Identified Plants History',
-                      style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
-                    ),
-                  ),
-                  content: Container(
-                    width: double.maxFinite,
-                    child: ListView.builder(
-                      itemCount: _history.length,
-                      itemBuilder: (context, index) {
-                        final plantName = _history[index]['plantName'];
-                        final score = (_history[index]['score'] * 100).toStringAsFixed(2);
-                        final imageIndex = _history[index]['imageIndex'];
-
-                        final bool newImage = index == 0 || _history[index - 1]['imageIndex'] != imageIndex;
-
-                        return Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            if (_showImageDivider && newImage)
-                              Padding(
-                                padding: const EdgeInsets.symmetric(vertical: 8.0),
-                                child: Center(
-                                  child: Text(
-                                    'Image ${imageIndex + 1}',
-                                    style: const TextStyle(fontWeight: FontWeight.bold, color: Colors.blue, fontSize: 18),
-                                  ),
-                                ),
-                              ),
-                            ListTile(
-                              title: Text(
-                                'Plant: $plantName',
-                                style: const TextStyle(fontWeight: FontWeight.bold),
-                              ),
-                              subtitle: Text('Score: $score%'),
-                            ),
-                            if (newImage) const Divider(),
-                          ],
-                        );
-                      },
-                    ),
-                  ),
-                  actions: [
-                    TextButton(
-                      onPressed: () {
-                        Navigator.pop(context);
-                      },
-                      child: const Text('Close'),
-                    ),
-                  ],
-                ),
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => HistoryScreen(history: _history)),
               );
             },
           ),
@@ -281,7 +232,7 @@ class _CameraScreenState extends State<CameraScreen> {
       showUnselectedLabels: true,
       selectedFontSize: 14.0,
       unselectedFontSize: 14.0,
-      currentIndex: 3, // Index 3 for Camera in this screen
+      currentIndex: 3,
       onTap: _onItemTapped,
       items: const <BottomNavigationBarItem>[
         BottomNavigationBarItem(
@@ -311,7 +262,10 @@ class _CameraScreenState extends State<CameraScreen> {
   void _onItemTapped(int index) {
     setState(() {
       if (index == 0) {
-        Navigator.pop(context);
+        Navigator.push(
+          context,
+          MaterialPageRoute(builder: (context) => MyHomePage1(events: [])),
+        );
       } else if (index == 1) {
         Navigator.push(
           context,

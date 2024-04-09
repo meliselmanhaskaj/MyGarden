@@ -116,29 +116,20 @@ class MyHomePage1State extends State<MyHomePage1> {
                 return Text('Error: ${snapshot.error}');
               } else {
                 return SfCalendar(
-                    view: CalendarView.schedule,
-                    dataSource: snapshot.data,
-                    monthViewSettings: const MonthViewSettings(
-                      appointmentDisplayMode:
-                          MonthAppointmentDisplayMode.appointment,
-                    ),
-                    headerStyle: const CalendarHeaderStyle(
-                      textStyle: TextStyle(
-                          color:
-                              Colors.black), // Personalizza lo stile del testo
-                      textAlign: TextAlign.center, // Centra il testo
-                      backgroundColor: Colors
-                          .white, // Personalizza il colore dello sfondo dell'intestazione
-                    ),
-                    onTap: (CalendarTapDetails details) {
-                      if (details.targetElement ==
-                          CalendarElement.appointment) {
-                        // Verifica se è stato fatto clic su un appuntamento
-                        final CalendarEvent tappedAppointment =
-                            details.appointments![0] as CalendarEvent;
-                        // Esegui le azioni desiderate con l'appuntamento
-                      }
-                    });
+                  view: CalendarView.schedule,
+                  dataSource: snapshot.data,
+                  monthViewSettings: const MonthViewSettings(
+                    appointmentDisplayMode:
+                        MonthAppointmentDisplayMode.appointment,
+                  ),
+                  headerStyle: const CalendarHeaderStyle(
+                    textStyle: TextStyle(
+                        color: Colors.black), // Personalizza lo stile del testo
+                    textAlign: TextAlign.center, // Centra il testo
+                    backgroundColor: Colors
+                        .white, // Personalizza il colore dello sfondo dell'intestazione
+                  ),
+                );
               }
             }));
   }

@@ -21,7 +21,8 @@ class _MyPlantState extends State<MyPlant> {
       child: Scaffold(
         appBar: AppBar(
           title: Text(widget.plant.selected_name!),
-          automaticallyImplyLeading: false, // Rimuove l'icona di default (freccia indietro)
+          automaticallyImplyLeading:
+              false, // Rimuove l'icona di default (freccia indietro)
         ),
         body: MyPlantWidget(p: widget.plant),
       ),

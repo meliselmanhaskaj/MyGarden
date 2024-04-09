@@ -39,7 +39,7 @@ class MyHomePage1State extends State<MyHomePage1> {
   Future<MeetingDataSource> loadPlants() async {
     final jsonString = await rootBundle.loadString("data/userData.json");
     final List<dynamic> jsonList = jsonDecode(jsonString);
-
+    List<CalendarEvent> events = [];
     for (var item in jsonList) {
       DateTime harvestDate = calculateHarvestDate(item);
       int giorni = extractNumberFromString(item["watering_frequency"]);
@@ -52,14 +52,15 @@ class MyHomePage1State extends State<MyHomePage1> {
         final List<CalendarEvent> meetings = <CalendarEvent>[];
 
         meetings.add(CalendarEvent(
-            eventName: "Planting: ${item["selected_name"]}",
-            from: DateFormat('dd-MM-yyyy').parse(item["planted_day"]),
-            to: DateFormat('dd-MM-yyyy').parse(item["planted_day"]),
-            background: Colors.green,
-            textStyle: const TextStyle(
-              color: Colors.green,
-              fontWeight: FontWeight.bold,
-            )));
+          eventName: "Planting: ${item["selected_name"]}",
+          from: DateFormat('dd-MM-yyyy').parse(item["planted_day"]),
+          to: DateFormat('dd-MM-yyyy').parse(item["planted_day"]),
+          background: Colors.green,
+          textStyle: const TextStyle(
+            color: Colors.green,
+            fontWeight: FontWeight.bold,
+          ),
+        ));
         meetings.add(CalendarEvent(
           eventName: "Harvest: ${item["selected_name"]}",
           from: harvestDate,
@@ -71,25 +72,22 @@ class MyHomePage1State extends State<MyHomePage1> {
           ),
         ));
         for (var wateringDay in wateringDays) {
-          meetings.add(
-            CalendarEvent(
-              eventName: "Watering: ${item["selected_name"]}",
-              from: wateringDay,
-              to: wateringDay,
-              background: Colors.blue,
-              textStyle: const TextStyle(
-                color: Colors.blue,
-                fontWeight: FontWeight.bold,
-              ),
+          meetings.add(CalendarEvent(
+            eventName: "Watering: ${item["selected_name"]}",
+            from: wateringDay,
+            to: wateringDay,
+            background: Colors.blue,
+            textStyle: const TextStyle(
+              color: Colors.blue,
+              fontWeight: FontWeight.bold,
             ),
-          );
+          ));
         }
         return meetings;
       }
 
       events.addAll(getDataSource());
     }
-
     return MeetingDataSource(events);
   }
 
@@ -118,13 +116,29 @@ class MyHomePage1State extends State<MyHomePage1> {
                 return Text('Error: ${snapshot.error}');
               } else {
                 return SfCalendar(
-                  view: CalendarView.schedule,
-                  dataSource: snapshot.data,
-                  monthViewSettings: const MonthViewSettings(
-                    appointmentDisplayMode:
-                        MonthAppointmentDisplayMode.appointment,
-                  ),
-                );
+                    view: CalendarView.schedule,
+                    dataSource: snapshot.data,
+                    monthViewSettings: const MonthViewSettings(
+                      appointmentDisplayMode:
+                          MonthAppointmentDisplayMode.appointment,
+                    ),
+                    headerStyle: const CalendarHeaderStyle(
+                      textStyle: TextStyle(
+                          color:
+                              Colors.black), // Personalizza lo stile del testo
+                      textAlign: TextAlign.center, // Centra il testo
+                      backgroundColor: Colors
+                          .white, // Personalizza il colore dello sfondo dell'intestazione
+                    ),
+                    onTap: (CalendarTapDetails details) {
+                      if (details.targetElement ==
+                          CalendarElement.appointment) {
+                        // Verifica se è stato fatto clic su un appuntamento
+                        final CalendarEvent tappedAppointment =
+                            details.appointments![0] as CalendarEvent;
+                        // Esegui le azioni desiderate con l'appuntamento
+                      }
+                    });
               }
             }));
   }

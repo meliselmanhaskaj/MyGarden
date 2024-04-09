@@ -5,6 +5,8 @@ import 'recipes_screen.dart';
 import 'camera.dart';
 
 class RecipesMainScreen extends StatefulWidget {
+  const RecipesMainScreen({super.key});
+
   @override
   _RecipesMainScreenState createState() => _RecipesMainScreenState();
 }
@@ -41,16 +43,16 @@ class _RecipesMainScreenState extends State<RecipesMainScreen> {
       context: context,
       builder: (BuildContext context) {
         return AlertDialog(
-          title: Text('Delete Recipe'),
-          content: Text('Are you sure you want to delete this recipe?'),
+          title: const Text('Delete Recipe'),
+          content: const Text('Are you sure you want to delete this recipe?'),
           actions: [
             TextButton(
               onPressed: () => Navigator.of(context).pop(false),
-              child: Text('Cancel'),
+              child: const Text('Cancel'),
             ),
             TextButton(
               onPressed: () => Navigator.of(context).pop(true),
-              child: Text('Delete'),
+              child: const Text('Delete'),
             ),
           ],
         );
@@ -90,7 +92,7 @@ class _RecipesMainScreenState extends State<RecipesMainScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(
+        title: const Text(
           'RECIPES',
           style: TextStyle(
             color: Colors.white,
@@ -104,8 +106,8 @@ class _RecipesMainScreenState extends State<RecipesMainScreen> {
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
-          Padding(
-            padding: const EdgeInsets.all(16.0),
+          const Padding(
+            padding: EdgeInsets.all(16.0),
             child: Center(
               child: Text(
                 'My recipes',
@@ -124,11 +126,11 @@ class _RecipesMainScreenState extends State<RecipesMainScreen> {
                 final recipe = savedRecipes[index];
                 return Card(
                   elevation: 2,
-                  margin: EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
+                  margin: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
                   child: ListTile(
                     title: Text(
                       recipe['title']!,
-                      style: TextStyle(
+                      style: const TextStyle(
                         fontSize: 18,
                         color: Colors.black,
                       ),
@@ -148,13 +150,13 @@ class _RecipesMainScreenState extends State<RecipesMainScreen> {
                       mainAxisSize: MainAxisSize.min,
                       children: [
                         IconButton(
-                          icon: Icon(Icons.edit),
+                          icon: const Icon(Icons.edit),
                           onPressed: () => _editRecipe(index),
                           iconSize: 20,
                           color: Colors.blue,
                         ),
                         IconButton(
-                          icon: Icon(Icons.delete),
+                          icon: const Icon(Icons.delete),
                           onPressed: () => _confirmDeleteRecipe(index),
                           iconSize: 20,
                           color: Colors.blue,
@@ -176,7 +178,7 @@ class _RecipesMainScreenState extends State<RecipesMainScreen> {
                     Navigator.push(
                       context,
                       MaterialPageRoute(
-                        builder: (context) => RecipesScreen(),
+                        builder: (context) => const RecipesScreen(),
                       ),
                     ).then((value) {
                       if (value != null && value is List<String>) {
@@ -191,7 +193,7 @@ class _RecipesMainScreenState extends State<RecipesMainScreen> {
                       }
                     });
                   },
-                  child: Icon(Icons.add),
+                  child: const Icon(Icons.add),
                 ),
               ],
             ),
@@ -213,7 +215,7 @@ class _RecipesMainScreenState extends State<RecipesMainScreen> {
       unselectedFontSize: 14.0,
       currentIndex: 2, // Index 2 for Recipes in this screen
       onTap: _onItemTapped,
-      items: <BottomNavigationBarItem>[
+      items: const <BottomNavigationBarItem>[
         BottomNavigationBarItem(
           icon: Icon(Icons.calendar_today, size: 28),
           label: 'Calendar',
@@ -231,8 +233,8 @@ class _RecipesMainScreenState extends State<RecipesMainScreen> {
           label: 'Camera',
         ),
       ],
-      selectedLabelStyle: TextStyle(fontWeight: FontWeight.bold),
-      unselectedLabelStyle: TextStyle(fontWeight: FontWeight.normal),
+      selectedLabelStyle: const TextStyle(fontWeight: FontWeight.bold),
+      unselectedLabelStyle: const TextStyle(fontWeight: FontWeight.normal),
       elevation: 8.0,
       type: BottomNavigationBarType.fixed,
     );
@@ -249,7 +251,7 @@ class _RecipesMainScreenState extends State<RecipesMainScreen> {
       } else if (index == 3) {
         Navigator.push(
           context,
-          MaterialPageRoute(builder: (context) => CameraScreen()),
+          MaterialPageRoute(builder: (context) => const CameraScreen()),
         );
       }
     });
@@ -271,7 +273,7 @@ class RecipeDetailScreen extends StatelessWidget {
       appBar: AppBar(
         title: Text(
           title,
-          style: TextStyle(
+          style: const TextStyle(
             color: Colors.white,
           ),
         ),
@@ -281,7 +283,7 @@ class RecipeDetailScreen extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text(
+            const Text(
               'Title:',
               style: TextStyle(
                 fontSize: 20,
@@ -289,15 +291,15 @@ class RecipeDetailScreen extends StatelessWidget {
                 color: Colors.blue,
               ),
             ),
-            SizedBox(height: 8),
+            const SizedBox(height: 8),
             Text(
               title,
-              style: TextStyle(
+              style: const TextStyle(
                 fontSize: 18,
               ),
             ),
-            SizedBox(height: 16),
-            Text(
+            const SizedBox(height: 16),
+            const Text(
               'Description:',
               style: TextStyle(
                 fontSize: 20,
@@ -305,10 +307,10 @@ class RecipeDetailScreen extends StatelessWidget {
                 color: Colors.blue,
               ),
             ),
-            SizedBox(height: 8),
+            const SizedBox(height: 8),
             Text(
               details,
-              style: TextStyle(
+              style: const TextStyle(
                 fontSize: 18,
               ),
             ),

@@ -4,7 +4,7 @@ class RecipesScreen extends StatefulWidget {
   final String? initialRecipeTitle;
   final String? initialRecipeDetails;
 
-  RecipesScreen({this.initialRecipeTitle, this.initialRecipeDetails});
+  const RecipesScreen({super.key, this.initialRecipeTitle, this.initialRecipeDetails});
 
   @override
   _RecipesScreenState createState() => _RecipesScreenState();
@@ -27,13 +27,10 @@ class _RecipesScreenState extends State<RecipesScreen> {
     final recipeDetails = _detailsController.text;
 
     if (recipeTitle.isNotEmpty && recipeDetails.isNotEmpty) {
-      print('Title: $recipeTitle');
-      print('Details: $recipeDetails');
-
       Navigator.pop(context, [recipeTitle, recipeDetails]);
     } else {
       ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(
+        const SnackBar(
           content: Text('Please fill in all fields'),
           duration: Duration(seconds: 2),
         ),
@@ -45,7 +42,7 @@ class _RecipesScreenState extends State<RecipesScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(
+        title: const Text(
           'Recipes',
           style: TextStyle(
             color: Colors.white, // Titolo della barra superiore in bianco
@@ -60,7 +57,7 @@ class _RecipesScreenState extends State<RecipesScreen> {
             Column(
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
-                Text(
+                const Text(
                   'Aggiungi titolo ricetta',
                   style: TextStyle(
                     fontSize: 20,
@@ -68,13 +65,13 @@ class _RecipesScreenState extends State<RecipesScreen> {
                     color: Colors.blue, // Parola "Titolo" in blu
                   ),
                 ),
-                SizedBox(height: 8),
+                const SizedBox(height: 8),
                 TextField(
                   controller: _titleController,
                   onChanged: (value) {
                     setState(() {});
                   },
-                  style: TextStyle(
+                  style: const TextStyle(
                     color: Colors.black, // Testo nero per il campo titolo
                   ),
                   decoration: InputDecoration(
@@ -86,8 +83,8 @@ class _RecipesScreenState extends State<RecipesScreen> {
                     ),
                   ),
                 ),
-                SizedBox(height: 16),
-                Text(
+                const SizedBox(height: 16),
+                const Text(
                   'Aggiungi ricetta',
                   style: TextStyle(
                     fontSize: 20,
@@ -96,14 +93,14 @@ class _RecipesScreenState extends State<RecipesScreen> {
                         .blue, // Parola "Descrizione delle ricette" in blu
                   ),
                 ),
-                SizedBox(height: 8),
+                const SizedBox(height: 8),
                 TextField(
                   controller: _detailsController,
                   onChanged: (value) {
                     setState(() {});
                   },
                   maxLines: 5,
-                  style: TextStyle(
+                  style: const TextStyle(
                     color: Colors.black, // Testo nero per il campo descrizione
                   ),
                   decoration: InputDecoration(
@@ -115,10 +112,9 @@ class _RecipesScreenState extends State<RecipesScreen> {
                     ),
                   ),
                 ),
-                SizedBox(height: 16),
+                const SizedBox(height: 16),
                 ElevatedButton(
                   onPressed: _saveRecipe,
-                  child: Text('Salva Ricetta'),
                   style: ButtonStyle(
                     backgroundColor:
                         MaterialStateProperty.resolveWith<Color>((states) {
@@ -132,13 +128,13 @@ class _RecipesScreenState extends State<RecipesScreen> {
                     foregroundColor:
                         MaterialStateProperty.all<Color>(Colors.white),
                     textStyle: MaterialStateProperty.all<TextStyle>(
-                      TextStyle(
+                      const TextStyle(
                         fontSize: 18,
                         fontWeight: FontWeight.bold,
                       ),
                     ),
                     padding: MaterialStateProperty.all<EdgeInsetsGeometry>(
-                      EdgeInsets.symmetric(vertical: 12.0),
+                      const EdgeInsets.symmetric(vertical: 12.0),
                     ),
                     shape: MaterialStateProperty.all<OutlinedBorder>(
                       RoundedRectangleBorder(
@@ -146,6 +142,7 @@ class _RecipesScreenState extends State<RecipesScreen> {
                       ),
                     ),
                   ),
+                  child: const Text('Salva Ricetta'),
                 ),
               ],
             ),

@@ -99,54 +99,57 @@ class MyHomePage1State extends State<MyHomePage1> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(
-          title: const Text(
-            'Calendar Event',
-            style: TextStyle(
-              color: Colors.white, // Imposta il colore del testo in bianco
-              fontWeight:
-                  FontWeight.bold, // Opzionale: aggiunge il grassetto al testo
-              fontSize: 20, // Opzionale: imposta la dimensione del testo
-            ),
+      appBar: AppBar(
+        title: const Text(
+          'Calendar Event',
+          style: TextStyle(
+            color: Colors.white, // Imposta il colore del testo in bianco
+            fontWeight: FontWeight.bold, // Opzionale: aggiunge il grassetto al testo
+            fontSize: 24, // Opzionale: imposta la dimensione del testo
           ),
-          centerTitle: true, // Centra il titolo dell'app Bar
         ),
-        body: FutureBuilder<MeetingDataSource>(
-            future: loadPlants(),
-            builder: (context, snapshot) {
-              if (snapshot.connectionState == ConnectionState.waiting) {
-                return const CircularProgressIndicator();
-              } else if (snapshot.hasError) {
-                return Text('Error: ${snapshot.error}');
-              } else {
-                return SfCalendar(
-                  view: CalendarView.schedule,
-                  scheduleViewMonthHeaderBuilder: scheduleViewHeaderBuilder,
-                  scheduleViewSettings: const ScheduleViewSettings(
-                      monthHeaderSettings: MonthHeaderSettings(
-                          monthFormat: 'MMMM, yyyy',
-                          height: 100,
-                          textAlign: TextAlign.left,
-                          backgroundColor: Colors.green,
-                          monthTextStyle: TextStyle(
-                              color: Color.fromARGB(255, 229, 229, 229),
-                              fontSize: 25,
-                              fontWeight: FontWeight.w400))),
-                  dataSource: snapshot.data,
-                  monthViewSettings: const MonthViewSettings(
-                    appointmentDisplayMode:
-                        MonthAppointmentDisplayMode.appointment,
-                  ),
-                  headerStyle: const CalendarHeaderStyle(
-                    textStyle: TextStyle(
-                        color: Colors.black), // Personalizza lo stile del testo
-                    textAlign: TextAlign.center, // Centra il testo
-                    backgroundColor: Colors
-                        .white, // Personalizza il colore dello sfondo dell'intestazione
-                  ),
-                );
-              }
-            }));
+        centerTitle: true, // Centra il titolo dell'app Bar
+        automaticallyImplyLeading: false, // Rimuove la freccia dalla AppBar
+      ),
+      body: FutureBuilder<MeetingDataSource>(
+        future: loadPlants(),
+        builder: (context, snapshot) {
+          if (snapshot.connectionState == ConnectionState.waiting) {
+            return const CircularProgressIndicator();
+          } else if (snapshot.hasError) {
+            return Text('Error: ${snapshot.error}');
+          } else {
+            return SfCalendar(
+              view: CalendarView.schedule,
+              scheduleViewMonthHeaderBuilder: scheduleViewHeaderBuilder,
+              scheduleViewSettings: const ScheduleViewSettings(
+                  monthHeaderSettings: MonthHeaderSettings(
+                      monthFormat: 'MMMM, yyyy',
+                      height: 100,
+                      textAlign: TextAlign.left,
+                      backgroundColor: Colors.green,
+                      monthTextStyle: TextStyle(
+                          color: Color.fromARGB(255, 229, 229, 229),
+                          fontSize: 25,
+                          fontWeight: FontWeight.w400))),
+              dataSource: snapshot.data,
+              monthViewSettings: const MonthViewSettings(
+                appointmentDisplayMode:
+                    MonthAppointmentDisplayMode.appointment,
+              ),
+              headerStyle: const CalendarHeaderStyle(
+                textStyle: TextStyle(
+                    color: Colors.black), // Personalizza lo stile del testo
+                textAlign: TextAlign.center, // Centra il testo
+                backgroundColor: Colors
+                    .white, // Personalizza il colore dello sfondo dell'intestazione
+              ),
+            );
+          }
+        },
+      ),
+      bottomNavigationBar: _buildBottomNavigationBar(),
+    );
   }
 
   BottomNavigationBar _buildBottomNavigationBar() {
@@ -234,7 +237,8 @@ class MyHomePage1State extends State<MyHomePage1> {
     int year = int.parse(parts[2]);
     DateTime plantedDay = DateTime(year, month, day);
     int estimatedGrowingDays = plantData["estimated_growing_days"];
-    DateTime harvestDate = plantedDay.add(Duration(days: estimatedGrowingDays));
+    DateTime harvestDate =
+        plantedDay.add(Duration(days: estimatedGrowingDays));
     return harvestDate;
   }
 

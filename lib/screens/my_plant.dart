@@ -4,9 +4,9 @@ import 'package:address_24/widgets/my_plant_widget.dart';
 
 class MyPlant extends StatefulWidget {
   const MyPlant({
-    super.key,
+    Key? key,
     required this.plant,
-  });
+  }) : super(key: key);
 
   final Plant plant;
 
@@ -20,9 +20,13 @@ class _MyPlantState extends State<MyPlant> {
     return SafeArea(
       child: Scaffold(
         appBar: AppBar(
-          title: Text(widget.plant.selected_name!),
-          automaticallyImplyLeading:
-              false, // Rimuove l'icona di default (freccia indietro)
+          title: Text(
+            widget.plant.selected_name!,
+            style: TextStyle(
+              color: Colors.white, // Imposta il colore del testo in bianco
+            ),
+          ),
+          automaticallyImplyLeading: true,
         ),
         body: MyPlantWidget(p: widget.plant),
       ),

@@ -1,0 +1,83 @@
+[
+    {
+      "name": "Lettuce",
+      "image": "assets/Lettuce.jpeg",
+      "description": "The lettuce is an annual plant...",
+      "wateringFrequency": "Every 2 days",
+      "species": "Lactuca sativa",
+      "propriety": "edible",
+      "estimated_growing_days": 30
+    },
+    {
+      "name": "Tomato",
+      "image": "assets/Tomato.jpeg",
+      "description": "The tomato is an edible plant...",
+      "wateringFrequency": "Every 1 day",
+      "species": "Solanum lycopersicum",
+      "propriety": "edible",
+      "estimated_growing_days": 60
+    },
+    {
+      "name": "Basil",
+      "image": "assets/Basil.jpeg",
+      "description": "The basil is an annual plant...",
+      "wateringFrequency": "Every 3 days",
+      "species": "Ocimum basilicum",
+      "propriety": "edible",
+      "estimated_growing_days": 20
+    },
+    {
+      "name": "Hawthorn",
+      "image": "assets/Hawthorn.jpeg",
+      "description": "The Hawthorn is a medical plant...",
+      "wateringFrequency": "Every 1 day",
+      "species": "",
+      "propriety": "medicine",
+      "estimated_growing_days": 90
+    },
+    {
+      "name": "Marigold",
+      "image": "assets/Marigold.jpeg",
+      "description": "The Marigold is a medical plant...",
+      "wateringFrequency": "Every 2 days",
+      "species": "",
+      "propriety": "medicine",
+      "estimated_growing_days": 45
+    },
+    {
+      "name": "Chamomile",
+      "image": "assets/Chamomile.jpeg",
+      "description": "The Chamomile is a medical plant...",
+      "wateringFrequency": "Every 1 day",
+      "species": "",
+      "propriety": "medicine",
+      "estimated_growing_days": 30
+    },
+    {
+      "name": "Hyacinth",
+      "image": "assets/Hyacinth.jpeg",
+      "description": "The Hyacinth is a flower...",
+      "wateringFrequency": "Every 4 days",
+      "species": "",
+      "propriety": "flower",
+      "estimated_growing_days": 60
+    },
+    {
+      "name": "Orchid",
+      "image": "assets/Orchid.jpeg",
+      "description": "The Orchid is a flower...",
+      "wateringFrequency": "Every 2 days",
+      "species": "",
+      "propriety": "flower",
+      "estimated_growing_days": 30
+    },
+    {
+      "name": "Rose",
+      "image": "assets/Rose.jpeg",
+      "description": "The rose is a flower...",
+      "wateringFrequency": "Every 1 day",
+      "species": "",
+      "propriety": "flower",
+      "estimated_growing_days": 50
+    }
+]

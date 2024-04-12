@@ -1,10 +1,9 @@
 import 'dart:convert';
 import 'package:address_24/screens/calendar_screen.dart';
+import 'package:address_24/services/get_plant_image.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:image_picker/image_picker.dart';
-import 'package:shared_preferences/shared_preferences.dart';
-
 import 'my_home_page.dart';
 import 'recipesadd_screen.dart';
 import 'history_screen.dart'; // Nuova schermata per lo storico
@@ -46,15 +45,20 @@ class _CameraScreenState extends State<CameraScreen> {
 
       if (response.statusCode == 200) {
         final jsonResponse = jsonDecode(response.body);
+        print('PIANTAA ${jsonResponse['results'][0]['images']}');
 
         final results = jsonResponse['results'];
         for (int i = 0; i < results.length; i++) {
           final plantName = results[i]['species']['scientificNameWithoutAuthor'];
           final score = results[i]['score'];
+          final plantImage = await getPlantImage(plantName);
+
 
           _plantData.add({
+            'originalImage': images,
             'plantName': plantName,
             'score': score,
+            'image': plantImage
           });
         }
 
@@ -68,6 +72,7 @@ class _CameraScreenState extends State<CameraScreen> {
             'plantName': plantName,
             'score': score,
             'imageIndex': _currentImageIndex,
+            'image': _plantData[0]['image']
           });
 
           _showImageDivider = _currentImageIndex > 0;
@@ -145,44 +150,71 @@ class _CameraScreenState extends State<CameraScreen> {
                     'Identify Your Plant!',
                     style: TextStyle(fontSize: 18),
                   )
-                : ListView.builder(
-                    itemCount: _plantData.length,
-                    itemBuilder: (context, index) {
-                      final plantName = _plantData[index]['plantName'];
-                      final score = (_plantData[index]['score'] * 100).toStringAsFixed(2);
-
-                      return Card(
-                        margin: const EdgeInsets.symmetric(vertical: 8, horizontal: 16),
-                        child: Padding(
-                          padding: const EdgeInsets.all(16),
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Text(
-                                'Plant ${index + 1}:',
-                                style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                : Column(
+                  children: [
+                    Card(
+                      child: Row(
+                        children: [
+                          Text("Your image: "),
+                        ]
+                      )
+                    ),
+                    Expanded(
+                      child: SizedBox(
+                        height: 200.0,
+                        child: ListView.builder(
+                          itemCount: _plantData.length,
+                          itemBuilder: (context, index) {
+                            final plantName = _plantData[index]['plantName'];
+                            final score = (_plantData[index]['score'] * 100).toStringAsFixed(2);
+                            final plantImage = _plantData[index]['image'];
+                                          
+                            return Card(
+                              margin: const EdgeInsets.symmetric(vertical: 8, horizontal: 16),
+                              child: Padding(
+                                padding: const EdgeInsets.all(16),
+                                child: Row(
+                                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                                  children: [
+                                    Column(
+                                      crossAxisAlignment: CrossAxisAlignment.start,
+                                      children: [
+                                        Text(
+                                          'Plant ${index + 1}:',
+                                          style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                                        ),
+                                        const SizedBox(height: 8),
+                                        const Text(
+                                          'Name:',
+                                          style: TextStyle(fontSize: 16),
+                                        ),
+                                        const SizedBox(height: 4),
+                                        Text(
+                                          plantName,
+                                          style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold, color: Colors.blue),
+                                        ),
+                                        const SizedBox(height: 8),
+                                        Text(
+                                          'Score: $score%',
+                                          style: const TextStyle(fontSize: 16),
+                                        ),
+                                      ],
+                                    ),
+                                    CircleAvatar(
+                                      backgroundImage: NetworkImage(
+                                        plantImage
+                                      ),
+                                      maxRadius: 40,
+                                    ),
+                                  ]
+                                ),
                               ),
-                              const SizedBox(height: 8),
-                              const Text(
-                                'Name:',
-                                style: TextStyle(fontSize: 16),
-                              ),
-                              const SizedBox(height: 4),
-                              Text(
-                                plantName,
-                                style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold, color: Colors.blue),
-                              ),
-                              const SizedBox(height: 8),
-                              Text(
-                                'Score: $score%',
-                                style: const TextStyle(fontSize: 16),
-                              ),
-                            ],
-                          ),
+                            );
+                          },
                         ),
-                      );
-                    },
-                  ),
+                      ),
+                    ),]
+                ),
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {

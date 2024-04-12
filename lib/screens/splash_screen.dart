@@ -1,4 +1,3 @@
-import 'package:address_24/main.dart';
 import 'package:flutter/material.dart';
 
 import 'my_home_page.dart';

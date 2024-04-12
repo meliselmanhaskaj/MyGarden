@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:intl/intl.dart';
 import 'package:syncfusion_flutter_calendar/calendar.dart';
-import 'my_home_page.dart'; // Import della tua home page
+import 'my_home_page.dart';
 import 'package:address_24/screens/camera.dart';
 import 'package:address_24/screens/recipesadd_screen.dart';
 
@@ -104,7 +104,8 @@ class MyHomePage1State extends State<MyHomePage1> {
           'Calendar Event',
           style: TextStyle(
             color: Colors.white, // Imposta il colore del testo in bianco
-            fontWeight: FontWeight.bold, // Opzionale: aggiunge il grassetto al testo
+            fontWeight:
+                FontWeight.bold, // Opzionale: aggiunge il grassetto al testo
             fontSize: 24, // Opzionale: imposta la dimensione del testo
           ),
         ),
@@ -134,8 +135,7 @@ class MyHomePage1State extends State<MyHomePage1> {
                           fontWeight: FontWeight.w400))),
               dataSource: snapshot.data,
               monthViewSettings: const MonthViewSettings(
-                appointmentDisplayMode:
-                    MonthAppointmentDisplayMode.appointment,
+                appointmentDisplayMode: MonthAppointmentDisplayMode.appointment,
               ),
               headerStyle: const CalendarHeaderStyle(
                 textStyle: TextStyle(
@@ -237,8 +237,7 @@ class MyHomePage1State extends State<MyHomePage1> {
     int year = int.parse(parts[2]);
     DateTime plantedDay = DateTime(year, month, day);
     int estimatedGrowingDays = plantData["estimated_growing_days"];
-    DateTime harvestDate =
-        plantedDay.add(Duration(days: estimatedGrowingDays));
+    DateTime harvestDate = plantedDay.add(Duration(days: estimatedGrowingDays));
     return harvestDate;
   }
 

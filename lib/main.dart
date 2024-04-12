@@ -1,3 +1,4 @@
+import 'package:address_24/screens/my_home_page.dart';
 import 'package:flutter/material.dart';
 import 'screens/splash_screen.dart';
 
@@ -38,7 +39,7 @@ class MyApp extends StatelessWidget {
           ),
         ),
       ),
-      home: const SplashScreen(),
+      home: const MyHomePage(),
     );
   }
 }

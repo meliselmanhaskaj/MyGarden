@@ -1,4 +1,7 @@
 import 'dart:convert';
+import 'package:address_24/services/CalculateharvestDate.dart';
+import 'package:address_24/services/number.dart';
+import 'package:address_24/services/wateringDays.dart';
 import 'package:address_24/widgets/scheduleViewHeaderBuilder.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -24,7 +27,7 @@ class CalendarEvent {
 }
 
 class MyHomePage1 extends StatefulWidget {
-  const MyHomePage1({Key? key, required this.events}) : super(key: key);
+  const MyHomePage1({super.key, required this.events});
   final List<CalendarEvent> events;
 
   @override
@@ -35,10 +38,19 @@ class MyHomePage1State extends State<MyHomePage1> {
   late MeetingDataSource dataSource = MeetingDataSource([]);
   List<CalendarEvent> events = [];
   int _selectedIndex = 0; // Indice iniziale
+  late DateTime _currentDate;
 
   @override
   void initState() {
     super.initState();
+    _currentDate = DateTime.now();
+  }
+
+// Impostazione data corrente al giorno odierno
+  void goToCurrentDate() {
+    setState(() {
+      _currentDate = DateTime.now();
+    });
   }
 
   Future<MeetingDataSource> loadPlants() async {
@@ -111,47 +123,53 @@ class MyHomePage1State extends State<MyHomePage1> {
         ),
         centerTitle: true, // Centra il titolo dell'app Bar
         automaticallyImplyLeading: false, // Rimuove la freccia dalla AppBar
+        actions: [
+// Aggiungi un'icona di pulsante per tornare al giorno corrente
+          IconButton(
+            icon: const Icon(Icons.today),
+            onPressed: goToCurrentDate,
+          ),
+        ],
       ),
       body: FutureBuilder<MeetingDataSource>(
-        future: loadPlants(),
-        builder: (context, snapshot) {
-          if (snapshot.connectionState == ConnectionState.waiting) {
-            return const CircularProgressIndicator();
-          } else if (snapshot.hasError) {
-            return Text('Error: ${snapshot.error}');
-          } else {
-            return SfCalendar(
-              view: CalendarView.schedule,
-              scheduleViewMonthHeaderBuilder: scheduleViewHeaderBuilder,
-              scheduleViewSettings: const ScheduleViewSettings(
-                  monthHeaderSettings: MonthHeaderSettings(
-                      monthFormat: 'MMMM, yyyy',
-                      height: 100,
-                      textAlign: TextAlign.left,
-                      backgroundColor: Colors.green,
-                      monthTextStyle: TextStyle(
-                          color: Color.fromARGB(255, 229, 229, 229),
-                          fontSize: 25,
-                          fontWeight: FontWeight.w400))),
-              dataSource: snapshot.data,
-              monthViewSettings: const MonthViewSettings(
-                appointmentDisplayMode: MonthAppointmentDisplayMode.appointment,
-              ),
-              headerStyle: const CalendarHeaderStyle(
-                textStyle: TextStyle(
-                    color: Colors.black), // Personalizza lo stile del testo
-                textAlign: TextAlign.center, // Centra il testo
-                backgroundColor: Colors
-                    .white, // Personalizza il colore dello sfondo dell'intestazione
-              ),
-            );
-          }
-        },
-      ),
+          future: loadPlants(),
+          builder: (context, snapshot) {
+            if (snapshot.connectionState == ConnectionState.waiting) {
+              return const CircularProgressIndicator();
+            } else if (snapshot.hasError) {
+              return Text('Error: ${snapshot.error}');
+            } else {
+              return SfCalendar(
+                view: CalendarView.schedule,
+                scheduleViewMonthHeaderBuilder: scheduleViewHeaderBuilder,
+                scheduleViewSettings: const ScheduleViewSettings(
+                    monthHeaderSettings: MonthHeaderSettings(
+                        monthFormat: 'MMMM, yyyy',
+                        height: 100,
+                        textAlign: TextAlign.left,
+                        backgroundColor: Colors.green,
+                        monthTextStyle: TextStyle(
+                            color: Color.fromARGB(255, 229, 229, 229),
+                            fontSize: 25,
+                            fontWeight: FontWeight.w400))),
+                dataSource: snapshot.data,
+                monthViewSettings: const MonthViewSettings(
+                  appointmentDisplayMode:
+                      MonthAppointmentDisplayMode.appointment,
+                ),
+                headerStyle: const CalendarHeaderStyle(
+                  textStyle: TextStyle(color: Colors.black),
+                  textAlign: TextAlign.center,
+                  backgroundColor: Colors.white,
+                ),
+              );
+            }
+          }),
       bottomNavigationBar: _buildBottomNavigationBar(),
     );
   }
 
+  //creazione navigation bar
   BottomNavigationBar _buildBottomNavigationBar() {
     return BottomNavigationBar(
       backgroundColor: Colors.white,
@@ -188,68 +206,35 @@ class MyHomePage1State extends State<MyHomePage1> {
     );
   }
 
+//azione navigation bar
   void _onItemTapped(int index) {
     setState(() {
       if (index == 0) {
         Navigator.push(
           context,
-          MaterialPageRoute(builder: (context) => MyHomePage1(events: [])),
+          MaterialPageRoute(
+              builder: (context) => const MyHomePage1(events: [])),
         );
       } else if (index == 1) {
         Navigator.push(
           context,
-          MaterialPageRoute(builder: (context) => MyHomePage()),
+          MaterialPageRoute(builder: (context) => const MyHomePage()),
         );
       } else if (index == 2) {
         Navigator.push(
           context,
-          MaterialPageRoute(builder: (context) => RecipesMainScreen()),
+          MaterialPageRoute(builder: (context) => const RecipesMainScreen()),
         );
       } else if (index == 3) {
         Navigator.push(
           context,
-          MaterialPageRoute(builder: (context) => CameraScreen()),
+          MaterialPageRoute(builder: (context) => const CameraScreen()),
         );
       }
 
-      // Imposta l'indice corretto quando si seleziona un'icona diversa
+// Imposta indice quando si seleziona un'icona
       _selectedIndex = index;
     });
-  }
-
-  int extractNumberFromString(String wateringFrequency) {
-    RegExp regExp = RegExp(r'\b(\d+)\b');
-    Match? match = regExp.firstMatch(wateringFrequency);
-    int numero;
-    if (match != null) {
-      String numberAsString = match.group(0)!;
-      numero = int.parse(numberAsString);
-    } else {
-      numero = 0;
-    }
-    return numero;
-  }
-
-  DateTime calculateHarvestDate(dynamic plantData) {
-    List<String> parts = plantData["planted_day"].split('-');
-    int day = int.parse(parts[0]);
-    int month = int.parse(parts[1]);
-    int year = int.parse(parts[2]);
-    DateTime plantedDay = DateTime(year, month, day);
-    int estimatedGrowingDays = plantData["estimated_growing_days"];
-    DateTime harvestDate = plantedDay.add(Duration(days: estimatedGrowingDays));
-    return harvestDate;
-  }
-
-  Future<List<DateTime>> loadWatering(
-      DateTime plantedDay, int giorni, DateTime harvestDate) async {
-    List<DateTime> wateringDays = [];
-    DateTime indexDate = plantedDay;
-    while (indexDate.isBefore(harvestDate)) {
-      wateringDays.add(indexDate);
-      indexDate = indexDate.add(Duration(days: giorni));
-    }
-    return wateringDays;
   }
 }
 

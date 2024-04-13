@@ -10,7 +10,7 @@ import 'recipesadd_screen.dart';
 import 'history_screen.dart'; // Nuova schermata per lo storico
 
 class CameraScreen extends StatefulWidget {
-  const CameraScreen({Key? key}) : super(key: key);
+  const CameraScreen({super.key});
 
   @override
   _CameraScreenState createState() => _CameraScreenState();
@@ -33,12 +33,14 @@ class _CameraScreenState extends State<CameraScreen> {
     });
 
     try {
-      final apiUrl = Uri.parse('https://my-api.plantnet.org/v2/identify/all?api-key=$apiKey');
+      final apiUrl = Uri.parse(
+          'https://my-api.plantnet.org/v2/identify/all?api-key=$apiKey');
       var formData = http.MultipartRequest('POST', apiUrl);
 
       for (int i = 0; i < images.length; i++) {
         formData.fields['organs'] = organs[i];
-        formData.files.add(await http.MultipartFile.fromPath('images', images[i].path));
+        formData.files
+            .add(await http.MultipartFile.fromPath('images', images[i].path));
       }
 
       http.Response response =
@@ -49,7 +51,8 @@ class _CameraScreenState extends State<CameraScreen> {
 
         final results = jsonResponse['results'];
         for (int i = 0; i < results.length; i++) {
-          final plantName = results[i]['species']['scientificNameWithoutAuthor'];
+          final plantName =
+              results[i]['species']['scientificNameWithoutAuthor'];
           final score = results[i]['score'];
 
           _plantData.add({
@@ -131,7 +134,8 @@ class _CameraScreenState extends State<CameraScreen> {
             onPressed: () {
               Navigator.push(
                 context,
-                MaterialPageRoute(builder: (context) => HistoryScreen(history: _history)),
+                MaterialPageRoute(
+                    builder: (context) => HistoryScreen(history: _history)),
               );
             },
           ),
@@ -149,10 +153,12 @@ class _CameraScreenState extends State<CameraScreen> {
                     itemCount: _plantData.length,
                     itemBuilder: (context, index) {
                       final plantName = _plantData[index]['plantName'];
-                      final score = (_plantData[index]['score'] * 100).toStringAsFixed(2);
+                      final score =
+                          (_plantData[index]['score'] * 100).toStringAsFixed(2);
 
                       return Card(
-                        margin: const EdgeInsets.symmetric(vertical: 8, horizontal: 16),
+                        margin: const EdgeInsets.symmetric(
+                            vertical: 8, horizontal: 16),
                         child: Padding(
                           padding: const EdgeInsets.all(16),
                           child: Column(
@@ -160,7 +166,8 @@ class _CameraScreenState extends State<CameraScreen> {
                             children: [
                               Text(
                                 'Plant ${index + 1}:',
-                                style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                                style: const TextStyle(
+                                    fontSize: 18, fontWeight: FontWeight.bold),
                               ),
                               const SizedBox(height: 8),
                               const Text(
@@ -170,7 +177,10 @@ class _CameraScreenState extends State<CameraScreen> {
                               const SizedBox(height: 4),
                               Text(
                                 plantName,
-                                style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold, color: Colors.blue),
+                                style: const TextStyle(
+                                    fontSize: 20,
+                                    fontWeight: FontWeight.bold,
+                                    color: Colors.blue),
                               ),
                               const SizedBox(height: 8),
                               Text(

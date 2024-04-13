@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 // import 'screens/splash_screen.dart';
 
 void main() {
-  runApp(MyApp());
+  runApp(const MyApp());
 }
 
 class MyApp extends StatelessWidget {
@@ -12,7 +12,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      title: 'My App',
+      title: 'My Garden',
       theme: ThemeData(
         primaryColor: Colors.green[500],
         scaffoldBackgroundColor: Colors.green[50],

@@ -26,6 +26,11 @@ Ogni ricetta può includere ingredienti, istruzioni e note personali per la prep
 L'app fornisce una sezione dedicata al "giardino virtuale" dell'utente.
 Qui, l'utente può visualizzare le piante attualmente coltivate, i loro progressi e le prossime attività di cura.
 
+2.5 Identificazione Pianta con API
+
+L'app permette all'utente di caricare o fare una foto di una pianta che mostrerà tramite risposta API, il nome della pianta.
+Qui è presente anche lo stroico delle piante identificate. 
+
 3. Requisiti Non Funzionali
 
 -Usabilità:
@@ -54,7 +59,7 @@ Con funzionalità come informazioni dettagliate, calendario interattivo, recetta
 Questo documento dei requisiti delinea le funzionalità principali e le capacità dell'app "My Garden", fornendo agli utenti un quadro chiaro di cosa aspettarsi e di cosa possono fare con l'applicazione. 
 Possono essere apportate modifiche o aggiunte in base all'evoluzione del progetto. 
 
-WORK IN PROGRESS ON NOTIFICATION, TRANSLATION AND IMAGE IDENTIFICATION.
+
 
 
 

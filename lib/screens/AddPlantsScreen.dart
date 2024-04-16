@@ -24,144 +24,159 @@ class _AddPlantsScreenState extends State<AddPlantsScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text(
-          'Add Plants',
-          textAlign: TextAlign.center,
-          style: TextStyle(
-            color: Colors.white,
+        appBar: AppBar(
+          title: Text(
+            'Add Plants',
+            textAlign: TextAlign.center,
+            style: TextStyle(
+              color: Colors.white,
+            ),
           ),
+          centerTitle: true,
         ),
-        centerTitle: true,
-      ),
-      body: Padding(
-        padding: EdgeInsets.all(16.0),
-        child: Form(
-          key: _formKey,
-          child: Column(
-            children: [
-              TextFormField(
-                decoration: InputDecoration(labelText: 'Nome Pianta'),
-                onSaved: (value) => selectedName = value,
-              ),
-              DropdownButtonFormField<String>(
-                decoration: InputDecoration(labelText: 'Scegli pianta'),
-                value: commonName,
-                onChanged: (value) {
-                  setState(() {
-                    commonName = value;
-                  });
-                },
-                items: [
-                  DropdownMenuItem(
-                    value: 'Lettuce',
-                    child: Text('Lettuce'),
-                  ),
-                  DropdownMenuItem(
-                    value: 'Tomato',
-                    child: Text('Tomato'),
-                  ),
-                  DropdownMenuItem(
-                    value: 'Basil',
-                    child: Text('Basil'),
-                  ),
-                  DropdownMenuItem(
-                    value: 'Hawthorn',
-                    child: const Text('Hawthorn'),
-                  ),
-                  DropdownMenuItem(
-                    value: 'Marigold',
-                    child: Text('Marigold'),
-                  ),
-                  DropdownMenuItem(
-                    value: 'Hyacinth',
-                    child: Text('Hyacinth'),
-                  ),
-                  DropdownMenuItem(
-                    value: 'Orchid',
-                    child: Text('Orchid'),
-                  ),
-                  DropdownMenuItem(
-                    value: 'Rose',
-                    child: Text('Rose'),
-                  ),
-                ],
-              ),
-              DropdownButtonFormField<String>(
-                decoration: InputDecoration(labelText: 'Watering Frequency'),
-                value: wateringFrequency,
-                onChanged: (value) {
-                  setState(() {
-                    wateringFrequency = value;
-                  });
-                },
-                items: [
-                  DropdownMenuItem(
-                    value: 'Every 1 days',
-                    child: Text('giornalmente'),
-                  ),
-                  DropdownMenuItem(
-                    value: 'Every 2 days',
-                    child: Text('ogni 2 giorni'),
-                  ),
-                  DropdownMenuItem(
-                    value: 'Every 3 days',
-                    child: Text('ogni 3 giorni'),
-                  ),
-                  DropdownMenuItem(
-                    value: 'Every 4 days',
-                    child: Text('ogni 4 giorni'),
-                  ),
-                ],
-              ),
-              TextFormField(
-                decoration:
-                    InputDecoration(labelText: 'Giorni di crescita stimati'),
-                onSaved: (value) => estimatedGrowingDays = value,
-              ),
-              TextFormField(
-                decoration: InputDecoration(labelText: 'Description'),
-                onSaved: (value) => description = value,
-              ),
-              SizedBox(height: 16.0),
-              ElevatedButton(
-                onPressed: () async {
-                  _formKey.currentState!.save();
-                  final plantres = Plant(
-                    id: 7,
-                    selectedName: selectedName,
-                    common_name: commonName,
-                    watering_frequency: wateringFrequency,
-                    description: description,
-                    estimated_growing_days: int.parse(estimatedGrowingDays!),
-                    planted_day: DateTime.now().toString(),
-                    propriety: "null",
-                    image: "null",
-                  );
-                  showDialog(
-                    context: context,
-                    builder: (BuildContext context) {
-                      return AlertDialog(
-                        title: Text('Result'),
-                        content: Text(plantres.toString()),
-                        actions: [
-                          TextButton(
-                            onPressed: () {
-                              Navigator.of(context).pop();
-                            },
-                            child: Text('OK'),
-                          ),
-                        ],
-                      );
+        body: SingleChildScrollView(
+          child: Padding(
+            padding: EdgeInsets.all(16.0),
+            child: Form(
+              key: _formKey,
+              child: Column(
+                children: [
+                  TextFormField(
+                    decoration: InputDecoration(labelText: 'Nome Pianta'),
+                    onSaved: (value) => selectedName = value,
+                    validator: (value) {
+                      if (value == null || value.isEmpty) {
+                        return 'Il campo nome pianta è obbligatorio';
+                      }
+                      return null;
                     },
-                  );
-                },
-                child: Text('Aggiungi Pianta'),
+                  ),
+                  SizedBox(height: 16.0),
+                  DropdownFormField(
+                    labelText: 'Scegli pianta',
+                    value: commonName,
+                    onChanged: (value) {
+                      setState(() {
+                        commonName = value;
+                      });
+                    },
+                    items: [
+                      'Lettuce',
+                      'Tomato',
+                      'Basil',
+                      'Hawthorn',
+                      'Marigold',
+                      'Hyacinth',
+                      'Orchid',
+                      'Rose',
+                    ],
+                  ),
+                  SizedBox(height: 16.0),
+                  DropdownFormField(
+                    labelText: 'Frequenza di irrigazione',
+                    value: wateringFrequency,
+                    onChanged: (value) {
+                      setState(() {
+                        wateringFrequency = value;
+                      });
+                    },
+                    items: [
+                      'Every 1 days',
+                      'Every 2 days',
+                      'Every 3 days',
+                      'Every 4 days',
+                    ],
+                  ),
+                  TextFormField(
+                    decoration: InputDecoration(
+                        labelText: 'Giorni di crescita stimati'),
+                    keyboardType: TextInputType.number,
+                    onSaved: (value) => estimatedGrowingDays = value,
+                    validator: (value) {
+                      if (value == null || value.isEmpty) {
+                        return 'Il campo giorni di crescita stimati è obbligatorio';
+                      }
+                      if (int.tryParse(value) == null) {
+                        return 'Inserisci un valore numerico valido';
+                      }
+                      return null;
+                    },
+                  ),
+                  TextFormField(
+                    decoration: InputDecoration(labelText: 'Descrizione'),
+                    onSaved: (value) => description = value,
+                  ),
+                  SizedBox(height: 16.0),
+                  ElevatedButton(
+                    onPressed: () async {
+                      if (_formKey.currentState!.validate()) {
+                        _formKey.currentState!.save();
+                        final plant = Plant(
+                          selectedName: selectedName,
+                          commonName: commonName,
+                          wateringFrequency: wateringFrequency,
+                          description: description,
+                          estimated_growing_days:
+                              int.parse(estimatedGrowingDays!),
+                          planted_day: DateTime.now().toString(),
+                          propriety: 'null',
+                          image: 'null',
+                        );
+                        showDialog(
+                          context: context,
+                          builder: (BuildContext context) {
+                            return AlertDialog(
+                              title: Text('Risultato'),
+                              content: Text(plant.toString()),
+                              actions: [
+                                TextButton(
+                                  onPressed: () {
+                                    Navigator.of(context).pop();
+                                  },
+                                  child: Text('OK'),
+                                ),
+                              ],
+                            );
+                          },
+                        );
+                      }
+                    },
+                    child: Text('Aggiungi Pianta'),
+                  ),
+                ],
               ),
-            ],
+            ),
           ),
-        ),
-      ),
+        ));
+  }
+}
+
+class DropdownFormField extends StatelessWidget {
+  final String? labelText;
+  final String? value;
+  final ValueChanged<String?>? onChanged;
+  final List<String>? items;
+
+  const DropdownFormField({
+    Key? key,
+    this.labelText,
+    this.value,
+    this.onChanged,
+    this.items,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return DropdownButtonFormField<String>(
+      decoration: InputDecoration(labelText: labelText),
+      value: value,
+      onChanged: onChanged,
+      items: items?.map((String item) {
+        return DropdownMenuItem<String>(
+          value: item,
+          child: Text(item),
+        );
+      }).toList(),
     );
   }
 }

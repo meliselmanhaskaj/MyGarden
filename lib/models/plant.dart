@@ -11,7 +11,9 @@ class Plant {
       this.propriety,
       this.planted_day,
       this.estimated_growing_days,
-      String? selectedName});
+      String? selectedName,
+      String? commonName,
+      String? wateringFrequency});
 
   final String? common_name;
   final String? selected_name;

@@ -2,8 +2,6 @@
 
 import 'package:address_24/models/plant.dart';
 import 'package:flutter/material.dart';
-import 'dart:convert';
-import 'package:flutter/services.dart';
 
 class AddPlantsScreen extends StatefulWidget {
   @override
@@ -27,7 +25,14 @@ class _AddPlantsScreenState extends State<AddPlantsScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Add Plants'),
+        title: Text(
+          'Add Plants',
+          textAlign: TextAlign.center,
+          style: TextStyle(
+            color: Colors.white,
+          ),
+        ),
+        centerTitle: true,
       ),
       body: Padding(
         padding: EdgeInsets.all(16.0),

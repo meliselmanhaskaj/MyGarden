@@ -240,7 +240,7 @@ class _CameraScreenState extends State<CameraScreen> {
       unselectedItemColor: Colors.blue,
       showSelectedLabels: true,
       showUnselectedLabels: true,
-      selectedFontSize: 14.0,
+      selectedFontSize: 20.0,
       unselectedFontSize: 14.0,
       currentIndex: 3,
       onTap: _onItemTapped,

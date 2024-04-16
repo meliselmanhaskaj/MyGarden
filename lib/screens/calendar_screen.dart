@@ -177,7 +177,7 @@ class MyHomePage1State extends State<MyHomePage1> {
       unselectedItemColor: Colors.blue,
       showSelectedLabels: true,
       showUnselectedLabels: true,
-      selectedFontSize: 14.0,
+      selectedFontSize: 20.0,
       unselectedFontSize: 14.0,
       currentIndex: _selectedIndex,
       onTap: _onItemTapped,

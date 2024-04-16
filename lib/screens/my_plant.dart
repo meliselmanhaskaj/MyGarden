@@ -22,7 +22,7 @@ class _MyPlantState extends State<MyPlant> {
         appBar: AppBar(
           title: Text(
             widget.plant.selected_name!,
-            style: TextStyle(
+            style: const TextStyle(
               color: Colors.white, // Imposta il colore del testo in bianco
             ),
           ),

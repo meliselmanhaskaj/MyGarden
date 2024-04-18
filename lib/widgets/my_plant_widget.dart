@@ -28,7 +28,7 @@ class MyPlantWidget extends StatelessWidget {
       final String fieldName = namesList[i];
       final int daysLeft = (DateFormat('dd-MM-yyyy')
               .parse(p.planted_day!)
-              .add(Duration(days: (int.parse(p.estimated_growing_days!)))))
+              .add(Duration(days: int.parse(p.estimated_growing_days!))))
           .difference(DateTime.now())
           .inDays;
       final value = fieldName == 'Estimated growing days'
@@ -50,7 +50,10 @@ class MyPlantWidget extends StatelessWidget {
           iconsList[i],
           color: const Color.fromRGBO(103, 148, 54, 1),
         ),
-        title: Text('${namesList[i]}: $value'),
+        title: Text(
+          '${namesList[i]}: $value',
+          softWrap: true, // Abilita il wrapping del testo
+        ),
       );
 
       list.add(obj);
@@ -60,13 +63,18 @@ class MyPlantWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        Image(image: AssetImage('data/${p.image}')),
-        Card(
-          child: Column(mainAxisSize: MainAxisSize.min, children: returnList()),
-        )
-      ],
+    return SingleChildScrollView(
+      child: Column(
+        children: [
+          Image(image: AssetImage('data/${p.image}')),
+          Card(
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: returnList(),
+            ),
+          ),
+        ],
+      ),
     );
   }
 }

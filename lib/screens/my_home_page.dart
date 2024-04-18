@@ -1,9 +1,11 @@
 import 'dart:convert';
 import 'package:address_24/models/plant.dart';
+import 'package:address_24/screens/addPlantscreen.dart';
 import 'package:address_24/screens/calendar_screen.dart';
 import 'package:address_24/screens/camera.dart';
 import 'package:address_24/screens/my_plant.dart';
 import 'package:address_24/screens/recipesadd_screen.dart';
+import 'package:address_24/services/db_helper.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
@@ -17,22 +19,29 @@ class MyHomePage extends StatefulWidget {
 class _MyHomePageState extends State<MyHomePage> {
   int _selectedIndex = 1;
   List<String> plants = [];
-  List<dynamic> userPlantList = [];
+  List<Plant> userPlantList = [];
+  late DBHelper dbHelper;
 
   @override
   void initState() {
     super.initState();
-    loadPlants();
+    try {
+      dbHelper = DBHelper();
+      refreshPlantsList();
+    } catch (e) {
+      print('Error2: $e');
+    }
   }
 
-  Future<void> loadPlants() async {
-    final String jsonString = await rootBundle.loadString('data/userData.json');
-    userPlantList = json.decode(jsonString);
-    setState(() {
-      plants = userPlantList
-          .map((item) => item["selected_name"].toString())
-          .toList();
-    });
+  refreshPlantsList() async {
+    try {
+      var temp = await dbHelper.getPlants();
+      setState(() {
+        userPlantList = (temp);
+      });
+    } catch (e) {
+      print('Error1: $e');
+    }
   }
 
   void _onItemTapped(int index) {
@@ -79,30 +88,12 @@ class _MyHomePageState extends State<MyHomePage> {
   }
 
   void _onAddPlant() {
-    showDialog(
-      context: context,
-      builder: (BuildContext context) {
-        return AlertDialog(
-          title: const Text('Aggiungi Pianta'),
-          content: const Text(
-              'Qui ci sarà il form per aggiungere una nuova pianta.'),
-          actions: <Widget>[
-            TextButton(
-              onPressed: () {
-                Navigator.of(context).pop();
-              },
-              child: const Text('Annulla'),
-            ),
-            TextButton(
-              onPressed: () {
-                Navigator.of(context).pop();
-              },
-              child: const Text('Aggiungi'),
-            ),
-          ],
-        );
-      },
-    );
+    setState(() {
+      Navigator.push(
+        context,
+        MaterialPageRoute(builder: (context) => const AddPlantsScreen()),
+      );
+    });
   }
 
   @override
@@ -135,9 +126,9 @@ class _MyHomePageState extends State<MyHomePage> {
           ),
           Expanded(
             child: ListView.builder(
-              itemCount: plants.length,
+              itemCount: userPlantList.length,
               itemBuilder: (context, index) {
-                final plantName = plants[index];
+                final plantName = userPlantList[index].common_name;
                 final plant = userPlantList[index];
                 return Padding(
                   padding: const EdgeInsets.symmetric(
@@ -146,21 +137,28 @@ class _MyHomePageState extends State<MyHomePage> {
                     elevation: 2,
                     child: ListTile(
                       leading: CircleAvatar(
-                        backgroundImage: AssetImage(
-                            'data/assets/${plant['common_name']}.jpeg'),
+                        backgroundImage:
+                            AssetImage('data/assets/${plant.common_name}.jpeg'),
                       ),
                       title: Text(
-                        plantName,
+                        plantName!,
                         style: const TextStyle(
                           fontSize: 18,
                         ),
                       ),
                       trailing: CircleAvatar(
                         backgroundImage: AssetImage(
-                            'data/assets/Icons/${plant['propriety']}.png'),
+                            'data/assets/Icons/${plant.propriety}.png'),
                         backgroundColor: Colors.white,
                       ),
                       onTap: () => _onPlantTapped(userPlantList[index]),
+                      subtitle: ElevatedButton(
+                        onPressed: () async {
+                          await dbHelper.delete(plant.id!);
+                          refreshPlantsList();
+                        },
+                        child: Text('Delete Plant'),
+                      ),
                     ),
                   ),
                 );

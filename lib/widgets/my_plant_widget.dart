@@ -28,7 +28,7 @@ class MyPlantWidget extends StatelessWidget {
       final String fieldName = namesList[i];
       final int daysLeft = (DateFormat('dd-MM-yyyy')
               .parse(p.planted_day!)
-              .add(Duration(days: p.estimated_growing_days!)))
+              .add(Duration(days: (int.parse(p.estimated_growing_days!)))))
           .difference(DateTime.now())
           .inDays;
       final value = fieldName == 'Estimated growing days'

@@ -1,0 +1,369 @@
+[33mcommit 04172e2684c4d293358d55c0ce927e5e459df60c[m[33m ([m[1;36mHEAD[m[33m)[m
+Author: Ma-Vi-ttia-tali <vitalimattia03@gmail.com>
+Date:   Sat Apr 13 13:54:15 2024 +0200
+
+    icona calndario per giorno corrente
+
+[33mcommit 39fef2f7d02c400eae23694ec9b758ba0d73846d[m
+Author: Ma-Vi-ttia-tali <vitalimattia03@gmail.com>
+Date:   Fri Apr 12 17:04:09 2024 +0200
+
+    mattiaa
+
+[33mcommit 51bae581ce867e27e88b68cd503d1c2dc080b691[m
+Author: MarcoPaoloni06 <marco.paoloni.studio@fitstic-edu.com>
+Date:   Fri Apr 12 16:11:53 2024 +0200
+
+    marcolino
+
+[33mcommit f45ead72c237a106591cbda3f68cfb5a04f5b83a[m
+Author: MarcoPaoloni06 <marco.paoloni.studio@fitstic-edu.com>
+Date:   Fri Apr 12 15:53:29 2024 +0200
+
+    marcoo
+
+[33mcommit 616572cd79c1b74bde5cdc2ae57f4454968f3c2a[m
+Author: Melissa Selmanhaskaj <melissaselmanhaskaj@gmail.com>
+Date:   Tue Apr 9 12:45:17 2024 +0200
+
+    sistemazioni
+
+[33mcommit cf64c7b6fd544b6cb7cb4faeba2db20ae37af708[m
+Merge: e9b3223 8e24e86
+Author: Ma-Vi-ttia-tali <vitalimattia03@gmail.com>
+Date:   Tue Apr 9 12:34:13 2024 +0200
+
+    Merge branch 'main' of https://github.com/meliselmanhaskaj/MyGarden
+
+[33mcommit e9b3223308967181c4d8bab9a4e906af994c008f[m
+Author: Ma-Vi-ttia-tali <vitalimattia03@gmail.com>
+Date:   Tue Apr 9 12:33:15 2024 +0200
+
+    calendariobelobello
+
+[33mcommit 7acf3190481f36da8be85d4d5a4603bb8475b0f1[m
+Author: Ma-Vi-ttia-tali <vitalimattia03@gmail.com>
+Date:   Tue Apr 9 12:31:22 2024 +0200
+
+    calendario-bellissimo
+
+[33mcommit 8e24e867000ff769a0bae8ef206257f76441f8f4[m
+Author: Melissa Selmanhaskaj <melissaselmanhaskaj@gmail.com>
+Date:   Tue Apr 9 11:56:01 2024 +0200
+
+    storico e design
+
+[33mcommit 6f91df48cf7b26e26610c987707c9383e4bc4d02[m
+Merge: 686b90d 14b04e9
+Author: Ma-Vi-ttia-tali <vitalimattia03@gmail.com>
+Date:   Tue Apr 9 10:47:56 2024 +0200
+
+    Merge branch 'main' of https://github.com/meliselmanhaskaj/MyGarden
+
+[33mcommit 686b90d1ce0fbb47184ce74dd0c49d20fe4db6a0[m
+Author: Ma-Vi-ttia-tali <vitalimattia03@gmail.com>
+Date:   Tue Apr 9 10:47:05 2024 +0200
+
+    calendario
+
+[33mcommit fbf9e76ef0a538393f897388adfaf645bb36a2dd[m
+Author: Ma-Vi-ttia-tali <vitalimattia03@gmail.com>
+Date:   Mon Apr 8 18:27:09 2024 +0200
+
+    calenadario-stile corretto
+
+[33mcommit 14b04e908e36ef34e798bb68e56ab1c1211a66c8[m
+Author: Stef24Dev <stefanmuntianu2@gmail.com>
+Date:   Mon Apr 8 17:46:08 2024 +0200
+
+    modified json and modified const in the widgets
+
+[33mcommit 328d6325a1e70a43275f13c1fd81d9494bd657b0[m
+Author: Stef24Dev <stefanmuntianu2@gmail.com>
+Date:   Mon Apr 8 17:20:40 2024 +0200
+
+    changed names, eliminated files, added const, modified json language, moved widget from main to files
+
+[33mcommit 3b58fd618a8bf63fa42bf60a538b91815b9a4223[m
+Author: Stef24Dev <stefanmuntianu2@gmail.com>
+Date:   Mon Apr 8 16:37:10 2024 +0200
+
+    Parsed date format from usa in italy
+
+[33mcommit 53d45d1e446cd051550860aa660a8b3eee9ddb5f[m
+Merge: 0a17842 33607ca
+Author: Ma-Vi-ttia-tali <vitalimattia03@gmail.com>
+Date:   Mon Apr 8 16:17:02 2024 +0200
+
+    Merge branch 'main' of https://github.com/meliselmanhaskaj/MyGarden
+
+[33mcommit 0a17842c8f7fed1e77b598d7a940c19c9e3036eb[m[33m ([m[1;31morigin/calendar[m[33m)[m
+Author: Ma-Vi-ttia-tali <vitalimattia03@gmail.com>
+Date:   Mon Apr 8 16:01:06 2024 +0200
+
+    Calendario-corretto
+
+[33mcommit 33607ca3b89ecc99c86011529446a30241f1ef5c[m
+Merge: e2fba6d ca76867
+Author: Melissa Selmanhaskaj <melissaselmanhaskaj@gmail.com>
+Date:   Mon Apr 8 15:40:54 2024 +0200
+
+    design
+
+[33mcommit e2fba6d0a3db29b5eb00181998f27ffb2f839604[m
+Author: Melissa Selmanhaskaj <melissaselmanhaskaj@gmail.com>
+Date:   Mon Apr 8 15:39:20 2024 +0200
+
+    design
+
+[33mcommit ca76867189391d6a5d4e66df3c9d3713308c522a[m
+Author: Stef24Dev <stefanmuntianu2@gmail.com>
+Date:   Mon Apr 8 14:13:28 2024 +0200
+
+    modified property days left
+
+[33mcommit d230814b114134a2a430fa8e46c965e9c2b1bdca[m
+Author: Ma-Vi-ttia-tali <vitalimattia03@gmail.com>
+Date:   Mon Apr 8 13:54:42 2024 +0200
+
+    commit8/04
+
+[33mcommit 83d74cf898b774ce20b411fb04324ef5f43bb001[m
+Author: Melissa Selmanhaskaj <melissaselmanhaskaj@gmail.com>
+Date:   Fri Apr 5 18:32:37 2024 +0200
+
+    Aggiunta funzionalità API sia da fotocamera che da carica foto
+
+[33mcommit 0cc6cd1cd408c6ce51342064795bc0ba80faae36[m
+Author: Ma-Vi-ttia-tali <vitalimattia03@gmail.com>
+Date:   Wed Apr 3 17:15:33 2024 +0200
+
+    problema nel caricamento del file json
+
+[33mcommit 4902d9f2ff68c648622f6a1b021fe56f2097b525[m
+Author: Melissa Selmanhaskaj <melissaselmanhaskaj@gmail.com>
+Date:   Wed Apr 3 17:05:53 2024 +0200
+
+    cambio di design
+
+[33mcommit 6c94948874982f1d7fd503d07b7e2524958d1803[m
+Author: Melissa Selmanhaskaj <melissaselmanhaskaj@gmail.com>
+Date:   Wed Apr 3 16:57:05 2024 +0200
+
+    Aggiuta della parte del API è da sistemare però perchè da sempre pianta non identificata ma l'interfaccia è presente e funziona sia per scaricare la foto sia per farla da fotocamera
+
+[33mcommit d8dab8b1f632d550b92e4ac2fdff86332b29c9d7[m
+Author: Stef24Dev <stefanmuntianu2@gmail.com>
+Date:   Wed Apr 3 10:07:13 2024 +0200
+
+    modified json with the data we need for the plants
+
+[33mcommit ac00200d5dae320e0b645ca860faf899f9e73eb1[m
+Author: Stef24Dev <stefanmuntianu2@gmail.com>
+Date:   Mon Apr 1 17:05:53 2024 +0200
+
+    added a dependency for date handling, now in plant infos you can see the missing days
+
+[33mcommit 173bed4b667012e607d9f4e056339ef0ad6639c7[m
+Author: Stef24Dev <stefanmuntianu2@gmail.com>
+Date:   Mon Apr 1 16:36:37 2024 +0200
+
+    modified the main page adding images and icons, modified specific plant page with more informations and icons
+
+[33mcommit 536c104c8f9028d8ddb1548844e05e2be9469cff[m
+Author: Ma-Vi-ttia-tali <vitalimattia03@gmail.com>
+Date:   Fri Mar 29 17:15:13 2024 +0100
+
+    aggiunto giorno odierno, ed ogni quanti giorni è da annaffiare
+
+[33mcommit 0111d53f406192b96e8d4dfa9f2b832bc157d503[m
+Merge: 060818f a3914e4
+Author: Melissa Selmanhaskaj <melissaselmanhaskaj@gmail.com>
+Date:   Fri Mar 29 17:14:29 2024 +0100
+
+    Modifiche e aggiunte di design e miglioramenti dell'app generale
+
+[33mcommit da257bb3da30be7eafd3bd9a3202d9a873877bfc[m
+Author: Ma-Vi-ttia-tali <vitalimattia03@gmail.com>
+Date:   Wed Mar 27 17:26:36 2024 +0100
+
+    implementazione del metodo per calcollo giorni annaffiatura -non totalmente funzionante
+
+[33mcommit 060818fb117ed39cb51145bc9d8fa7b7ca11612d[m
+Author: Melissa Selmanhaskaj <melissaselmanhaskaj@gmail.com>
+Date:   Wed Mar 27 17:25:38 2024 +0100
+
+    deign fatto male ancora
+
+[33mcommit a3914e4ee10ae45c99522b7c9903529bbe5eda05[m
+Author: MarcoPaoloni06 <marco.paoloni.studio@fitstic-edu.com>
+Date:   Wed Mar 27 16:57:35 2024 +0100
+
+    marco prova
+
+[33mcommit 19d7d6128c96aa8073dc1533cade620b492574e1[m
+Merge: 6a692b6 66ebf76
+Author: Stef24Dev <stefanmuntianu2@gmail.com>
+Date:   Wed Mar 27 16:34:55 2024 +0100
+
+    Merge branch 'main' of https://github.com/meliselmanhaskaj/MyGarden
+
+[33mcommit 6a692b6d150e50c531de42bfd2cdd173a78672ec[m
+Author: Stef24Dev <stefanmuntianu2@gmail.com>
+Date:   Wed Mar 27 16:33:42 2024 +0100
+
+    modified the display of plant informations with a method
+
+[33mcommit 942adf67641d98eae8156c9b8aa3d256e6e74269[m
+Author: Ma-Vi-ttia-tali <vitalimattia03@gmail.com>
+Date:   Wed Mar 27 16:30:45 2024 +0100
+
+    implementato giorno di raccolta
+
+[33mcommit 66ebf76cc1a96684acb4c4242a48ecae99167f45[m
+Author: Melissa Selmanhaskaj <melissaselmanhaskaj@gmail.com>
+Date:   Wed Mar 27 15:53:41 2024 +0100
+
+    merge di my plant, recipts e plant information
+
+[33mcommit 460fd5fe99bf5f82d530f59441b499b61ea1a5c2[m
+Author: Ma-Vi-ttia-tali <vitalimattia03@gmail.com>
+Date:   Wed Mar 27 15:11:00 2024 +0100
+
+    creato screen calendario - da finire
+
+[33mcommit c7679c7764bb665eded2d4d253dc921f62265f4f[m
+Author: Stef24Dev <stefanmuntianu2@gmail.com>
+Date:   Wed Mar 27 15:09:09 2024 +0100
+
+    modified class, added navigation between home page and plant informations
+
+[33mcommit 3791f22a2f02c9ec66b0d09d873d96a486116a55[m
+Author: Stef24Dev <stefanmuntianu2@gmail.com>
+Date:   Wed Mar 27 14:27:26 2024 +0100
+
+    Merged with my_plant, fixed bug in home page, still not working my_plants page
+
+[33mcommit 787bc364b3370bf7a3961c9248744e460c7d1426[m
+Author: minosoos <michele.pontecchio@gmail.com>
+Date:   Tue Mar 26 18:13:57 2024 +0100
+
+    aggiunta visualizzazione piante home base
+
+[33mcommit 45a90713c9e0ff44dbfb55bc2d5215d41d595393[m
+Author: minosoos <michele.pontecchio@gmail.com>
+Date:   Tue Mar 26 16:59:55 2024 +0100
+
+    commit mattia userdata
+
+[33mcommit de557d19712b671c1faa03f6db95e8c870369717[m
+Author: minosoos <michele.pontecchio@gmail.com>
+Date:   Tue Mar 26 16:00:29 2024 +0100
+
+    commit userdata aggiunta data quando piantata
+
+[33mcommit 6341dc0de8adda339a5824d650df98c778f3e0ce[m
+Merge: d02c8fc ac4a2ce
+Author: minosoos <michele.pontecchio@gmail.com>
+Date:   Tue Mar 26 15:23:55 2024 +0100
+
+    Merge branch 'main' of https://github.com/meliselmanhaskaj/MyGarden
+
+[33mcommit d02c8fcc27773a038bd48132a5d1419df55133a3[m
+Author: minosoos <michele.pontecchio@gmail.com>
+Date:   Tue Mar 26 15:23:44 2024 +0100
+
+    commit modifiche melissa
+
+[33mcommit ac4a2ce1408faa2ad21d4d5292e1d853917e6801[m
+Author: meliselmanhaskaj <161866465+meliselmanhaskaj@users.noreply.github.com>
+Date:   Tue Mar 26 15:12:58 2024 +0100
+
+    Add files via upload
+
+[33mcommit 8274421cab6de8edbedd854dc8c9d5aba02c2f47[m
+Author: minosoos <michele.pontecchio@gmail.com>
+Date:   Tue Mar 26 15:01:14 2024 +0100
+
+    indica come salvare le piante create dall'utente dentro userdata.json
+
+[33mcommit d6be673c2835d160c54dd50974445983d3a29c21[m
+Author: minosoos <michele.pontecchio@gmail.com>
+Date:   Tue Mar 26 14:49:46 2024 +0100
+
+    creata classe plant da usare
+
+[33mcommit 12a8f551cd880c9f78c01d385cebffbbecef70b1[m
+Merge: 2a4dadb 8e42b90
+Author: minosoos <michele.pontecchio@gmail.com>
+Date:   Tue Mar 26 14:02:24 2024 +0100
+
+    Merge branch 'main' of https://github.com/meliselmanhaskaj/MyGarden
+
+[33mcommit 2a4dadbd987e7f8c5e3d487590f976b57a62c6d3[m
+Author: minosoos <michele.pontecchio@gmail.com>
+Date:   Tue Mar 26 14:02:15 2024 +0100
+
+    home page base di partenza
+
+[33mcommit 8e42b9083bd964c16f448c4976e53e7f311f90a8[m
+Author: meliselmanhaskaj <161866465+meliselmanhaskaj@users.noreply.github.com>
+Date:   Fri Mar 22 20:39:47 2024 +0100
+
+    Add files via upload
+    
+    Figma
+
+[33mcommit 2179e113b71238b67afab6c5af90ef241a078510[m
+Author: minosoos <michele.pontecchio@gmail.com>
+Date:   Fri Mar 22 18:25:05 2024 +0100
+
+    scusate per la commit inutile ho aggiunto il file userdata
+
+[33mcommit 358b7cf5bc280e695b230f2b2b67a23a738b85a1[m
+Author: minosoos <michele.pontecchio@gmail.com>
+Date:   Fri Mar 22 18:08:13 2024 +0100
+
+    Creata Sorgente dati
+
+[33mcommit 9e19426a741c8c4336e56164b6a9cba7fd8955df[m
+Author: minosoos <michele.pontecchio@gmail.com>
+Date:   Fri Mar 22 17:37:08 2024 +0100
+
+    commit base per le cartelle
+
+[33mcommit 4277885f5daa1e755dcd79d69ca5f8a4f6fa290c[m
+Author: meliselmanhaskaj <161866465+meliselmanhaskaj@users.noreply.github.com>
+Date:   Fri Mar 22 16:29:32 2024 +0100
+
+    Update README.md
+
+[33mcommit 178eab9a2c051e7deb507bdc1d40b76c171b9a3e[m
+Author: meliselmanhaskaj <161866465+meliselmanhaskaj@users.noreply.github.com>
+Date:   Fri Mar 22 16:26:51 2024 +0100
+
+    Update README.md
+
+[33mcommit 83c05a627e529af4e4cb968e236e9b43b2595c72[m
+Author: meliselmanhaskaj <161866465+meliselmanhaskaj@users.noreply.github.com>
+Date:   Fri Mar 22 16:25:46 2024 +0100
+
+    Update README.md
+
+[33mcommit fc0c08ade834ff9b50b60561f2e190234cbd6da6[m
+Author: meliselmanhaskaj <161866465+meliselmanhaskaj@users.noreply.github.com>
+Date:   Fri Mar 22 16:23:19 2024 +0100
+
+    Update README.md
+
+[33mcommit 0cc98bd035f7ddd0eb83c334c4065edcd0ec6c55[m
+Author: Melissa Selmanhaskaj <melissaselmanhaskaj@gmail.com>
+Date:   Thu Mar 21 21:23:30 2024 +0100
+
+    first commit
+
+[33mcommit 81fb60a2c0d643362bc35119906b82f155db3bff[m
+Author: Melissa Selmanhaskaj <melissaselmanhaskaj@gmail.com>
+Date:   Thu Mar 21 21:22:53 2024 +0100
+
+    first commit

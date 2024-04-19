@@ -1,12 +1,11 @@
-import 'dart:convert';
 import 'package:address_24/models/plant.dart';
-import 'package:address_24/screens/AddPlantsScreen.dart';
+import 'package:address_24/screens/addPlantscreen.dart';
 import 'package:address_24/screens/calendar_screen.dart';
 import 'package:address_24/screens/camera.dart';
 import 'package:address_24/screens/my_plant.dart';
 import 'package:address_24/screens/recipesadd_screen.dart';
+import 'package:address_24/services/db_helper.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 
 class MyHomePage extends StatefulWidget {
   const MyHomePage({super.key});
@@ -18,22 +17,29 @@ class MyHomePage extends StatefulWidget {
 class _MyHomePageState extends State<MyHomePage> {
   int _selectedIndex = 1;
   List<String> plants = [];
-  List<dynamic> userPlantList = [];
+  List<Plant> userPlantList = [];
+  late DBHelper dbHelper;
 
   @override
   void initState() {
     super.initState();
-    loadPlants();
+    try {
+      dbHelper = DBHelper();
+      refreshPlantsList();
+    } catch (e) {
+      print('Error2: $e');
+    }
   }
 
-  Future<void> loadPlants() async {
-    final String jsonString = await rootBundle.loadString('data/userData.json');
-    userPlantList = json.decode(jsonString);
-    setState(() {
-      plants = userPlantList
-          .map((item) => item["selected_name"].toString())
-          .toList();
-    });
+  refreshPlantsList() async {
+    try {
+      var temp = await dbHelper.getPlants();
+      setState(() {
+        userPlantList = (temp);
+      });
+    } catch (e) {
+      print('Error1: $e');
+    }
   }
 
   void _onItemTapped(int index) {
@@ -51,14 +57,14 @@ class _MyHomePageState extends State<MyHomePage> {
       if (_selectedIndex == 1) {
         Navigator.push(
           context,
-          MaterialPageRoute(builder: (context) => MyHomePage()),
+          MaterialPageRoute(builder: (context) => const MyHomePage()),
         );
         // // Se l'utente preme sull'icona del calendario (indice 1), apri la schermata principale
       }
       if (_selectedIndex == 2) {
         Navigator.push(
           context,
-          MaterialPageRoute(builder: (context) => RecipesMainScreen()),
+          MaterialPageRoute(builder: (context) => const RecipesMainScreen()),
         );
       } else if (_selectedIndex == 3) {
         Navigator.push(
@@ -70,11 +76,11 @@ class _MyHomePageState extends State<MyHomePage> {
   }
 
   void _onPlantTapped(dynamic myPlant) {
-    final Plant miaPianta = Plant.fromJson(myPlant);
+    // final Plant miaPianta = Plant.fromJson(myPlant);
     setState(() {
       Navigator.push(
         context,
-        MaterialPageRoute(builder: (context) => MyPlant(plant: miaPianta)),
+        MaterialPageRoute(builder: (context) => MyPlant(plant: myPlant)),
       );
     });
   }
@@ -83,7 +89,7 @@ class _MyHomePageState extends State<MyHomePage> {
     setState(() {
       Navigator.push(
         context,
-        MaterialPageRoute(builder: (context) => AddPlantsScreen()),
+        MaterialPageRoute(builder: (context) => const AddPlantsScreen()),
       );
     });
   }
@@ -118,9 +124,9 @@ class _MyHomePageState extends State<MyHomePage> {
           ),
           Expanded(
             child: ListView.builder(
-              itemCount: plants.length,
+              itemCount: userPlantList.length,
               itemBuilder: (context, index) {
-                final plantName = plants[index];
+                final plantName = userPlantList[index].common_name;
                 final plant = userPlantList[index];
                 return Padding(
                   padding: const EdgeInsets.symmetric(
@@ -129,21 +135,28 @@ class _MyHomePageState extends State<MyHomePage> {
                     elevation: 2,
                     child: ListTile(
                       leading: CircleAvatar(
-                        backgroundImage: AssetImage(
-                            'data/assets/${plant['common_name']}.jpeg'),
+                        backgroundImage:
+                            AssetImage('data/assets/${plant.common_name}.jpeg'),
                       ),
                       title: Text(
-                        plantName,
+                        plantName!,
                         style: const TextStyle(
                           fontSize: 18,
                         ),
                       ),
                       trailing: CircleAvatar(
                         backgroundImage: AssetImage(
-                            'data/assets/Icons/${plant['propriety']}.png'),
+                            'data/assets/Icons/${plant.propriety}.png'),
                         backgroundColor: Colors.white,
                       ),
                       onTap: () => _onPlantTapped(userPlantList[index]),
+                      subtitle: ElevatedButton(
+                        onPressed: () async {
+                          await dbHelper.delete(plant.id!);
+                          refreshPlantsList();
+                        },
+                        child: Text('Delete Plant'),
+                      ),
                     ),
                   ),
                 );

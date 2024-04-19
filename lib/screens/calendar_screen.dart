@@ -1,5 +1,7 @@
 import 'dart:convert';
+import 'package:address_24/models/plant.dart';
 import 'package:address_24/services/CalculateharvestDate.dart';
+import 'package:address_24/services/db_helper.dart';
 import 'package:address_24/services/number.dart';
 import 'package:address_24/services/wateringDays.dart';
 import 'package:address_24/widgets/scheduleViewHeaderBuilder.dart';
@@ -40,10 +42,31 @@ class MyHomePage1State extends State<MyHomePage1> {
   int _selectedIndex = 0; // Indice iniziale
   late DateTime _currentDate;
 
+  List<String> plants = [];
+
+  List<Plant> userPlantList = [];
+  late DBHelper dbHelper;
+
   @override
   void initState() {
     super.initState();
-    _currentDate = DateTime.now();
+    try {
+      dbHelper = DBHelper();
+      refreshPlantsList();
+    } catch (e) {
+      print('Error2: $e');
+    }
+  }
+
+  refreshPlantsList() async {
+    try {
+      var temp = await dbHelper.getPlants();
+      setState(() {
+        userPlantList = (temp);
+      });
+    } catch (e) {
+      print('Error1: $e');
+    }
   }
 
 // Impostazione data corrente al giorno odierno
@@ -54,14 +77,12 @@ class MyHomePage1State extends State<MyHomePage1> {
   }
 
   Future<MeetingDataSource> loadPlants() async {
-    final jsonString = await rootBundle.loadString("data/userData.json");
-    final List<dynamic> jsonList = jsonDecode(jsonString);
     List<CalendarEvent> events = [];
-    for (var item in jsonList) {
+    for (var item in userPlantList) {
       DateTime harvestDate = calculateHarvestDate(item);
-      int giorni = extractNumberFromString(item["watering_frequency"]);
+      int giorni = extractNumberFromString(item.watering_frequency!);
       List<DateTime> wateringDays = await loadWatering(
-          DateFormat('dd-MM-yyyy').parse(item["planted_day"]),
+          DateFormat('dd-MM-yyyy').parse(item.planted_day!),
           giorni,
           harvestDate);
 
@@ -69,9 +90,9 @@ class MyHomePage1State extends State<MyHomePage1> {
         final List<CalendarEvent> meetings = <CalendarEvent>[];
 
         meetings.add(CalendarEvent(
-          eventName: "Planting: ${item["selected_name"]}",
-          from: DateFormat('dd-MM-yyyy').parse(item["planted_day"]),
-          to: DateFormat('dd-MM-yyyy').parse(item["planted_day"]),
+          eventName: "Planting: ${item.selected_name}",
+          from: DateFormat('dd-MM-yyyy').parse(item.planted_day!),
+          to: DateFormat('dd-MM-yyyy').parse(item.planted_day!),
           background: Colors.green,
           textStyle: const TextStyle(
             color: Colors.green,
@@ -79,7 +100,7 @@ class MyHomePage1State extends State<MyHomePage1> {
           ),
         ));
         meetings.add(CalendarEvent(
-          eventName: "Harvest: ${item["selected_name"]}",
+          eventName: "Harvest: ${item.selected_name}",
           from: harvestDate,
           to: harvestDate,
           background: Colors.green,
@@ -90,7 +111,7 @@ class MyHomePage1State extends State<MyHomePage1> {
         ));
         for (var wateringDay in wateringDays) {
           meetings.add(CalendarEvent(
-            eventName: "Watering: ${item["selected_name"]}",
+            eventName: "Watering: ${item.selected_name}",
             from: wateringDay,
             to: wateringDay,
             background: Colors.blue,

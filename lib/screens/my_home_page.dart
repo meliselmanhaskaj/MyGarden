@@ -1,5 +1,6 @@
 import 'dart:convert';
 import 'package:address_24/models/plant.dart';
+import 'package:address_24/screens/AddPlantsScreen.dart';
 import 'package:address_24/screens/calendar_screen.dart';
 import 'package:address_24/screens/camera.dart';
 import 'package:address_24/screens/my_plant.dart';
@@ -79,30 +80,12 @@ class _MyHomePageState extends State<MyHomePage> {
   }
 
   void _onAddPlant() {
-    showDialog(
-      context: context,
-      builder: (BuildContext context) {
-        return AlertDialog(
-          title: const Text('Aggiungi Pianta'),
-          content: const Text(
-              'Qui ci sarà il form per aggiungere una nuova pianta.'),
-          actions: <Widget>[
-            TextButton(
-              onPressed: () {
-                Navigator.of(context).pop();
-              },
-              child: const Text('Annulla'),
-            ),
-            TextButton(
-              onPressed: () {
-                Navigator.of(context).pop();
-              },
-              child: const Text('Aggiungi'),
-            ),
-          ],
-        );
-      },
-    );
+    setState(() {
+      Navigator.push(
+        context,
+        MaterialPageRoute(builder: (context) => AddPlantsScreen()),
+      );
+    });
   }
 
   @override
@@ -184,7 +167,7 @@ class _MyHomePageState extends State<MyHomePage> {
       unselectedItemColor: Colors.blue,
       showSelectedLabels: true,
       showUnselectedLabels: true,
-      selectedFontSize: 14.0,
+      selectedFontSize: 20.0,
       unselectedFontSize: 14.0,
       currentIndex: _selectedIndex,
       onTap: _onItemTapped,

@@ -217,7 +217,7 @@ class _RecipesMainScreenState extends State<RecipesMainScreen> {
       unselectedItemColor: Colors.blue,
       showSelectedLabels: true,
       showUnselectedLabels: true,
-      selectedFontSize: 14.0,
+      selectedFontSize: 20.0,
       unselectedFontSize: 14.0,
       currentIndex: 2, // Index 2 for Recipes in this screen
       onTap: _onItemTapped,
@@ -248,7 +248,8 @@ class _RecipesMainScreenState extends State<RecipesMainScreen> {
 
   void _onItemTapped(int index) {
     setState(() {
-      if (index == 0) { Navigator.push(
+      if (index == 0) {
+        Navigator.push(
           context,
           MaterialPageRoute(builder: (context) => MyHomePage1(events: [])),
         );

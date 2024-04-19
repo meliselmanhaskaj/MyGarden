@@ -8,10 +8,12 @@ class Plant {
       this.image,
       this.description,
       this.watering_frequency,
-      this.species,
       this.propriety,
       this.planted_day,
-      this.estimated_growing_days});
+      this.estimated_growing_days,
+      String? selectedName,
+      String? commonName,
+      String? wateringFrequency});
 
   final String? common_name;
   final String? selected_name;
@@ -19,7 +21,6 @@ class Plant {
   final String? image;
   final String? description;
   final String? watering_frequency;
-  final String? species;
   final String? propriety;
   final String? planted_day;
   final int? estimated_growing_days;
@@ -31,7 +32,6 @@ class Plant {
           String? selected_name,
           String? description,
           String? watering_frequency,
-          String? species,
           String? propriety,
           String? planted_day,
           int? estimated_growing_days}) =>
@@ -42,7 +42,6 @@ class Plant {
           image: image ?? this.image,
           description: description ?? this.description,
           watering_frequency: watering_frequency ?? this.watering_frequency,
-          species: species ?? this.species,
           propriety: propriety ?? this.propriety,
           planted_day: planted_day ?? this.planted_day,
           estimated_growing_days:
@@ -57,9 +56,13 @@ class Plant {
         image: json["image"],
         description: json["description"],
         watering_frequency: json["watering_frequency"],
-        species: json["species"],
         propriety: json["propriety"],
         planted_day: json["planted_day"],
         estimated_growing_days: json["estimated_growing_days"],
       );
+
+  @override
+  String toString() {
+    return 'Plant(common_name: $common_name, selected_name: $selected_name, id: $id, image: $image, description: $description, watering_frequency: $watering_frequency, propriety: $propriety, planted_day: $planted_day, estimated_growing_days: $estimated_growing_days)';
+  }
 }

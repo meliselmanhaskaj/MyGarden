@@ -4,7 +4,8 @@ class RecipesScreen extends StatefulWidget {
   final String? initialRecipeTitle;
   final String? initialRecipeDetails;
 
-  const RecipesScreen({super.key, this.initialRecipeTitle, this.initialRecipeDetails});
+  const RecipesScreen(
+      {super.key, this.initialRecipeTitle, this.initialRecipeDetails});
 
   @override
   _RecipesScreenState createState() => _RecipesScreenState();
@@ -44,10 +45,12 @@ class _RecipesScreenState extends State<RecipesScreen> {
       appBar: AppBar(
         title: const Text(
           'Recipes',
+          textAlign: TextAlign.center,
           style: TextStyle(
-            color: Colors.white, // Titolo della barra superiore in bianco
+            color: Colors.white,
           ),
         ),
+        centerTitle: true,
         backgroundColor: Colors.green[500],
       ),
       body: Padding(

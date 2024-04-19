@@ -13,14 +13,8 @@ class AddPlantsScreen extends StatefulWidget {
 }
 
 class _AddPlantsScreenState extends State<AddPlantsScreen> {
-  // List<dynamic> userPlantList = [];
-  // dynamic plantsInfo = [];
-
-  // File userdataFile = File('data/userData.json');
-
-  // late final SharedPreferences prefs;
-
-  // late final Database database;
+  final _controller = TextEditingController();
+  final _controller1 = TextEditingController();
   List<Plant>? userPlants;
 
   final GlobalKey<FormState> _formStateKey = GlobalKey<FormState>();
@@ -79,11 +73,11 @@ class _AddPlantsScreenState extends State<AddPlantsScreen> {
         child: Form(
           key: _formStateKey,
           child: ListView(
-            padding: EdgeInsets.all(16.0),
+            padding: const EdgeInsets.all(16.0),
             children: [
               TextFormField(
                 decoration: const InputDecoration(labelText: 'Common Name'),
-                initialValue: common_name,
+                controller: _controller,
                 readOnly: true,
                 onTap: () {
                   showDialog(
@@ -99,6 +93,7 @@ class _AddPlantsScreenState extends State<AddPlantsScreen> {
                                 onTap: () {
                                   setState(() {
                                     common_name = 'Rose';
+                                    _controller.text = common_name;
                                   });
                                   Navigator.pop(context);
                                 },
@@ -108,6 +103,7 @@ class _AddPlantsScreenState extends State<AddPlantsScreen> {
                                 onTap: () {
                                   setState(() {
                                     common_name = 'Orchid';
+                                    _controller.text = common_name;
                                   });
                                   Navigator.pop(context);
                                 },
@@ -117,6 +113,7 @@ class _AddPlantsScreenState extends State<AddPlantsScreen> {
                                 onTap: () {
                                   setState(() {
                                     common_name = 'Hyacinth';
+                                    _controller.text = common_name;
                                   });
                                   Navigator.pop(context);
                                 },
@@ -126,6 +123,7 @@ class _AddPlantsScreenState extends State<AddPlantsScreen> {
                                 onTap: () {
                                   setState(() {
                                     common_name = 'Chamomile';
+                                    _controller.text = common_name;
                                   });
                                   Navigator.pop(context);
                                 },
@@ -135,6 +133,7 @@ class _AddPlantsScreenState extends State<AddPlantsScreen> {
                                 onTap: () {
                                   setState(() {
                                     common_name = 'Marigold';
+                                    _controller.text = common_name;
                                   });
                                   Navigator.pop(context);
                                 },
@@ -144,6 +143,7 @@ class _AddPlantsScreenState extends State<AddPlantsScreen> {
                                 onTap: () {
                                   setState(() {
                                     common_name = 'Hawthorn';
+                                    _controller.text = common_name;
                                   });
                                   Navigator.pop(context);
                                 },
@@ -153,6 +153,7 @@ class _AddPlantsScreenState extends State<AddPlantsScreen> {
                                 onTap: () {
                                   setState(() {
                                     common_name = 'Basil';
+                                    _controller.text = common_name;
                                   });
                                   Navigator.pop(context);
                                 },
@@ -162,6 +163,7 @@ class _AddPlantsScreenState extends State<AddPlantsScreen> {
                                 onTap: () {
                                   setState(() {
                                     common_name = 'Tomato';
+                                    _controller.text = common_name;
                                   });
                                   Navigator.pop(context);
                                 },
@@ -171,6 +173,7 @@ class _AddPlantsScreenState extends State<AddPlantsScreen> {
                                 onTap: () {
                                   setState(() {
                                     common_name = 'Lettuce';
+                                    _controller.text = common_name;
                                   });
                                   Navigator.pop(context);
                                 },
@@ -210,7 +213,7 @@ class _AddPlantsScreenState extends State<AddPlantsScreen> {
               TextFormField(
                 decoration:
                     const InputDecoration(labelText: 'Watering frequency'),
-                initialValue: common_name,
+                controller: _controller1,
                 readOnly: true,
                 onTap: () {
                   showDialog(
@@ -226,6 +229,7 @@ class _AddPlantsScreenState extends State<AddPlantsScreen> {
                                 onTap: () {
                                   setState(() {
                                     watering_frequency = 'every 1 days';
+                                    _controller1.text = watering_frequency;
                                   });
                                   Navigator.pop(context);
                                 },
@@ -235,6 +239,7 @@ class _AddPlantsScreenState extends State<AddPlantsScreen> {
                                 onTap: () {
                                   setState(() {
                                     watering_frequency = 'every 2 days';
+                                    _controller1.text = watering_frequency;
                                   });
                                   Navigator.pop(context);
                                 },
@@ -244,6 +249,7 @@ class _AddPlantsScreenState extends State<AddPlantsScreen> {
                                 onTap: () {
                                   setState(() {
                                     watering_frequency = 'every 3 days';
+                                    _controller1.text = watering_frequency;
                                   });
                                   Navigator.pop(context);
                                 },
@@ -253,6 +259,7 @@ class _AddPlantsScreenState extends State<AddPlantsScreen> {
                                 onTap: () {
                                   setState(() {
                                     watering_frequency = 'every 4 days';
+                                    _controller1.text = watering_frequency;
                                   });
                                   Navigator.pop(context);
                                 },

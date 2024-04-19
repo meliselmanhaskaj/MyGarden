@@ -1,4 +1,3 @@
-import 'dart:convert';
 import 'package:address_24/models/plant.dart';
 import 'package:address_24/screens/addPlantscreen.dart';
 import 'package:address_24/screens/calendar_screen.dart';
@@ -7,7 +6,6 @@ import 'package:address_24/screens/my_plant.dart';
 import 'package:address_24/screens/recipesadd_screen.dart';
 import 'package:address_24/services/db_helper.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 
 class MyHomePage extends StatefulWidget {
   const MyHomePage({super.key});
@@ -59,14 +57,14 @@ class _MyHomePageState extends State<MyHomePage> {
       if (_selectedIndex == 1) {
         Navigator.push(
           context,
-          MaterialPageRoute(builder: (context) => MyHomePage()),
+          MaterialPageRoute(builder: (context) => const MyHomePage()),
         );
         // // Se l'utente preme sull'icona del calendario (indice 1), apri la schermata principale
       }
       if (_selectedIndex == 2) {
         Navigator.push(
           context,
-          MaterialPageRoute(builder: (context) => RecipesMainScreen()),
+          MaterialPageRoute(builder: (context) => const RecipesMainScreen()),
         );
       } else if (_selectedIndex == 3) {
         Navigator.push(

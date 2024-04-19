@@ -78,11 +78,11 @@ class _MyHomePageState extends State<MyHomePage> {
   }
 
   void _onPlantTapped(dynamic myPlant) {
-    final Plant miaPianta = Plant.fromJson(myPlant);
+    // final Plant miaPianta = Plant.fromJson(myPlant);
     setState(() {
       Navigator.push(
         context,
-        MaterialPageRoute(builder: (context) => MyPlant(plant: miaPianta)),
+        MaterialPageRoute(builder: (context) => MyPlant(plant: myPlant)),
       );
     });
   }

@@ -1,21 +1,12 @@
-import 'dart:async';
-import 'dart:io';
-
 import 'package:address_24/models/models.dart';
 import 'package:address_24/models/plant.dart';
 import 'package:address_24/screens/my_home_page.dart';
 import 'package:address_24/services/db_helper.dart';
 import 'package:flutter/material.dart';
-import 'dart:convert';
-import 'package:flutter/services.dart';
 import 'package:intl/intl.dart';
-import 'package:shared_preferences/shared_preferences.dart';
-import 'package:http/http.dart' as http;
-import 'package:path/path.dart';
-import 'package:sqflite/sqflite.dart';
 
 class AddPlantsScreen extends StatefulWidget {
-  const AddPlantsScreen({Key? key}) : super(key: key);
+  const AddPlantsScreen({super.key});
 
   @override
   _AddPlantsScreenState createState() => _AddPlantsScreenState();
@@ -91,7 +82,7 @@ class _AddPlantsScreenState extends State<AddPlantsScreen> {
             padding: EdgeInsets.all(16.0),
             children: [
               TextFormField(
-                decoration: InputDecoration(labelText: 'Common Name'),
+                decoration: const InputDecoration(labelText: 'Common Name'),
                 initialValue: common_name,
                 readOnly: true,
                 onTap: () {
@@ -99,12 +90,12 @@ class _AddPlantsScreenState extends State<AddPlantsScreen> {
                     context: context,
                     builder: (BuildContext context) {
                       return AlertDialog(
-                        title: Text('Select Common Name'),
+                        title: const Text('Select Common Name'),
                         content: SingleChildScrollView(
                           child: Column(
                             children: [
                               ListTile(
-                                title: Text('Rose'),
+                                title: const Text('Rose'),
                                 onTap: () {
                                   setState(() {
                                     common_name = 'Rose';
@@ -113,7 +104,7 @@ class _AddPlantsScreenState extends State<AddPlantsScreen> {
                                 },
                               ),
                               ListTile(
-                                title: Text('Orchid'),
+                                title: const Text('Orchid'),
                                 onTap: () {
                                   setState(() {
                                     common_name = 'Orchid';
@@ -122,7 +113,7 @@ class _AddPlantsScreenState extends State<AddPlantsScreen> {
                                 },
                               ),
                               ListTile(
-                                title: Text('Hyacinth'),
+                                title: const Text('Hyacinth'),
                                 onTap: () {
                                   setState(() {
                                     common_name = 'Hyacinth';
@@ -131,7 +122,7 @@ class _AddPlantsScreenState extends State<AddPlantsScreen> {
                                 },
                               ),
                               ListTile(
-                                title: Text('Chamomile'),
+                                title: const Text('Chamomile'),
                                 onTap: () {
                                   setState(() {
                                     common_name = 'Chamomile';
@@ -140,7 +131,7 @@ class _AddPlantsScreenState extends State<AddPlantsScreen> {
                                 },
                               ),
                               ListTile(
-                                title: Text('Marigold'),
+                                title: const Text('Marigold'),
                                 onTap: () {
                                   setState(() {
                                     common_name = 'Marigold';
@@ -149,7 +140,7 @@ class _AddPlantsScreenState extends State<AddPlantsScreen> {
                                 },
                               ),
                               ListTile(
-                                title: Text('Hawthorn'),
+                                title: const Text('Hawthorn'),
                                 onTap: () {
                                   setState(() {
                                     common_name = 'Hawthorn';
@@ -158,7 +149,7 @@ class _AddPlantsScreenState extends State<AddPlantsScreen> {
                                 },
                               ),
                               ListTile(
-                                title: Text('Basil'),
+                                title: const Text('Basil'),
                                 onTap: () {
                                   setState(() {
                                     common_name = 'Basil';
@@ -167,7 +158,7 @@ class _AddPlantsScreenState extends State<AddPlantsScreen> {
                                 },
                               ),
                               ListTile(
-                                title: Text('Tomato'),
+                                title: const Text('Tomato'),
                                 onTap: () {
                                   setState(() {
                                     common_name = 'Tomato';
@@ -176,7 +167,7 @@ class _AddPlantsScreenState extends State<AddPlantsScreen> {
                                 },
                               ),
                               ListTile(
-                                title: Text('Lettuce'),
+                                title: const Text('Lettuce'),
                                 onTap: () {
                                   setState(() {
                                     common_name = 'Lettuce';
@@ -193,7 +184,7 @@ class _AddPlantsScreenState extends State<AddPlantsScreen> {
                 },
               ),
               TextFormField(
-                decoration: InputDecoration(labelText: 'Selected Name'),
+                decoration: const InputDecoration(labelText: 'Selected Name'),
                 validator: (value) {
                   if (value == null || value.isEmpty) {
                     return 'Please enter a selected name';
@@ -205,7 +196,7 @@ class _AddPlantsScreenState extends State<AddPlantsScreen> {
                 },
               ),
               TextFormField(
-                decoration: InputDecoration(labelText: 'Description'),
+                decoration: const InputDecoration(labelText: 'Description'),
                 validator: (value) {
                   if (value == null || value.isEmpty) {
                     return 'Please enter a description';
@@ -217,7 +208,8 @@ class _AddPlantsScreenState extends State<AddPlantsScreen> {
                 },
               ),
               TextFormField(
-                decoration: InputDecoration(labelText: 'Watering frequency'),
+                decoration:
+                    const InputDecoration(labelText: 'Watering frequency'),
                 initialValue: common_name,
                 readOnly: true,
                 onTap: () {
@@ -225,12 +217,12 @@ class _AddPlantsScreenState extends State<AddPlantsScreen> {
                     context: context,
                     builder: (BuildContext context) {
                       return AlertDialog(
-                        title: Text('select frequency'),
+                        title: const Text('select frequency'),
                         content: SingleChildScrollView(
                           child: Column(
                             children: [
                               ListTile(
-                                title: Text('daily'),
+                                title: const Text('daily'),
                                 onTap: () {
                                   setState(() {
                                     watering_frequency = 'every 1 days';
@@ -239,7 +231,7 @@ class _AddPlantsScreenState extends State<AddPlantsScreen> {
                                 },
                               ),
                               ListTile(
-                                title: Text('every 2 days'),
+                                title: const Text('every 2 days'),
                                 onTap: () {
                                   setState(() {
                                     watering_frequency = 'every 2 days';
@@ -248,7 +240,7 @@ class _AddPlantsScreenState extends State<AddPlantsScreen> {
                                 },
                               ),
                               ListTile(
-                                title: Text('every 3 days'),
+                                title: const Text('every 3 days'),
                                 onTap: () {
                                   setState(() {
                                     watering_frequency = 'every 3 days';
@@ -257,7 +249,7 @@ class _AddPlantsScreenState extends State<AddPlantsScreen> {
                                 },
                               ),
                               ListTile(
-                                title: Text('every 4 days'),
+                                title: const Text('every 4 days'),
                                 onTap: () {
                                   setState(() {
                                     watering_frequency = 'every 4 days';
@@ -275,7 +267,7 @@ class _AddPlantsScreenState extends State<AddPlantsScreen> {
               ),
               TextFormField(
                 decoration:
-                    InputDecoration(labelText: 'Estimated Growing Days'),
+                    const InputDecoration(labelText: 'Estimated Growing Days'),
                 keyboardType: TextInputType.number,
                 validator: (value) {
                   if (value == null || value.isEmpty) {
@@ -291,6 +283,40 @@ class _AddPlantsScreenState extends State<AddPlantsScreen> {
                 onPressed: () {
                   if (_formStateKey.currentState!.validate()) {
                     _formStateKey.currentState!.save();
+                    String newPropriety;
+                    // Cambia la proprietà in base al common_name selezionato
+                    switch (common_name) {
+                      case 'Rose':
+                        newPropriety = 'flower';
+                        break;
+                      case 'Orchid':
+                        newPropriety = 'flower';
+                        break;
+                      case 'Hyacinth':
+                        newPropriety = 'flower';
+                        break;
+                      case 'Chamomile':
+                        newPropriety = 'medicine';
+                        break;
+                      case 'Marigold':
+                        newPropriety = 'medicine';
+                        break;
+                      case 'Hawthorn':
+                        newPropriety = 'medicine';
+                        break;
+                      case 'Basil':
+                        newPropriety = 'edible';
+                        break;
+                      case 'Tomato':
+                        newPropriety = 'edible';
+                        break;
+                      case 'Lettuce':
+                        newPropriety = 'edible';
+                        break;
+                      default:
+                        newPropriety =
+                            ''; // Imposta un valore predefinito o gestisci altri casi
+                    }
                     // Create a new Plant object with the entered values
                     Plant newPlant = Plant(
                       id: getLastId(),
@@ -298,7 +324,8 @@ class _AddPlantsScreenState extends State<AddPlantsScreen> {
                       selected_name: selected_name,
                       description: description,
                       watering_frequency: watering_frequency,
-                      propriety: 'edible',
+                      propriety:
+                          newPropriety, // Assegna la nuova proprietà calcolata
                       planted_day:
                           DateFormat('dd-MM-yyyy').format(DateTime.now()),
                       estimated_growing_days: estimated_growing_days,
@@ -316,7 +343,7 @@ class _AddPlantsScreenState extends State<AddPlantsScreen> {
                     );
                   }
                 },
-                child: Text('Add Plant'),
+                child: const Text('Add Plant'),
               ),
             ],
           ),

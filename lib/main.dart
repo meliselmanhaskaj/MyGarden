@@ -12,7 +12,6 @@ void main() {
     // Change default factory on the web
     databaseFactory = databaseFactoryFfiWeb;
   }
-
   runApp(const MyApp());
 }
 

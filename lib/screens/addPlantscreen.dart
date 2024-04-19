@@ -1,6 +1,5 @@
 import 'dart:async';
 import 'dart:io';
-import 'dart:js_interop';
 
 import 'package:address_24/models/models.dart';
 import 'package:address_24/models/plant.dart';
